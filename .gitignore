@@ -3,10 +3,8 @@
 /.settings/
 /bin/
 /build/
+/run/
 /eclipse/
 .classpath
 .project
-/run/
-/run/config/
-/run/logs/
-run/
+
