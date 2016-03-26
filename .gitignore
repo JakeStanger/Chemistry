@@ -6,3 +6,6 @@
 /eclipse/
 .classpath
 .project
+/run/
+/run/config/
+/run/logs/
