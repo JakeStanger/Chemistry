@@ -8,8 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 
-public class Element extends Item
+public abstract class Element extends Item
 {
+	private String name;
 	private String symbol;
 	
 	private int atomicNumber;
@@ -20,22 +21,22 @@ public class Element extends Item
 	
 	private int[] electronConfiguration;
 	
-	public Element(String name, String symbol, int atomicNumber, int atomicMass, int meltingPoint, int boilingPoint, int[] electronConfiguration)
-	{
-		this.setCreativeTab(Chemistry.tabElements);
+	public Element()
+	{	
+		this.name = "element." + this.giveName();
+		this.symbol = this.giveSymbol();
 		
-		this.symbol = symbol;
+		this.atomicNumber = this.giveAtomicNumber();
+		this.atomicMass = this.giveAtomicMass();
 		
-		this.atomicNumber = atomicNumber;
-		this.atomicMass = atomicMass;
+		this.meltingPoint = this.giveMeltingPoint();
+		this.boilingPoint = this.giveBoilingPoint();
 		
-		this.meltingPoint = meltingPoint;
-		this.boilingPoint = boilingPoint;
-		
-		this.electronConfiguration = electronConfiguration;
+		this.electronConfiguration = this.giveElectronConfiguration();
 		
 		this.setUnlocalizedName(name);
 		this.setMaxStackSize(64);
+		this.setCreativeTab(Chemistry.tabElements);
 		GameRegistry.registerItem(this, name);
 	}
 	
@@ -64,29 +65,13 @@ public class Element extends Item
 		return this.boilingPoint;
 	}
 	
-	public abstract void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
-
-	public void setAtomicNumber(int atomicNumber) {
-		this.atomicNumber = atomicNumber;
-	}
-
-	public abstract void setAtomicMass(int atomicMass) {
-		this.atomicMass = atomicMass;
-	}
-
-	public abstract void setMeltingPoint(int meltingPoint) {
-		this.meltingPoint = meltingPoint;
-	}
-
-	public abstract void setBoilingPoint(int boilingPoint) {
-		this.boilingPoint = boilingPoint;
-	}
-
-	public abstract void setElectronConfiguration(int[] electronConfiguration) {
-		this.electronConfiguration = electronConfiguration;
-	}
+	public abstract String giveName();
+	public abstract String giveSymbol();
+	public abstract int giveAtomicNumber();
+	public abstract int giveAtomicMass();
+	public abstract int giveMeltingPoint();
+	public abstract int giveBoilingPoint();
+	public abstract int[] giveElectronConfiguration();
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)

@@ -4,20 +4,48 @@ import roboguy99.chemistry.item.element.Element;
 
 public class Helium extends Element
 {
-	private static final String NAME = "element.helium";
-	
-	private static final String SYMBOL = "He";
-	
-	private static final int ATOMIC_NUMBER = 2;
-	private static final int ATOMIC_MASS = 2;
-	
-	private static final int MELTING_POINT = -272;
-	private static final int BOILING_POINT = -267;
-	
-	private static final int[] ELECTRON_CONFIG = {2};
-	
-	public Helium() 
+	@Override
+	public String giveName() 
 	{
-		super(NAME, SYMBOL, ATOMIC_NUMBER, ATOMIC_MASS, MELTING_POINT, BOILING_POINT, ELECTRON_CONFIG);
+		return "helium";
 	}
+
+	@Override
+	public String giveSymbol() 
+	{
+		return "He";
+	}
+
+	@Override
+	public int giveAtomicNumber() 
+	{
+		return 2;
+	}
+
+	@Override
+	public int giveAtomicMass() 
+	{
+		return 4;
+	}
+
+	@Override
+	public int giveMeltingPoint() 
+	{
+		return -272;
+	}
+
+	@Override
+	public int giveBoilingPoint() 
+	{
+		return -267;
+	}
+
+	@Override
+	public int[] giveElectronConfiguration() 
+	{
+		int[] config = {2};
+		return config;
+	}
+
+
 }
