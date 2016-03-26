@@ -3,6 +3,7 @@ package roboguy99.chemistry.item.compound;
 import java.text.AttributedString;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.UUID;
 
 import org.lwjgl.input.Keyboard;
 
@@ -10,7 +11,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumColour;
 import roboguy99.chemistry.item.element.Element;
@@ -20,16 +23,19 @@ public class Compound extends Item
 {
 	private String formula;
 	private String name;
+	private int mass;
 	
 	public Compound(LinkedHashMap<Element, Integer> structure)
 	{	
 		this.name = this.getCompoundName(structure);
 		this.formula = this.getFormula(structure);
+		this.mass = this.getRelativeMass(structure);
 		
 		this.setUnlocalizedName(name);
 		this.setMaxStackSize(64);
 	this.setCreativeTab(Chemistry.tabElements);
 		GameRegistry.registerItem(this, name);
+		//LanguageRegistry.instance().addStringLocalization(this.getUnlocalizedName(), "en_US", name.replaceAll(".name", ""));
 	}
 	
 	private String getCompoundName(LinkedHashMap<Element, Integer> structure)
@@ -38,16 +44,16 @@ public class Compound extends Item
 		int elements = 0;
 		
 		for(Element element : structure.keySet())
-		{
-			if(elements == 0) name += element.getUnlocalizedName();
+		{			
+			if(elements == 0) name += StatCollector.translateToLocal(element.getUnlocalizedName() + ".name");
 			if(elements == 1)
 			{
 				name += " ";
-				name += element.getUnlocalizedName();
+				name += StatCollector.translateToLocal(element.getUnlocalizedName() + ".name");
 				name = name.substring(0, name.length() - 3);
 				name += "ide";
 			}
-			if(elements == 2 && element == Elements.oxygen)
+			if(elements == 2 && element == Elements.oxygen && structure.size() == 3)
 			{
 				name = name.substring(0, name.length() - 3);
 				name += "ate";
@@ -57,7 +63,9 @@ public class Compound extends Item
 		String commonName = this.getCommonName(name);
 		if(commonName != "") return commonName;
 		
-		return name;
+		if(name != "") return name;
+		
+		return UUID.randomUUID().toString(); //If bork, make ugly.
 	}
 	
 	private String getCommonName(String name)
@@ -79,6 +87,13 @@ public class Compound extends Item
 			if(structure.get(element) > 1) formula += structure.get(element);
 		}
 		return subscript(formula);
+	}
+	
+	private int getRelativeMass(LinkedHashMap<Element, Integer> structure)
+	{
+		int mass = 0;
+		for(Element element : structure.keySet()) mass += (element.getAtomicWeight() * structure.get(element));
+		return mass;
 	}
 	
 	private String subscript(String str) 
@@ -106,6 +121,7 @@ public class Compound extends Item
 		else
 		{
 			tooltip.add(formula);
+			tooltip.add("Relative mass: " + Integer.toString(mass));
 		}
 	}
 }

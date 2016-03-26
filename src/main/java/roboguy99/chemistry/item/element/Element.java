@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumColour;
 
@@ -42,6 +43,11 @@ public abstract class Element extends Item
 		this.setMaxStackSize(64);
 		this.setCreativeTab(Chemistry.tabElements);
 		GameRegistry.registerItem(this, name);
+	}
+	
+	public String getName()
+	{
+		return this.name;
 	}
 	
 	public String getSymbol()
@@ -93,12 +99,12 @@ public abstract class Element extends Item
 			}
 			electronString = electronString.substring(0, electronString.length() - 1); //Remove trailing dot
 			
-			tooltip.add("Symbol: " + symbol);
-			tooltip.add("Atomic No: " + atomicNumber);
-			tooltip.add("Atomic Mass: " + atomicMass);
-			tooltip.add("Electron Configuration: " + electronString);
-			tooltip.add("Melting Point: " + meltingPoint);
-			tooltip.add("Boiling Point: " + boilingPoint);
+			tooltip.add(EnumColour.YELLOW + "Symbol: " + symbol);
+			tooltip.add(EnumColour.DARK_AQUA + "Atomic No: " + atomicNumber);
+			tooltip.add(EnumColour.DARK_AQUA + "Atomic Mass: " + atomicMass);
+			tooltip.add(EnumColour.BRIGHT_PINK + "Electron Configuration: " + electronString);
+			tooltip.add(EnumColour.RED + "Melting Point: " + meltingPoint + "\u00B0C");
+			tooltip.add(EnumColour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
 		}
 	}
 }

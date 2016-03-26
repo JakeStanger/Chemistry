@@ -26,5 +26,18 @@ public class Elements
 		waterCompound.put(Elements.hydrogen, 2);
 		waterCompound.put(Elements.oxygen, 1);
 		Compound water = new Compound(waterCompound);
+		
+		LinkedHashMap glucoseCompound = new LinkedHashMap();
+		glucoseCompound.put(Elements.carbon, 6);
+		glucoseCompound.put(Elements.hydrogen, 12);
+		glucoseCompound.put(Elements.oxygen, 6);
+		Compound glucose = new Compound(glucoseCompound);
+		
+		/*LinkedHashMap ethanolCompound = new LinkedHashMap();
+		ethanolCompound.put(Elements.carbon, 2);
+		ethanolCompound.put(Elements.hydrogen, 5);
+		ethanolCompound.put(Elements.oxygen, 1);
+		ethanolCompound.put(Elements.hydrogen, 1);
+		Compound ethanol = new Compound(ethanolCompound);*/
 	}
 }
