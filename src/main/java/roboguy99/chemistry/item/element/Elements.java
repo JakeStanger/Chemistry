@@ -1,6 +1,7 @@
 package roboguy99.chemistry.item.element;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.elements.Carbon;
@@ -14,6 +15,8 @@ public class Elements
 	public static Helium helium;
 	public static Oxygen oxygen;
 	public static Carbon carbon;
+	
+	public static Compound ethanol;
 	
 	public Elements()
 	{
@@ -33,11 +36,17 @@ public class Elements
 		glucoseCompound.put(Elements.oxygen, 6);
 		Compound glucose = new Compound(glucoseCompound);
 		
-		/*LinkedHashMap ethanolCompound = new LinkedHashMap();
-		ethanolCompound.put(Elements.carbon, 2);
-		ethanolCompound.put(Elements.hydrogen, 5);
-		ethanolCompound.put(Elements.oxygen, 1);
-		ethanolCompound.put(Elements.hydrogen, 1);
-		Compound ethanol = new Compound(ethanolCompound);*/
+		LinkedHashMap ethanolCompoundMain = new LinkedHashMap();
+		ethanolCompoundMain.put(Elements.carbon, 2);
+		ethanolCompoundMain.put(Elements.hydrogen, 5);
+		Compound ethanolMain = new Compound(ethanolCompoundMain);
+		
+		LinkedHashMap ethanolCompoundFunctional = new LinkedHashMap();
+		ethanolCompoundFunctional.put(Elements.oxygen, 1);
+		ethanolCompoundFunctional.put(Elements.hydrogen, 1);
+		Compound ethanolFunctional = new Compound(ethanolCompoundFunctional);
+		
+		Compound[] compoundArray = {ethanolMain, ethanolFunctional};
+		ethanol = new Compound(compoundArray);
 	}
 }
