@@ -6,6 +6,6 @@ public class TileEntities
 {
 	public TileEntities()
 	{
-		GameRegistry.registerTileEntity(TileCompoundMaker.class, "tileCompoundMaker");
+		GameRegistry.registerTileEntity(TileCompoundAnalyser.class, "tileCompoundAnalyser");
 	}
 }

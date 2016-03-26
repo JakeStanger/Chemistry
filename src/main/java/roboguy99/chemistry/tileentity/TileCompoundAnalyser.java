@@ -4,11 +4,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import roboguy99.chemistry.Chemistry;
 
-public class TileCompoundMaker extends TileEntity implements ITickable
+public class TileCompoundAnalyser extends TileEntity implements ITickable
 {
     @Override
     public void update()
     {
-    	//Update tile
+    	if (!this.worldObj.isRemote)
+    	{
+    		//Update
+    	}
     }
 }

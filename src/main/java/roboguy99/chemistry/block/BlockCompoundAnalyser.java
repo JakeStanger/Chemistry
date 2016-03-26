@@ -7,11 +7,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.tileentity.TileCompoundMaker;
+import roboguy99.chemistry.tileentity.TileCompoundAnalyser;
 
-public class BlockCompoundMaker extends BlockContainer
+public class BlockCompoundAnalyser extends BlockContainer
 {
-	public BlockCompoundMaker() 
+	public BlockCompoundAnalyser() 
 	{
 		super(Material.iron);
 		this.setCreativeTab(Chemistry.tabElements);
@@ -35,7 +35,7 @@ public class BlockCompoundMaker extends BlockContainer
 	
 	public TileEntity createNewTileEntity(World world, int var2) 
 	{
-		return new TileCompoundMaker();
+		return new TileCompoundAnalyser();
 	}
 	
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
