@@ -3,6 +3,7 @@ package roboguy99.chemistry.tileentity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import roboguy99.chemistry.Chemistry;
+import roboguy99.chemistry.item.element.Elements;
 
 public class TileCompoundAnalyser extends TileEntity implements ITickable
 {
@@ -11,7 +12,7 @@ public class TileCompoundAnalyser extends TileEntity implements ITickable
     {
     	if (!this.worldObj.isRemote)
     	{
-    		//Update
+    		System.out.println(Elements.ethanol.getStructure());
     	}
     }
 }
