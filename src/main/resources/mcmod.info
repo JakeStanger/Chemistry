@@ -1,16 +1,17 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
+  "modid": "chemistry",
+  "name": "Chemistry",
+  "description": "Elements, compounds, explosions!",
+  "version": "0.0.0",
+  "mcversion": "1.8.9",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
+  "authorList": [
+    "Roboguy99"
+  ],
+  "credits": "Thanks to all those who helped me (especially on the Minecraft Forge forums)",
+  "logoFile": "logo.png",
+  "screenshots": [
+  ]
 }
 ]
