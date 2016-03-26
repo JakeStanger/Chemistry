@@ -2,11 +2,15 @@ package roboguy99.chemistry.item.element;
 
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
+import roboguy99.chemistry.api.EnumColour;
 
 public abstract class Element extends Item
 {
@@ -74,20 +78,27 @@ public abstract class Element extends Item
 	public abstract int[] giveElectronConfiguration();
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{
-		String electronString = "";
-		for(int electronShell : electronConfiguration)
+		if(!Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode()))
 		{
-			electronString += (electronShell + ".");
+			tooltip.add(EnumColour.AQUA + "Sneak for more info");
 		}
-		electronString = electronString.substring(0, electronString.length() - 1); //Remove trailing dot
-		
-		tooltip.add("Symbol: " + symbol);
-		tooltip.add("Atomic No: " + atomicNumber);
-		tooltip.add("Atomic Mass: " + atomicMass);
-		tooltip.add("Electron Configuration: " + electronString);
-		tooltip.add("Melting Point: " + meltingPoint);
-		tooltip.add("Boiling Point: " + boilingPoint);
+		else
+		{
+			String electronString = "";
+			for(int electronShell : electronConfiguration)
+			{
+				electronString += (electronShell + ".");
+			}
+			electronString = electronString.substring(0, electronString.length() - 1); //Remove trailing dot
+			
+			tooltip.add("Symbol: " + symbol);
+			tooltip.add("Atomic No: " + atomicNumber);
+			tooltip.add("Atomic Mass: " + atomicMass);
+			tooltip.add("Electron Configuration: " + electronString);
+			tooltip.add("Melting Point: " + meltingPoint);
+			tooltip.add("Boiling Point: " + boilingPoint);
+		}
 	}
 }
