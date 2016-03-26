@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import roboguy99.chemistry.block.BlockCompoundMaker;
+import roboguy99.chemistry.block.BlockCompoundAnalyser;
 import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.network.CommonProxy;
 import roboguy99.chemistry.tileentity.TileEntities;
@@ -52,7 +52,7 @@ public class Chemistry {
 	{
 		logger.info("Initialising");
 		new Elements();
-	new BlockCompoundMaker();
+	new BlockCompoundAnalyser();
 		new TileEntities();
 	}
 
