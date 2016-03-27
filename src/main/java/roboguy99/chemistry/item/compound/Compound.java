@@ -23,6 +23,8 @@ import roboguy99.chemistry.item.element.Elements;
 
 public class Compound extends Item
 {
+	public static Compound instance;
+	
 	private String formula;
 	private String name;
 	private int mass;
@@ -30,6 +32,8 @@ public class Compound extends Item
 	
 	public Compound()
 	{
+		this.instance = this;
+		
 		this.setUnlocalizedName("compound");
 		this.setMaxStackSize(64);
 		this.setCreativeTab(Chemistry.tabElements); //TODO Remove once compound complete
@@ -141,50 +145,6 @@ public class Compound extends Item
 			tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + Integer.toString(mass));
 		}
 	}
-	
-	public void setNBTData(ItemStack itemStack)
-	{
-		NBTTagCompound compound = itemStack.getTagCompound();
-		compound.setString("name", name);
-		compound.setString("formula", formula);
-		compound.setInteger("mass", mass);
-		
-		NBTTagCompound structure = new NBTTagCompound();
-		
-		for(Element element : this.structure.keySet()) structure.setInteger(Integer.toString(element.getAtomicNumber()), this.structure.get(element));
-		
-		compound.setTag("Structure", structure);
-	}
-	
-	public void getNBTData(ItemStack itemStack)
-	{
-		NBTTagCompound compound = itemStack.getTagCompound();
-		
-		this.name = compound.getString("name");
-		this.formula = compound.getString("formula");
-		this.mass = compound.getInteger("mass");
-		
-		NBTTagCompound structureNBT = compound.getCompoundTag("Structure");
-		//LinkedHashMap<Element, Integer> structure = new LinkedHashMap<Element, Integer>();
-		
-		for(String atomicNumber : structureNBT.getKeySet())
-		{
-			Element element = Elements.getElement(Integer.parseInt(atomicNumber));
-			int quantity = structureNBT.getInteger(atomicNumber);
-			
-			structure.put(element, quantity);
-		}
-	}
-
-	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-    {
-		if(stack.getTagCompound() == null)
-		{
-			stack.setTagCompound(new NBTTagCompound());
-			this.setNBTData(stack);
-		}
-    }
 	
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
