@@ -1,6 +1,6 @@
 package roboguy99.chemistry.api;
 
-public enum EnumElement //TODO Move elements here as well
+public enum EnumElement //TODO Move elements here as well maybe
 {
 	HYDROGEN(1),
 	HELIUM(2),
