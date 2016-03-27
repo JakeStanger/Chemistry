@@ -1,13 +1,13 @@
 package roboguy99.chemistry.item.element;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.elements.Carbon;
 import roboguy99.chemistry.item.element.elements.Helium;
 import roboguy99.chemistry.item.element.elements.Hydrogen;
 import roboguy99.chemistry.item.element.elements.Oxygen;
+import roboguy99.chemistry.item.element.elements.Uranium;
 
 public class Elements 
 {
@@ -15,6 +15,7 @@ public class Elements
 	public static Helium helium;
 	public static Oxygen oxygen;
 	public static Carbon carbon;
+	public static Uranium uranium;
 	
 	public static Compound ethanol;
 	
@@ -24,6 +25,7 @@ public class Elements
 		helium = new Helium();
 		oxygen = new Oxygen();
 		carbon = new Carbon();
+		uranium = new Uranium();
 		
 		LinkedHashMap waterCompound = new LinkedHashMap();
 		waterCompound.put(Elements.hydrogen, 2);
