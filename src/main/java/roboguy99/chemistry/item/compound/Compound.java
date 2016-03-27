@@ -1,6 +1,5 @@
 package roboguy99.chemistry.item.compound;
 
-import java.text.AttributedString;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.UUID;
@@ -8,12 +7,14 @@ import java.util.UUID;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumColour;
 import roboguy99.chemistry.item.element.Element;
@@ -26,6 +27,14 @@ public class Compound extends Item
 	private int mass;
 	private LinkedHashMap<Element, Integer> structure;
 	
+	public Compound()
+	{
+		this.setUnlocalizedName("compound");
+		this.setMaxStackSize(64);
+		this.setCreativeTab(Chemistry.tabElements);
+		GameRegistry.registerItem(this, "compound");
+	}
+	
 	public Compound(LinkedHashMap<Element, Integer> structure)
 	{	
 		this.name = this.getCompoundName(structure);
@@ -36,7 +45,14 @@ public class Compound extends Item
 		this.setUnlocalizedName(name);
 		this.setMaxStackSize(64);
 	this.setCreativeTab(Chemistry.tabElements);
-		GameRegistry.registerItem(this, name);
+		try
+		{
+			GameRegistry.registerItem(this, name);
+		}
+		catch(Exception e)
+		{
+			GameRegistry.registerItem(this, name + UUID.randomUUID().toString().substring(0, 4));
+		}
 		//LanguageRegistry.instance().addStringLocalization(this.getUnlocalizedName(), "en_US", name.replaceAll(".name", ""));
 	}
 	
@@ -75,21 +91,15 @@ public class Compound extends Item
 			if(elements == 0)
 			{
 				name += StatCollector.translateToLocal(element.getUnlocalizedName() + ".name");
-				
-				String prefix = "";
-				if(structure.get(element) == 2) prefix = "Di";
-				if(structure.get(element) == 3) prefix = "Tri";
-				
-				if(prefix != "") name = name.toLowerCase();
-				name = prefix + name;
 			}
 			if(elements == 1)
 			{
 				name += " ";
 				name += StatCollector.translateToLocal(element.getUnlocalizedName() + ".name");
 				name = name.substring(0, name.length() - 3);
-				if(name.endsWith("a") || name.endsWith("e") || name.endsWith("i") || name.endsWith("o") || name.endsWith("u") || name.endsWith("y")) //Remove vowels
-					name = name.substring(0, name.length() - 1);
+				
+				String[] vowels = {"a", "e", "i", "o", "u", "y"};
+				for(String vowel: vowels) if(name.endsWith(vowel)) name = name.substring(0, name.length() - 1);
 				name += "ide";
 			}
 			if(elements == 2 && element == Elements.oxygen && structure.size() == 3)
@@ -102,9 +112,7 @@ public class Compound extends Item
 		String commonName = this.getCommonName(name);
 		if(commonName != "") return commonName;
 		
-		if(name != "") return name;
-		
-		return UUID.randomUUID().toString(); //If bork, make ugly. Saves crashing. Probably a bad idea.
+		return name;
 	}
 	
 	private String getCommonName(String name)
@@ -112,7 +120,7 @@ public class Compound extends Item
 		System.out.println(name);
 		String commonName = "";
 		
-		if(name.equals("Dihydrogen Oxide")) commonName = "Water";
+		if(name.equals("Hydrogen Oxide")) commonName = "Water";
 		if(name.equals("Carbon Hydrate")) commonName = "Glucose";
 		if(name.equals("Oxygen Hydride")) commonName = "Hydroxide";
 		
@@ -178,4 +186,50 @@ public class Compound extends Item
 			tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + Integer.toString(mass));
 		}
 	}
+	
+	public void setNBTData(ItemStack itemStack)
+	{
+		NBTTagCompound compound = itemStack.getTagCompound();
+		compound.setString("name", name);
+		compound.setString("formula", formula);
+		compound.setInteger("mass", mass);
+		
+		NBTTagCompound structure = new NBTTagCompound();
+		
+		for(Element element : this.structure.keySet())
+		{
+			structure.setInteger(element.getItemStackDisplayName(new ItemStack(element)), this.structure.get(element));
+		}
+		
+		compound.setTag("Structure", structure);
+	}
+	
+	public void getNBTData(ItemStack itemStack)
+	{
+		NBTTagCompound compound = itemStack.getTagCompound();
+		
+		this.name = compound.getString("name");
+		this.formula = compound.getString("formula");
+		this.mass = compound.getInteger("mass");
+		
+		NBTTagCompound structureNBT = compound.getCompoundTag("Structure");
+		LinkedHashMap<Element, Integer> structure = new LinkedHashMap<Element, Integer>();
+		
+		for(String elementName : structureNBT.getKeySet())
+		{
+			switch elementName //This seems like a bad idea...
+				
+		}
+	}
+
+	
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+    {
+		if(stack.getTagCompound() == null)
+		{
+			stack.setTagCompound(new NBTTagCompound());
+			this.setNBTData(stack);
+		}
+    }
 }
