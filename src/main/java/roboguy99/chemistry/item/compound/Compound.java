@@ -36,14 +36,6 @@ public class Compound extends Item
 		GameRegistry.registerItem(this, "compound");
 	}
 	
-	public Compound(LinkedHashMap<Element, Integer> structure)
-	{	
-		this.name = this.getCompoundName(structure);
-		this.formula = this.getFormula(structure);
-		this.mass = this.getRelativeMass(structure);
-		this.structure = structure;
-	}
-	
 	private String getCompoundName(LinkedHashMap<Element, Integer> structure)
 	{
 		String name = "";
