@@ -47,5 +47,9 @@ public class Oxygen extends Element
 		return config;
 	}
 
-	
+	@Override
+	public String giveDesc()
+	{
+		return "All life requires oxygen for respiration.";
+	}
 }

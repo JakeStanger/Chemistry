@@ -46,4 +46,10 @@ public class Hydrogen extends Element
 		int[] config = {1};
 		return config;
 	}
+
+	@Override
+	public String giveDesc()
+	{
+		return "Hydrogen is the smallest, \nlightest and most abundant element in the universe.";
+	}
 }

@@ -47,5 +47,11 @@ public class Helium extends Element
 		return config;
 	}
 
+	@Override
+	public String giveDesc()
+	{
+		return "Helium is a noble gas and \ndoes not react with any other element without intense amounts of energy.";
+	}
+
 
 }

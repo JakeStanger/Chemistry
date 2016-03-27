@@ -47,4 +47,12 @@ public class Carbon extends Element
 		return config;
 	}
 
+	@Override
+	public String giveDesc()
+	{
+		return "Carbon is the basis for all life. "
+			 + "All relative atomic masses are "
+			 + "based off of carbon.";
+	}
+
 }
