@@ -25,7 +25,7 @@ public class Compound extends Item
 {
 	public static Compound instance;
 	
-	private String formula;
+	private String formula; //TODO Create packet to save data
 	private String name;
 	private int mass;
 	private LinkedHashMap<Element, Integer> structure;
