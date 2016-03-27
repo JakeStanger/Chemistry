@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.block.BlockCompoundAnalyser;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.Elements;
@@ -67,14 +68,14 @@ public class Chemistry {
 	    @Override
 	    @SideOnly(Side.CLIENT)
 	    public Item getTabIconItem() {
-	        return Elements.carbon;
+	        return Elements.getElement(EnumElement.CARBON);
 	    }
 	};
-	public static CreativeTabs tabMachines = new CreativeTabs("tabMachines") {
+	/*public static CreativeTabs tabMachines = new CreativeTabs("tabMachines") {
 	    @Override
 	    @SideOnly(Side.CLIENT)
 	    public Item getTabIconItem() {
 	        return Elements.ethanol; //TODO do something about this
 	    }
-	};
+	};*/
 }	
