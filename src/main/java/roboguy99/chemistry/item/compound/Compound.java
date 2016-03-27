@@ -217,8 +217,7 @@ public class Compound extends Item
 		
 		for(String elementName : structureNBT.getKeySet())
 		{
-			switch elementName //This seems like a bad idea...
-				
+			//Do something
 		}
 	}
 

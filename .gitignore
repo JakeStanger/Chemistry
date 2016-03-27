@@ -4,7 +4,10 @@
 /bin/
 /build/
 /run/
+/run/config/
+/run/logs/
 /eclipse/
 .classpath
 .project
-
+Chemistry_Client.launch
+Chemistry_Server.launch
