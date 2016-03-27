@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumColour;
+import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 
@@ -103,7 +104,7 @@ public class Compound extends Item
 				for(String vowel: vowels) if(name.endsWith(vowel)) name = name.substring(0, name.length() - 1);
 				name += "ide";
 			}
-			if(elements == 2 && element == Elements.oxygen && structure.size() == 3)
+			if(elements == 2 && element == Elements.getElement(EnumElement.OXYGEN) && structure.size() == 3)
 			{
 				name = name.substring(0, name.length() - 3);
 				name += "ate";
