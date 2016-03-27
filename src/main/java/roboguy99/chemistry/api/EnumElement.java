@@ -2,7 +2,7 @@ package roboguy99.chemistry.api;
 
 /**
  * Get element atomic number from name
- * @author robog
+ * @author Roboguy99
  *
  */
 public enum EnumElement //TODO Move elements here as well maybe

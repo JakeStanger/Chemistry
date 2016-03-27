@@ -8,7 +8,7 @@ import roboguy99.chemistry.item.element.Element;
 
 /**
  * TODO Properly implement this
- * @author robog
+ * @author Roboguy99
  *
  */
 public class CompoundHandler

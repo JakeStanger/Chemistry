@@ -1,5 +1,7 @@
 package roboguy99.chemistry;
 
+import java.util.LinkedHashMap;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +18,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.block.BlockCompoundAnalyser;
 import roboguy99.chemistry.item.compound.Compound;
+import roboguy99.chemistry.item.compound.CompoundHandler;
+import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.network.CommonProxy;
 import roboguy99.chemistry.tileentity.TileEntities;
@@ -23,7 +27,7 @@ import roboguy99.chemistry.tileentity.TileEntities;
 /**
  * Main class. Handles mod initialisation.
  * 
- * @author Roboguy99
+ * @author Roboguy99uy99
  * 
  */
 @Mod(modid = Chemistry.modID, version = Chemistry.modVersion, name = Chemistry.name)
@@ -55,6 +59,7 @@ public class Chemistry {
 		logger.info("Initialising");
 		new Elements();
 		new Compound();
+	
 	new BlockCompoundAnalyser();
 		new TileEntities();
 	}
