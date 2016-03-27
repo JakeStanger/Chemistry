@@ -1,51 +1,45 @@
 package roboguy99.chemistry.item.element;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedHashMap;
 
-import javax.imageio.ImageIO;
-
+import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.compound.Compound;
+import roboguy99.chemistry.item.element.elements.Berylium;
+import roboguy99.chemistry.item.element.elements.Boron;
 import roboguy99.chemistry.item.element.elements.Carbon;
 import roboguy99.chemistry.item.element.elements.Helium;
 import roboguy99.chemistry.item.element.elements.Hydrogen;
+import roboguy99.chemistry.item.element.elements.Lithium;
+import roboguy99.chemistry.item.element.elements.Nitrogen;
 import roboguy99.chemistry.item.element.elements.Oxygen;
 import roboguy99.chemistry.item.element.elements.Uranium;
 
 public class Elements 
-{	
-	public static Hydrogen hydrogen;
-	public static Helium helium;
-	public static Oxygen oxygen;
-	public static Carbon carbon;
-	public static Uranium uranium;
+{
+	public static Element[] elements = new Element[118];
 	
 	public static Compound ethanol;
 	
 	public Elements()
 	{
-		hydrogen = new Hydrogen();
-		helium = new Helium();
-		oxygen = new Oxygen();
-		carbon = new Carbon();
-		uranium = new Uranium();
+		elements[0] = new Hydrogen();
+		elements[1] = new Helium();
+		elements[2] = new Lithium();
+		elements[3] = new Berylium();
+		elements[4] = new Boron();
+		elements[5] = new Carbon();
+		elements[6] = new Nitrogen();
+		elements[7] = new Oxygen();
 		
 		LinkedHashMap waterCompound = new LinkedHashMap(); //TODO Move all of these to their own class
-		waterCompound.put(Elements.hydrogen, 2);
-		waterCompound.put(Elements.oxygen, 1);
+		waterCompound.put(Elements.getElement(EnumElement.HYDROGEN.atomicNumber), 2);
+		waterCompound.put(Elements.getElement(8), 1);
 		Compound water = new Compound(waterCompound);
 		
 		LinkedHashMap glucoseCompound = new LinkedHashMap();
-		glucoseCompound.put(Elements.carbon, 6);
-		glucoseCompound.put(Elements.hydrogen, 12);
-		glucoseCompound.put(Elements.oxygen, 6);
+		glucoseCompound.put(Elements.getElement(6), 6);
+		glucoseCompound.put(Elements.getElement(1), 12);
+		glucoseCompound.put(Elements.getElement(6), 6);
 		Compound glucose = new Compound(glucoseCompound);
 		
 		LinkedHashMap ethanolCompoundMain = new LinkedHashMap();
@@ -98,4 +92,9 @@ public class Elements
             ex.printStackTrace();
         }*/
     }
+	
+	public static Element getElement(int atomicNumber)
+	{
+		return elements[atomicNumber-1];
+	}
 }
