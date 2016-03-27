@@ -2,6 +2,7 @@ package roboguy99.chemistry.item.element;
 
 import java.util.LinkedHashMap;
 
+import roboguy99.chemistry.api.EnumColour;
 import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.elements.Berylium;
@@ -30,19 +31,20 @@ public class Elements
 		elements[5] = new Carbon();
 		elements[6] = new Nitrogen();
 		elements[7] = new Oxygen();
+		elements[91] = new Uranium();
 		
 		LinkedHashMap waterCompound = new LinkedHashMap(); //TODO Move all of these to their own class
-		waterCompound.put(Elements.getElement(EnumElement.HYDROGEN.atomicNumber), 2);
-		waterCompound.put(Elements.getElement(8), 1);
+		waterCompound.put(getElement(EnumElement.HYDROGEN), 2);
+		waterCompound.put(getElement(EnumElement.OXYGEN), 1);
 		Compound water = new Compound(waterCompound);
 		
 		LinkedHashMap glucoseCompound = new LinkedHashMap();
-		glucoseCompound.put(Elements.getElement(6), 6);
-		glucoseCompound.put(Elements.getElement(1), 12);
-		glucoseCompound.put(Elements.getElement(6), 6);
+		glucoseCompound.put(getElement(EnumElement.CARBON), 6);
+		glucoseCompound.put(getElement(EnumElement.HYDROGEN), 12);
+		glucoseCompound.put(getElement(EnumElement.OXYGEN), 6);
 		Compound glucose = new Compound(glucoseCompound);
 		
-		LinkedHashMap ethanolCompoundMain = new LinkedHashMap();
+		/*LinkedHashMap ethanolCompoundMain = new LinkedHashMap();
 		ethanolCompoundMain.put(Elements.carbon, 2);
 		ethanolCompoundMain.put(Elements.hydrogen, 5);
 		Compound ethanolMain = new Compound(ethanolCompoundMain);
@@ -93,8 +95,23 @@ public class Elements
         }*/
     }
 	
+	/**
+	 * Get the element instance linking to the specified atomic number
+	 * @param atomicNumber
+	 * @return The element with the specified atomic number
+	 */
 	public static Element getElement(int atomicNumber)
 	{
 		return elements[atomicNumber-1];
+	}
+	
+	/**
+	 * Get the element instance linking to the specified enum value
+	 * @param enumElement
+	 * @return The element for the given enum
+	 */
+	public static Element getElement(EnumElement enumElement)
+	{
+		return getElement(enumElement.atomicNumber);
 	}
 }
