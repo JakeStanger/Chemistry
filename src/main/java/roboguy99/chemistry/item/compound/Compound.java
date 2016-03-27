@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -33,7 +32,7 @@ public class Compound extends Item
 	{
 		this.setUnlocalizedName("compound");
 		this.setMaxStackSize(64);
-		this.setCreativeTab(Chemistry.tabElements);
+		this.setCreativeTab(Chemistry.tabElements); //TODO Remove once compound complete
 		GameRegistry.registerItem(this, "compound");
 	}
 	
@@ -43,44 +42,6 @@ public class Compound extends Item
 		this.formula = this.getFormula(structure);
 		this.mass = this.getRelativeMass(structure);
 		this.structure = structure;
-		
-		this.setUnlocalizedName(name);
-		this.setMaxStackSize(64);
-	this.setCreativeTab(Chemistry.tabElements);
-		try
-		{
-			GameRegistry.registerItem(this, name);
-		}
-		catch(Exception e)
-		{
-			GameRegistry.registerItem(this, name + UUID.randomUUID().toString().substring(0, 4));
-		}
-		//LanguageRegistry.instance().addStringLocalization(this.getUnlocalizedName(), "en_US", name.replaceAll(".name", ""));
-	}
-	
-	public Compound(Compound[] compounds)
-	{
-		this.name = "";
-		this.formula = "";
-		this.mass = 0;
-		this.structure = new LinkedHashMap<Element, Integer>();
-		
-		for(Compound compound : compounds)
-		{
-			this.name += this.getCompoundName(compound.getStructure());
-			this.formula += this.getFormula(compound.getStructure());
-			this.mass += this.getRelativeMass(compound.getStructure());
-			for(Element element : compound.getStructure().keySet())
-			{
-				if(!this.structure.containsKey(element)) this.structure.put(element, compound.getStructure().get(element));
-				else this.structure.put(element, compound.getStructure().get(element) + structure.get(element));
-			}
-		}
-		
-		this.setUnlocalizedName(name);
-		this.setMaxStackSize(64);
-	this.setCreativeTab(Chemistry.tabElements);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	private String getCompoundName(LinkedHashMap<Element, Integer> structure)
@@ -96,7 +57,7 @@ public class Compound extends Item
 			}
 			if(elements == 1)
 			{
-				name += " ";
+				name += " "; //TODO Change name to stringbuilder
 				name += StatCollector.translateToLocal(element.getUnlocalizedName() + ".name");
 				name = name.substring(0, name.length() - 3);
 				
@@ -198,10 +159,7 @@ public class Compound extends Item
 		
 		NBTTagCompound structure = new NBTTagCompound();
 		
-		for(Element element : this.structure.keySet())
-		{
-			structure.setInteger(element.getItemStackDisplayName(new ItemStack(element)), this.structure.get(element));
-		}
+		for(Element element : this.structure.keySet()) structure.setInteger(Integer.toString(element.getAtomicNumber()), this.structure.get(element));
 		
 		compound.setTag("Structure", structure);
 	}
@@ -215,11 +173,14 @@ public class Compound extends Item
 		this.mass = compound.getInteger("mass");
 		
 		NBTTagCompound structureNBT = compound.getCompoundTag("Structure");
-		LinkedHashMap<Element, Integer> structure = new LinkedHashMap<Element, Integer>();
+		//LinkedHashMap<Element, Integer> structure = new LinkedHashMap<Element, Integer>();
 		
-		for(String elementName : structureNBT.getKeySet())
+		for(String atomicNumber : structureNBT.getKeySet())
 		{
-			//Do something
+			Element element = Elements.getElement(Integer.parseInt(atomicNumber));
+			int quantity = structureNBT.getInteger(atomicNumber);
+			
+			structure.put(element, quantity);
 		}
 	}
 
@@ -231,5 +192,12 @@ public class Compound extends Item
 			stack.setTagCompound(new NBTTagCompound());
 			this.setNBTData(stack);
 		}
+    }
+	
+	@Override
+	public String getItemStackDisplayName(ItemStack stack)
+    {
+        //return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim(); (Default)
+		return this.name;
     }
 }
