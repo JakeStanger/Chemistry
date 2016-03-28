@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.api.EnumElement;
-import roboguy99.chemistry.block.BlockCompoundAnalyser;
+import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.network.CommonProxy;
@@ -64,7 +64,7 @@ public class Chemistry {
 		new Elements();
 		new Compound();
 	
-	new BlockCompoundAnalyser();
+	new BlockCompoundCreator();
 		new TileEntities();
 	}
 
