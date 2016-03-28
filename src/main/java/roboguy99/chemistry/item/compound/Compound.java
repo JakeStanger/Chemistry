@@ -2,18 +2,15 @@ package roboguy99.chemistry.item.compound;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.UUID;
 
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumColour;
@@ -25,9 +22,6 @@ public class Compound extends Item
 {
 	public static Compound instance;
 	
-	private String formula; //TODO Create packet to save data
-	private String name;
-	private int mass;
 	private LinkedHashMap<Element, Integer> structure;
 	
 	public Compound()
@@ -76,14 +70,12 @@ public class Compound extends Item
 	
 	private String getCommonName(String name)
 	{
-		System.out.println(name);
 		String commonName = "";
 		
 		if(name.equals("Hydrogen Oxide")) commonName = "Water";
 		if(name.equals("Carbon Hydrate")) commonName = "Glucose";
 		if(name.equals("Oxygen Hydride")) commonName = "Hydroxide";
 		
-		System.out.println(commonName);
 		return commonName;
 	}
 	
@@ -96,13 +88,14 @@ public class Compound extends Item
 			formula += element.getSymbol();
 			if(structure.get(element) > 1) formula += structure.get(element);
 		}
+		
 		return subscript(formula);
 	}
 	
 	private int getRelativeMass(LinkedHashMap<Element, Integer> structure)
 	{
 		int mass = 0;
-		for(Element element : structure.keySet()) mass += (element.getAtomicWeight() * structure.get(element));
+		if(structure != null) for(Element element : structure.keySet()) mass += (element.getAtomicMass() * structure.get(element));
 		return mass;
 	}
 	
@@ -141,8 +134,9 @@ public class Compound extends Item
 		}
 		else
 		{
-			tooltip.add(EnumColour.YELLOW + formula);
-			tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + Integer.toString(mass));
+			LinkedHashMap<Element, Integer> map = this.convertNBTToMap(stack.getTagCompound());
+			tooltip.add(EnumColour.YELLOW + this.getFormula(map));
+			tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(map));
 		}
 	}
 	
@@ -150,6 +144,19 @@ public class Compound extends Item
 	public String getItemStackDisplayName(ItemStack stack)
     {
         //return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim(); (Default)
-		return this.name;
+		return this.getCompoundName(this.convertNBTToMap(stack.getTagCompound()));
     }
+	
+	private LinkedHashMap<Element, Integer> convertNBTToMap(NBTTagCompound tag)
+	{
+		LinkedHashMap<Element, Integer> compound = new LinkedHashMap<Element, Integer>();
+		
+		for(String atomicNumber : tag.getKeySet())
+		{
+			Element element = Elements.getElement(Integer.parseInt(atomicNumber));
+			compound.put(element, compound.get(element));
+		}
+		
+		return compound;
+	}
 }
