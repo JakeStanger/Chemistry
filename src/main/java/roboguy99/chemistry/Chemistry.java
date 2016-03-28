@@ -1,7 +1,5 @@
 package roboguy99.chemistry;
 
-import java.util.LinkedHashMap;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,15 +11,17 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.block.BlockCompoundAnalyser;
 import roboguy99.chemistry.item.compound.Compound;
-import roboguy99.chemistry.item.compound.CompoundHandler;
-import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.network.CommonProxy;
+import roboguy99.chemistry.network.packet.CompoundCreate;
+import roboguy99.chemistry.network.packet.CompoundCreate.CompoundCreateHandle;
 import roboguy99.chemistry.tileentity.TileEntities;
 
 /**
@@ -41,6 +41,7 @@ public class Chemistry {
 
 	@SidedProxy(clientSide = "roboguy99.chemistry.network.ClientProxy", serverSide = "roboguy99.chemistry.network.CommonProxy")
 	public static CommonProxy proxy;
+	public static SimpleNetworkWrapper networkWrapper;
 
 	public static Chemistry instance;
 
@@ -51,6 +52,9 @@ public class Chemistry {
 		this.instance = this;
 
 		proxy.registerProxies();
+		
+		this.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("hotbarBag_inv");
+		this.networkWrapper.registerMessage(CompoundCreateHandle.class, CompoundCreate.class, 0, Side.SERVER);
 	}
 
 	@EventHandler
