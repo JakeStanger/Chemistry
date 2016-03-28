@@ -13,18 +13,49 @@ import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumColour;
 
+/**
+ * The item class for a chemical element.
+ * Extend this to create an element.
+ * @author Roboguy99
+ *
+ */
 public abstract class Element extends Item
 {
+	/**
+	 * The unlocalised name of the element
+	 */
 	private String name;
+	/***
+	 * The chemical symbol for the element
+	 */
 	private String symbol;
+	/**
+	 * A description of the element
+	 */
 	private String desc;
 	
+	/**
+	 * The atomic number of the element
+	 */
 	private int atomicNumber;
+	/**
+	 * The relative atomic mass of the element
+	 */
 	private int atomicMass;
 	
+	/**
+	 * The melting point of the element in Celsius
+	 */
 	private int meltingPoint;
+	/**
+	 * The boiling point of the element in Celsius
+	 */
 	private int boilingPoint;
 	
+	/**
+	 * Technically the name is slightly incorrect.
+	 * The number of electrons per shell for the atom
+	 */
 	private int[] electronConfiguration;
 	
 	public Element()
@@ -47,36 +78,57 @@ public abstract class Element extends Item
 		GameRegistry.registerItem(this, name);
 	}
 	
+	/**
+	 * @return the unlocalised name
+	 */
 	public String getName()
 	{
 		return this.name;
 	}
 	
+	/**
+	 * @return the chemical symbol
+	 */
 	public String getSymbol()
 	{
 		return this.symbol;
 	}
 	
+	/**
+	 * @return the description
+	 */
 	public String getDesc()
 	{
 		return this.desc;
 	}
 	
+	/**
+	 * @return the atomic number
+	 */
 	public int getAtomicNumber()
 	{
 		return this.atomicNumber;
 	}
 	
-	public int getAtomicWeight()
+	/**
+	 * @return the relative atomic mass
+	 */
+	public int getAtomicMass()
 	{
 		return this.atomicMass;
 	}
 	
+	/**
+	 * @return the melting point, in Celsius
+	 */
 	public int getMeltingPoint()
 	{
 		return this.meltingPoint;
 	}
 	
+	/**
+	 * @return the boiling point, in Celsius
+	 */
 	public int getBoilingPoint()
 	{
 		return this.boilingPoint;
