@@ -54,7 +54,7 @@ public class CompoundCreate implements IMessage
                 	
                 	compound.setTagCompound(tag);
                    
-                   //Return stack...?
+                	ctx.getServerHandler().playerEntity.inventory.addItemStackToInventory(compound);
                 }
             });
             return null;
