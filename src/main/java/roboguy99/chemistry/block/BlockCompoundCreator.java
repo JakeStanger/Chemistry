@@ -17,9 +17,9 @@ import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.compound.CompoundCreator;
 import roboguy99.chemistry.item.element.Elements;
 
-public class BlockCompoundAnalyser extends Block/*extends BlockContainer*/
+public class BlockCompoundCreator extends Block/*extends BlockContainer*/
 {
-	public BlockCompoundAnalyser() 
+	public BlockCompoundCreator() 
 	{
 		super(Material.iron);
 		this.setCreativeTab(Chemistry.tabElements);
@@ -57,10 +57,12 @@ public class BlockCompoundAnalyser extends Block/*extends BlockContainer*/
 			compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN), 6);
 				
 			ItemStack stack = compoundHandler.createCompound();
-			System.out.println(stack.getTagCompound());
+			//System.out.println(stack.getTagCompound());
 			compoundHandler.clearElements();
 			
-			world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack));
+			//world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack));
+			
+			System.out.println(player.inventory.getStackInSlot(1).getTagCompound());
 		}
 		return true;
 	}
