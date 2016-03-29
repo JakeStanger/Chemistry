@@ -52,7 +52,7 @@ public class BlockCompoundCreator extends Block/*extends BlockContainer*/
 		{
 			CompoundCreator compoundHandler = new CompoundCreator();
 				
-			compoundHandler.putElement(Elements.getElement(EnumElement.CARBON), 6);
+			/*compoundHandler.putElement(Elements.getElement(EnumElement.CARBON), 6);
 			compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 2);
 			
 			for(int i = 0; i < 3; i++)
@@ -63,6 +63,23 @@ public class BlockCompoundCreator extends Block/*extends BlockContainer*/
 			
 			compoundHandler.putElement(Elements.getElement(EnumElement.CARBON));
 			compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 3);
+			
+			compoundHandler.putElement(Elements.getElement(EnumElement.NITROGEN));
+			compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN), 2);
+			
+			for(int i = 0; i < 2; i++)
+			{
+				compoundHandler.putElement(Elements.getElement(EnumElement.URANIUM), 7);
+				compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 3);
+				compoundHandler.putElement(Elements.getElement(EnumElement.BORON), 3);
+			}*/
+			
+			for(int i = 0; i < 2; i++)
+			{
+				compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN));
+				compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN));
+				compoundHandler.putElement(Elements.getElement(EnumElement.MOLECULE_MARKER));
+			}
 				
 			ItemStack stack = compoundHandler.createCompound(false);
 		}
