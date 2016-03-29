@@ -3,7 +3,9 @@ package roboguy99.chemistry.item.compound;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.lwjgl.input.Keyboard;
 
@@ -14,9 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumColour;
-import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 
@@ -59,7 +59,36 @@ public class Compound extends Item
 			if(currentElement.size() > 1) formula += currentElement.size();
 		}
 		
+		//formula = formula.replaceAll("([A-Za-z]+[1-9]*)\\1+", "($1)"); //Add brackets to repeats
+		formula = this.factorise("C6|H2|NO2|NO2|NO2|CH3|OH|OH");
+		//System.out.println(formula);
 		return formula;
+	}
+	
+	
+	/**
+	 * Gets any consecutive repeated molecules, separated by a |, and returns the factorised version
+	 * @author robotlos (http://stackoverflow.com/users/5976941/robotlos)
+	 * @param input a fully expanded chemical formula
+	 * @return a factorised chemical formula
+	 */
+	private String factorise(String input) 
+	{ 
+		String result = ""; 
+		Map<String, Integer> molecules = new LinkedHashMap<String, Integer>(); 
+		String[] res = input.split("\\|"); 
+		for (String t : res) 
+		{ 
+			if (!molecules.containsKey(t)) molecules.put(t, 1); //If we don't already have this element in the map, then add it and set the count to 1 
+			else molecules.put(t, molecules.get(t) + 1); 
+		} 
+		//Iterate through each molecule 
+		for (String key : molecules.keySet()) 
+		{ 
+			if (molecules.get(key) == 1) result += key; //If the count is only at one, then we just need to append it. 
+			else result = result + "(" + key + ")" + molecules.get(key); //Otherwise, we need the parentheses and the number of repetitions followed after 
+		} 
+		return result; 
 	}
 	
 	private int getRelativeMass(List<List<Element>> elements)
