@@ -19,13 +19,14 @@ import roboguy99.chemistry.item.element.elements.Carbon;
 import roboguy99.chemistry.item.element.elements.Helium;
 import roboguy99.chemistry.item.element.elements.Hydrogen;
 import roboguy99.chemistry.item.element.elements.Lithium;
+import roboguy99.chemistry.item.element.elements.MoleculeMarker;
 import roboguy99.chemistry.item.element.elements.Nitrogen;
 import roboguy99.chemistry.item.element.elements.Oxygen;
 import roboguy99.chemistry.item.element.elements.Uranium;
 
 public class Elements 
 {
-	public static Element[] elements = new Element[118];
+	public static Element[] elements = new Element[119];
 	
 	public static Compound ethanol;
 	
@@ -40,6 +41,7 @@ public class Elements
 		elements[6] = new Nitrogen();
 		elements[7] = new Oxygen();
 		elements[91] = new Uranium();
+		elements[118] = new MoleculeMarker();
 		
 		this.generateTexturesForElements();
     }
