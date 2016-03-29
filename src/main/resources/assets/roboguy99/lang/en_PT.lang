@@ -1,0 +1,13 @@
+itemGroup.tabElements=Elements
+item.element.hydrogen.name=Hydrogen
+item.element.helium.name=Ye Floaty Gas
+item.element.lithium.name=Lithium
+item.element.berylium.name=Berylium
+item.element.boron.name=Boron
+item.element.carbon.name=Carbon
+item.element.nitrogen.name=Nitrogen
+item.element.oxygen.name=Oxygen
+item.element.uranium.name=Uranium
+item.compound.name=Compound
+compound.water=Water
+compound.tnt=A Ship Sinkin' Device
