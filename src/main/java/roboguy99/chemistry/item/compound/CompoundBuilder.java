@@ -15,7 +15,7 @@ import roboguy99.chemistry.network.packet.CompoundCreate;
  * TODO Properly implement this
  * @author Roboguy99
  */
-public class CompoundCreator
+public class CompoundBuilder
 {
 	private List<Element> elements = new ArrayList<Element>();
 	
