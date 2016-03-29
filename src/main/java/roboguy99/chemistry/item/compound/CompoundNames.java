@@ -16,6 +16,11 @@ public class CompoundNames
 		names = new HashMap<String, String>();
 		
 		names.put("H2O", "compound.water");
-		names.put("C6H2NO2NO2NO2CH3", "compound.tnt");
+		names.put("C6H2(NO2)3CH3", "compound.tnt");
+	}
+	
+	public static void putName(String formula, String unlocalisedName)
+	{
+		names.put(formula, "compound." + unlocalisedName);
 	}
 }
