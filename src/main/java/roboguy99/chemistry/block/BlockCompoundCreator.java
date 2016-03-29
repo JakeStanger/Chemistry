@@ -52,16 +52,19 @@ public class BlockCompoundCreator extends Block/*extends BlockContainer*/
 		{
 			CompoundCreator compoundHandler = new CompoundCreator();
 				
+			compoundHandler.putElement(Elements.getElement(EnumElement.CARBON), 6);
 			compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 2);
-			compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN), 1);
+			
+			for(int i = 0; i < 3; i++)
+			{
+				compoundHandler.putElement(Elements.getElement(EnumElement.NITROGEN));
+				compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN), 2);
+			}
+			
+			compoundHandler.putElement(Elements.getElement(EnumElement.CARBON));
+			compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 3);
 				
-			ItemStack stack = compoundHandler.createCompound();
-			//System.out.println(stack.getTagCompound());
-			compoundHandler.clearElements();
-			
-			//world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack));
-			
-			//System.out.println(player.inventory.getStackInSlot(1).getTagCompound());
+			ItemStack stack = compoundHandler.createCompound(false);
 		}
 		return true;
 	}
