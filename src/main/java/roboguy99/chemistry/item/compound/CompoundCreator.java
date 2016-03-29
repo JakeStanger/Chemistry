@@ -93,7 +93,7 @@ public class CompoundCreator
 		for(int i = 0; i < quantity; i++)
 		{
 			this.putElements(elements);
-			this.elements.add(Elements.getElement(EnumElement.MOLECULE_MARKER)); //Add a molecule marker after each so it's factorised
+			this.putElement(Elements.getElement(EnumElement.MOLECULE_MARKER)); //Add a molecule marker after each so it's factorised
 		}
 		this.elements.remove(this.elements.size()-1); //Remove trailing molecule marker
 	}
