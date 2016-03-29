@@ -17,12 +17,6 @@ public class Boron extends Element
 	}
 	
 	@Override
-	public String giveDesc()
-	{
-		return null;
-	}
-	
-	@Override
 	public int giveAtomicNumber()
 	{
 		return 5;
@@ -50,6 +44,6 @@ public class Boron extends Element
 	public int[] giveElectronConfiguration()
 	{
 		int[] config = {2, 3};
-		return config;
+		return new int[]{2,3};
 	}
 }

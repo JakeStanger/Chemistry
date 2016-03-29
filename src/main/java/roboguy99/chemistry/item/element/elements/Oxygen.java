@@ -43,13 +43,6 @@ public class Oxygen extends Element
 	@Override
 	public int[] giveElectronConfiguration()
 	{
-		int[] config = {2, 6};
-		return config;
-	}
-
-	@Override
-	public String giveDesc()
-	{
-		return "All life requires oxygen for respiration.";
+		return new int[]{2,6};
 	}
 }

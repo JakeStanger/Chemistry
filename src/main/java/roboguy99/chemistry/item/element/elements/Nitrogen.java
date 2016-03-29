@@ -17,12 +17,6 @@ public class Nitrogen extends Element
 	}
 	
 	@Override
-	public String giveDesc()
-	{
-		return null;
-	}
-	
-	@Override
 	public int giveAtomicNumber()
 	{
 		return 7;
@@ -49,7 +43,6 @@ public class Nitrogen extends Element
 	@Override
 	public int[] giveElectronConfiguration()
 	{
-		int[] config = {2, 5};
-		return config;
+		return new int[]{2,5};
 	}
 }

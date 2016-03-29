@@ -17,12 +17,6 @@ public class Berylium extends Element
 	}
 
 	@Override
-	public String giveDesc()
-	{
-		return "Beryllium is used in alloys with copper or nickel to make gyroscopes, springs, electrical contacts, spot-welding electrodes and non-sparking tools.";
-	}
-
-	@Override
 	public int giveAtomicNumber()
 	{
 		return 4;
@@ -49,7 +43,6 @@ public class Berylium extends Element
 	@Override
 	public int[] giveElectronConfiguration()
 	{
-		int[] config = {2, 2};
-		return config;
+		return new int[]{2,2};
 	}
 }

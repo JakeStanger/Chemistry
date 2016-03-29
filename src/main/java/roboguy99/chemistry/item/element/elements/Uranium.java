@@ -43,13 +43,6 @@ public class Uranium extends Element
 	@Override
 	public int[] giveElectronConfiguration()
 	{
-		int[] config = {2,8,18,32,21,9,2};
-		return config;
-	}
-
-	@Override
-	public String giveDesc()
-	{
-		return "Uranium is the heaviest naturally occuring element. \nIts main use is as a nuclear fuel, due to its radioactivity.";
+		return new int[]{2,8,18,32,21,9,2};
 	}
 }

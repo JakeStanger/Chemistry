@@ -17,12 +17,6 @@ public class Lithium extends Element
 	}
 
 	@Override
-	public String giveDesc()
-	{
-		return "Lithium is the least reactive alkali metal. It is used is the creation of rechargable batteries.";
-	}
-
-	@Override
 	public int giveAtomicNumber()
 	{
 		return 3;
@@ -50,6 +44,6 @@ public class Lithium extends Element
 	public int[] giveElectronConfiguration()
 	{
 		int[] config = {2, 1};
-		return config;
+		return new int[]{2,1};
 	}
 }

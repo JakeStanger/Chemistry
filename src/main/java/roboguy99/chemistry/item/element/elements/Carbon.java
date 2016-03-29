@@ -43,16 +43,6 @@ public class Carbon extends Element
 	@Override
 	public int[] giveElectronConfiguration()
 	{
-		int[] config = {2, 4};
-		return config;
+		return new int[]{2, 4};
 	}
-
-	@Override
-	public String giveDesc()
-	{
-		return "Carbon is the basis for all life. "
-			 + "All relative atomic masses are "
-			 + "based off of carbon.";
-	}
-
 }
