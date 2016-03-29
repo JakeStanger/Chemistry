@@ -20,12 +20,14 @@ public class CompoundBuilder
 	private List<Element> elements = new ArrayList<Element>();
 	
 	/**
-	 * Creates a compound from the elements put into the elements list
-	 * TODO Check for null list and throw custom exception
+	 * Creates a compound from the elements put into the elements list.
+	 * Factorising is supported, however you cannot factorise a factorised compound.
+	 * This means adding a factorised molecule more than once will not factorise it a second time, 
+	 * but instead will have strange and unwanted effects.
 	 * @param preserveAfterCreation should the compound in buffer be reset after creation?
 	 * @return an itemstack for the compound
 	 */
-	public ItemStack createCompound(boolean preserveAfterCreation)
+	public ItemStack createCompound(boolean preserveAfterCreation) throws NullPointerException
 	{
 		Compound compound = Compound.instance;
 		NBTTagCompound tag = new NBTTagCompound();
@@ -56,12 +58,12 @@ public class CompoundBuilder
 	}
 	
 	/**
-	 * Add the given element to the buffer
+	 * Add the given element to the buffer.
 	 * @param element The element to add
 	 */
 	public void putElement(Element element)
 	{
-		this.elements.add(element);
+		this.elements.add(element); //Add a molecule marker after each so it's factorised
 	}
 	
 	/**
@@ -71,20 +73,21 @@ public class CompoundBuilder
 	 */
 	public void putElement(Element element, int quantity)
 	{
-		for(int i = 0; i < quantity; i++) this.putElement(element);
+		for(int i = 0; i < quantity; i++) this.elements.add(element);
 	}
 	
 	/**
-	 * Add the given list of elements to the buffer
+	 * Add the given list of elements to the buffer.
 	 * @param elements The list of elements to add
 	 */
 	public void putElements(List<Element> elements)
 	{
-		for(Element element : elements) this.putElement(element);
+		for(Element element : elements) this.elements.add(element);
 	}
 	
 	/**
-	 * Add the given list of elements to the buffer
+	 * Add the given list of elements to the buffer.
+	 * This will automatically add a molecule marker.
 	 * @param elements The list of elements to add
 	 * @param quantity The number of times to add the element
 	 */
@@ -92,10 +95,17 @@ public class CompoundBuilder
 	{
 		for(int i = 0; i < quantity; i++)
 		{
-			this.putElements(elements);
-			this.putElement(Elements.getElement(EnumElement.MOLECULE_MARKER)); //Add a molecule marker after each so it's factorised
+			for(Element element : elements) this.elements.add(element);
+			this.endMolecule();
 		}
-		this.elements.remove(this.elements.size()-1); //Remove trailing molecule marker
+	}
+	
+	/**
+	 * Mark the end of a molecule by adding a molecule marker element
+	 */
+	public void endMolecule()
+	{
+		this.elements.add(Elements.getElement(EnumElement.MOLECULE_MARKER));
 	}
 	
 	/**
