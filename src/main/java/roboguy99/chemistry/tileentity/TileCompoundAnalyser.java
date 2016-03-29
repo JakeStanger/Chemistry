@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import roboguy99.chemistry.api.EnumElement;
-import roboguy99.chemistry.item.compound.CompoundCreator;
+import roboguy99.chemistry.item.compound.CompoundBuilder;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 
