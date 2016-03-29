@@ -1,7 +1,9 @@
 package roboguy99.chemistry.item.compound;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.lwjgl.input.Keyboard;
 
@@ -22,8 +24,6 @@ public class Compound extends Item
 {
 	public static Compound instance;
 	
-	private LinkedHashMap<Element, Integer> structure;
-	
 	public Compound()
 	{
 		this.instance = this;
@@ -34,33 +34,33 @@ public class Compound extends Item
 		GameRegistry.registerItem(this, "compound");
 	}
 	
-	private String getCompoundName(LinkedHashMap<Element, Integer> structure)
+	private String getCompoundName(List<List<Element>> elements)
 	{
 		String name = "";
-		int elements = 0;
+		int currentElement = 0;
 		
-		for(Element element : structure.keySet())
+		for(List<Element> element : elements)
 		{			
-			if(elements == 0)
+			if(currentElement == 0)
 			{
-				name += StatCollector.translateToLocal(element.getUnlocalizedName() + ".name");
+				name += StatCollector.translateToLocal(element.get(0).getUnlocalizedName() + ".name");
 			}
-			if(elements == 1)
+			if(currentElement == 1)
 			{
 				name += " "; //TODO Change name to stringbuilder
-				name += StatCollector.translateToLocal(element.getUnlocalizedName() + ".name");
+				name += StatCollector.translateToLocal(element.get(0).getUnlocalizedName() + ".name");
 				name = name.substring(0, name.length() - 3);
 				
 				String[] vowels = {"a", "e", "i", "o", "u", "y"};
 				for(String vowel: vowels) if(name.endsWith(vowel)) name = name.substring(0, name.length() - 1);
 				name += "ide";
 			}
-			if(elements == 2 && element == Elements.getElement(EnumElement.OXYGEN) && structure.size() == 3)
+			if(currentElement == 2 && element == Elements.getElement(EnumElement.OXYGEN) && elements.size() == 3)
 			{
 				name = name.substring(0, name.length() - 3);
 				name += "ate";
 			}
-			elements++;
+			currentElement++;
 		}
 		String commonName = this.getCommonName(name);
 		if(commonName != "") return commonName;
@@ -79,29 +79,24 @@ public class Compound extends Item
 		return commonName;
 	}
 	
-	private String getFormula(LinkedHashMap<Element, Integer> structure)
+	private String getFormula(List<List<Element>> elements)
 	{
 		String formula = "";
 		
-		for(Element element : structure.keySet())
+		for(List<Element> currentElement : elements)
 		{
-			formula += element.getSymbol();
-			if(structure.get(element) > 1) formula += structure.get(element);
+			formula += currentElement.get(0).getSymbol(); //Every element is identical, so looking at 0 will always be safe
+			if(currentElement.size() > 1) formula += currentElement.size();
 		}
 		
 		return subscript(formula);
 	}
 	
-	private int getRelativeMass(LinkedHashMap<Element, Integer> structure)
+	private int getRelativeMass(List<List<Element>> elements)
 	{
 		int mass = 0;
-		if(structure != null) for(Element element : structure.keySet()) mass += (element.getAtomicMass() * structure.get(element));
+		for(List<Element> element : elements) mass += (element.get(0).getAtomicMass() * element.size());
 		return mass;
-	}
-	
-	public LinkedHashMap<Element, Integer> getStructure()
-	{
-		return this.structure;
 	}
 	
 	/**
@@ -134,29 +129,36 @@ public class Compound extends Item
 		}
 		else
 		{
-			LinkedHashMap<Element, Integer> map = this.convertNBTToMap(stack.getTagCompound());
-			tooltip.add(EnumColour.YELLOW + this.getFormula(map));
-			tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(map));
+			List<List<Element>> elements = this.convertNBTToList(stack.getTagCompound());
+			tooltip.add(EnumColour.YELLOW + this.getFormula(elements));
+			tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(elements));
 		}
 	}
 	
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
     {
-        //return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim(); (Default)
-		return this.getCompoundName(this.convertNBTToMap(stack.getTagCompound()));
+		//return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+		return this.getCompoundName(this.convertNBTToList(stack.getTagCompound()));
     }
 	
-	private LinkedHashMap<Element, Integer> convertNBTToMap(NBTTagCompound tag)
-	{
-		LinkedHashMap<Element, Integer> compound = new LinkedHashMap<Element, Integer>();
+	private List<List<Element>> convertNBTToList(NBTTagCompound tag)
+	{	
+		List<List<Element>> elements = new ArrayList<List<Element>>();
 		
-		for(String atomicNumber : tag.getKeySet())
+		int quantity = 0;
+		for(String position : tag.getKeySet())
 		{
-			Element element = Elements.getElement(Integer.parseInt(atomicNumber));
-			compound.put(element, compound.get(element));
+			int[] info = tag.getIntArray(position);
+			
+			Element element = Elements.getElement(info[0]);
+			quantity = info[1];
+			
+			List<Element> currentElement = new ArrayList<Element>();
+			for(int i = 0; i < quantity; i++) currentElement.add(element);
+			elements.add(currentElement);
 		}
 		
-		return compound;
+		return elements;
 	}
 }
