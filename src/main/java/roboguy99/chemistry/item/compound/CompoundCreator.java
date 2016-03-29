@@ -18,11 +18,12 @@ public class CompoundCreator
 	private List<Element> elements = new ArrayList<Element>();
 	
 	/**
-	 * Create a compound from the elements put into the elements list
+	 * Creates a compound from the elements put into the elements list
 	 * TODO Check for null list and throw custom exception
+	 * @param preserveAfterCreation should the compound in buffer be reset after creation?
 	 * @return an itemstack for the compound
 	 */
-	public ItemStack createCompound()
+	public ItemStack createCompound(boolean preserveAfterCreation)
 	{
 		Compound compound = Compound.instance;
 		NBTTagCompound tag = new NBTTagCompound();
@@ -46,6 +47,8 @@ public class CompoundCreator
 		ItemStack stack = new ItemStack(compound);
 		
 		Chemistry.networkWrapper.sendToServer(new CompoundCreate(stack, tag));
+		
+		if(!preserveAfterCreation) this.clearElements();
 		
 		return stack;
 	}
