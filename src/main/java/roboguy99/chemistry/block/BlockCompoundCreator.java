@@ -1,11 +1,11 @@
 package roboguy99.chemistry.block;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -14,7 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumElement;
-import roboguy99.chemistry.item.compound.CompoundCreator;
+import roboguy99.chemistry.item.compound.CompoundBuilder;
+import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 
 public class BlockCompoundCreator extends Block/*extends BlockContainer*/
@@ -50,36 +51,11 @@ public class BlockCompoundCreator extends Block/*extends BlockContainer*/
 	{
 		if(!world.isRemote)
 		{
-			CompoundCreator compoundHandler = new CompoundCreator();
-				
-			/*compoundHandler.putElement(Elements.getElement(EnumElement.CARBON), 6);
-			compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 2);
+			CompoundBuilder compoundHandler = new CompoundBuilder();
 			
-			for(int i = 0; i < 3; i++)
-			{
-				compoundHandler.putElement(Elements.getElement(EnumElement.NITROGEN));
-				compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN), 2);
-			}
+			//Build compound
 			
-			compoundHandler.putElement(Elements.getElement(EnumElement.CARBON));
-			compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 3);
-			
-			compoundHandler.putElement(Elements.getElement(EnumElement.NITROGEN));
-			compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN), 2);
-			
-			for(int i = 0; i < 2; i++)
-			{
-				compoundHandler.putElement(Elements.getElement(EnumElement.URANIUM), 7);
-				compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 3);
-				compoundHandler.putElement(Elements.getElement(EnumElement.BORON), 3);
-			}*/
-			
-			for(int i = 0; i < 2; i++)
-			{
-				compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN));
-				compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN));
-				compoundHandler.putElement(Elements.getElement(EnumElement.MOLECULE_MARKER));
-			}
+			compoundHandler.putElements(compoundHandler.getElements(), 2);
 				
 			ItemStack stack = compoundHandler.createCompound(false);
 		}
