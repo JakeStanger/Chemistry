@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.item.compound.Compound;
+import roboguy99.chemistry.item.compound.CompoundNames;
 import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.network.CommonProxy;
 import roboguy99.chemistry.network.packet.CompoundCreate;
@@ -63,6 +64,7 @@ public class Chemistry {
 		logger.info("Initialising");
 		new Elements();
 		new Compound();
+		new CompoundNames();
 	
 	new BlockCompoundCreator();
 		new TileEntities();
