@@ -29,10 +29,6 @@ public abstract class Element extends Item
 	 * The chemical symbol for the element
 	 */
 	private String symbol;
-	/**
-	 * A description of the element
-	 */
-	private String desc;
 	
 	/**
 	 * The atomic number of the element
@@ -62,7 +58,6 @@ public abstract class Element extends Item
 	{	
 		this.name = "element." + this.giveName();
 		this.symbol = this.giveSymbol();
-		this.desc = this.giveDesc();
 		
 		this.atomicNumber = this.giveAtomicNumber();
 		this.atomicMass = this.giveAtomicMass();
@@ -92,14 +87,6 @@ public abstract class Element extends Item
 	public String getSymbol()
 	{
 		return this.symbol;
-	}
-	
-	/**
-	 * @return the description
-	 */
-	public String getDesc()
-	{
-		return this.desc;
 	}
 	
 	/**
@@ -136,7 +123,6 @@ public abstract class Element extends Item
 	
 	public abstract String giveName();
 	public abstract String giveSymbol();
-	public abstract String giveDesc();
 	public abstract int giveAtomicNumber();
 	public abstract int giveAtomicMass();
 	public abstract int giveMeltingPoint();
@@ -165,7 +151,6 @@ public abstract class Element extends Item
 			tooltip.add(EnumColour.BRIGHT_PINK + "Electron Configuration: " + electronString);
 			tooltip.add(EnumColour.RED + "Melting Point: " + meltingPoint + "\u00B0C");
 			tooltip.add(EnumColour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
-			//tooltip.add(EnumColour.WHITE + this.desc); TODO Text wrapping
 		}
 	}
 }
