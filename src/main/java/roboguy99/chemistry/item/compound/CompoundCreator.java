@@ -27,7 +27,7 @@ public class CompoundCreator
 		Compound compound = Compound.instance;
 		NBTTagCompound tag = new NBTTagCompound();
 		
-		int elementNumber = 0; //The number of different elements into the list the current one is
+		int elementPos = 0; //The number of different elements into the list the current one is
 		int elementQuantity = 0; //The number of times the current element has occurred in a row
 		for(int i = 0; i < elements.size(); i++)
 		{
@@ -35,12 +35,12 @@ public class CompoundCreator
 			
 			if(i > 0 && elements.get(i-1).getAtomicNumber() != element.getAtomicNumber())
 			{
-				elementNumber++;
+				elementPos++;
 				elementQuantity = 1;
 			}
 			else elementQuantity++;
 			
-			tag.setIntArray(Integer.toString(element.getAtomicNumber()), new int[]{elementNumber, elementQuantity});
+			tag.setIntArray(Integer.toString(elementPos), new int[]{element.getAtomicNumber(), elementQuantity});
 		}
 		
 		ItemStack stack = new ItemStack(compound);
