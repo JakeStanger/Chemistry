@@ -59,10 +59,7 @@ public class Compound extends Item
 			if(currentElement.size() > 1) formula += currentElement.size();
 		}
 		
-		//formula = formula.replaceAll("([A-Za-z]+[1-9]*)\\1+", "($1)"); //Add brackets to repeats
-		formula = this.factorise("C6|H2|NO2|NO2|NO2|CH3|OH|OH");
-		//System.out.println(formula);
-		return formula;
+		return this.factorise(formula);
 	}
 	
 	
