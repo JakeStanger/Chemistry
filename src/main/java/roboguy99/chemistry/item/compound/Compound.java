@@ -125,17 +125,31 @@ public class Compound extends Item
 		}
 		else
 		{
-			List<List<Element>> elements = this.convertNBTToList(stack.getTagCompound());
-			tooltip.add(EnumColour.YELLOW + this.subscript(this.getFormula(elements)));
-			tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(elements));
+			try
+			{
+				List<List<Element>> elements = this.convertNBTToList(stack.getTagCompound());
+				tooltip.add(EnumColour.YELLOW + this.subscript(this.getFormula(elements)));
+				tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(elements));
+			}
+			catch(Exception e)
+			{
+				tooltip.add(EnumColour.RED + "Well something broke...");
+			}
 		}
 	}
 	
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
     {
-		if(stack.getTagCompound() == null) return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
-		return StatCollector.translateToLocal(this.getCompoundName(this.convertNBTToList(stack.getTagCompound())));
+		try
+		{
+			return StatCollector.translateToLocal(this.getCompoundName(this.convertNBTToList(stack.getTagCompound())));
+		}
+			
+		catch(Exception e)
+		{
+			return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+		}
     }
 	
 	private List<List<Element>> convertNBTToList(NBTTagCompound tag)
