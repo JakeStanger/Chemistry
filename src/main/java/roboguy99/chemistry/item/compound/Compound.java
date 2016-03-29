@@ -30,7 +30,6 @@ public class Compound extends Item
 		
 		this.setUnlocalizedName("compound");
 		this.setMaxStackSize(64);
-		this.setCreativeTab(Chemistry.tabElements); //TODO Remove once compound complete
 		GameRegistry.registerItem(this, "compound");
 	}
 	
