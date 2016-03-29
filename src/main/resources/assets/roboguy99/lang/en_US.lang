@@ -9,3 +9,5 @@ item.element.nitrogen.name=Nitrogen
 item.element.oxygen.name=Oxygen
 item.element.uranium.name=Uranium
 item.compound.name=Compound
+compound.water=Water
+compound.tnt=TNT

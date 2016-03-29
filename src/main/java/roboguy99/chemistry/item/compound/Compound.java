@@ -34,49 +34,20 @@ public class Compound extends Item
 		GameRegistry.registerItem(this, "compound");
 	}
 	
+	/**
+	 * Returns the common name for the given list of elements, or the formula if there isn't one
+	 * @param elements A 2D list of elements
+	 * @return The compound name
+	 */
 	private String getCompoundName(List<List<Element>> elements)
 	{
-		String name = "";
-		int currentElement = 0;
+		String formula = this.getFormula(elements);
 		
-		for(List<Element> element : elements)
-		{			
-			if(currentElement == 0)
-			{
-				name += StatCollector.translateToLocal(element.get(0).getUnlocalizedName() + ".name");
-			}
-			if(currentElement == 1)
-			{
-				name += " "; //TODO Change name to stringbuilder
-				name += StatCollector.translateToLocal(element.get(0).getUnlocalizedName() + ".name");
-				name = name.substring(0, name.length() - 3);
-				
-				String[] vowels = {"a", "e", "i", "o", "u", "y"};
-				for(String vowel: vowels) if(name.endsWith(vowel)) name = name.substring(0, name.length() - 1);
-				name += "ide";
-			}
-			if(currentElement == 2 && element == Elements.getElement(EnumElement.OXYGEN) && elements.size() == 3)
-			{
-				name = name.substring(0, name.length() - 3);
-				name += "ate";
-			}
-			currentElement++;
-		}
-		String commonName = this.getCommonName(name);
-		if(commonName != "") return commonName;
+		String name = "";
+		if(CompoundNames.names.containsKey(formula)) name = CompoundNames.names.get(formula);
+		else name = this.subscript(formula);
 		
 		return name;
-	}
-	
-	private String getCommonName(String name)
-	{
-		String commonName = "";
-		
-		if(name.equals("Hydrogen Oxide")) commonName = "Water";
-		if(name.equals("Carbon Hydrate")) commonName = "Glucose";
-		if(name.equals("Oxygen Hydride")) commonName = "Hydroxide";
-		
-		return commonName;
 	}
 	
 	private String getFormula(List<List<Element>> elements)
@@ -89,7 +60,7 @@ public class Compound extends Item
 			if(currentElement.size() > 1) formula += currentElement.size();
 		}
 		
-		return subscript(formula);
+		return formula;
 	}
 	
 	private int getRelativeMass(List<List<Element>> elements)
@@ -130,7 +101,7 @@ public class Compound extends Item
 		else
 		{
 			List<List<Element>> elements = this.convertNBTToList(stack.getTagCompound());
-			tooltip.add(EnumColour.YELLOW + this.getFormula(elements));
+			tooltip.add(EnumColour.YELLOW + this.subscript(this.getFormula(elements)));
 			tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(elements));
 		}
 	}
@@ -138,8 +109,8 @@ public class Compound extends Item
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
     {
-		//return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
-		return this.getCompoundName(this.convertNBTToList(stack.getTagCompound()));
+		if(stack.getTagCompound() == null) return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+		return StatCollector.translateToLocal(this.getCompoundName(this.convertNBTToList(stack.getTagCompound())));
     }
 	
 	private List<List<Element>> convertNBTToList(NBTTagCompound tag)
