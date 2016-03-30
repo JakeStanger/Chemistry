@@ -19,10 +19,10 @@ import roboguy99.chemistry.item.element.elements.Carbon;
 import roboguy99.chemistry.item.element.elements.Helium;
 import roboguy99.chemistry.item.element.elements.Hydrogen;
 import roboguy99.chemistry.item.element.elements.Lithium;
-import roboguy99.chemistry.item.element.elements.MoleculeMarker;
 import roboguy99.chemistry.item.element.elements.Nitrogen;
 import roboguy99.chemistry.item.element.elements.Oxygen;
 import roboguy99.chemistry.item.element.elements.Uranium;
+import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
 
 public class Elements 
 {
