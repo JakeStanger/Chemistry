@@ -13,6 +13,7 @@ item.element.neon.name=Neon
 item.element.sodium.name=Sodium
 item.element.magnesium.name=Magnesium
 item.element.aluminium.name=Aluminium
+item.element.caesium.name=Cesium
 item.element.uranium.name=Uranium
 
 item.compound.name=Compound
