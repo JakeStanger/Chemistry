@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.elements.*;
@@ -144,7 +147,7 @@ public class Elements
 		elements[117] = new Ununoctium();
 		elements[118] = new MoleculeMarker();
 		
-		this.generateTexturesForElements();
+		//this.generateTexturesForElements();
     }
 	
 	/**
@@ -174,10 +177,41 @@ public class Elements
 			if(element != null && !new File("generatedtextures" + element.getName() + "png").isFile()) 
 			{
 				String text = element.getSymbol();
+				Group group = element.getGroup();
 			
 		        BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 		        Graphics2D g2d = img.createGraphics();
-		        Font font = new Font("Arial", Font.PLAIN, 48);
+		        
+		        Font font;
+		        if(text.length() == 1) font = new Font("Helvetica", Font.PLAIN, 60);
+		        else if(text.length() == 2) font = new Font("Helvetica", Font.PLAIN, 45);
+		        else font = new Font("Helvetica", Font.PLAIN, 32);
+		        
+		        Color colour;
+		        switch(group)
+		        {
+		        	case ALKALI_METALS:
+		        		colour = Color.WHITE;
+		        		break;
+		        	case ALKALINE_EARTH_METALS:
+		        		colour = Color.PINK;
+		        		break;
+		        	case TRANSITION_METALS:
+		        		colour = Color.BLUE;
+		        		break;
+		        	case OTHER_METALS:
+		        		colour = Color.ORANGE;
+		        		break;
+		        	case NON_METALS:
+		        		colour = Color.GREEN;
+		        		break;
+		        	case NOBLE_GASES:
+		        		colour = Color.YELLOW;
+		        		break;
+		        	default:
+		        		colour = Color.WHITE;
+		        }
+		        
 		        g2d.setFont(font);
 		        FontMetrics fm = g2d.getFontMetrics();
 		        //int width = fm.stringWidth(text);
@@ -196,8 +230,8 @@ public class Elements
 		        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 		        g2d.setFont(font);
 		        fm = g2d.getFontMetrics();
-		        g2d.setColor(Color.BLACK);
-		        g2d.drawString(text, 0, fm.getAscent());
+		        g2d.setColor(colour);
+		        g2d.drawString(text, 32- fm.stringWidth(text)/2, 32+ fm.getDescent());
 		        g2d.dispose();
 		        try 
 		        {
