@@ -8,7 +8,7 @@ import roboguy99.chemistry.item.element.Group;
  * @author Roboguy99
  *
  */
-public class MoleculeMarker extends Element
+public class MoleculeMarker extends ElementSpecial
 {
 	@Override
 	public String giveName()
@@ -57,5 +57,4 @@ public class MoleculeMarker extends Element
 	{
 		return Group.SPECIAL;
 	}
-	
 }
