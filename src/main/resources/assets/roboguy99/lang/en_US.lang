@@ -1,4 +1,5 @@
 itemGroup.tabElements=Elements
+
 item.element.hydrogen.name=Hydrogen
 item.element.helium.name=Helium
 item.element.lithium.name=Lithium
@@ -7,7 +8,14 @@ item.element.boron.name=Boron
 item.element.carbon.name=Carbon
 item.element.nitrogen.name=Nitrogen
 item.element.oxygen.name=Oxygen
+item.element.flourine.name=Flourine
+item.element.neon.name=Neon
+item.element.sodium.name=Sodium
+item.element.magnesium.name=Magnesium
+item.element.aluminium.name=Aluminium
 item.element.uranium.name=Uranium
+
 item.compound.name=Compound
 compound.water=Water
 compound.tnt=Trinitrotoluene (TNT)
+compound.aluminium.name=Aluminum
