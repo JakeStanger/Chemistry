@@ -20,7 +20,7 @@ public class Krypton extends Element
 	@Override
 	public Group giveGroup()
 	{
-		return Group.NOBLE_GASSES;
+		return Group.NOBLE_GASES;
 	}
 
 	@Override

@@ -7,15 +7,15 @@ public enum Group
 	TRANSITION_METALS("transitionMetals"),
 	OTHER_METALS("otherMetals"),
 	NON_METALS("nonMetals"),
-	NOBLE_GASSES("nobleGasses"),
+	NOBLE_GASES("nobleGases"),
 	SPECIAL("special");
 	
-	public static Group[] GROUPS = new Group[]{ALKALI_METALS, ALKALINE_EARTH_METALS, TRANSITION_METALS, OTHER_METALS, NON_METALS, NOBLE_GASSES, SPECIAL};
+	public static Group[] GROUPS = new Group[]{ALKALI_METALS, ALKALINE_EARTH_METALS, TRANSITION_METALS, OTHER_METALS, NON_METALS, NOBLE_GASES, SPECIAL};
 	
 	public final String groupName;
 	
 	private Group(String groupName)
 	{
-		this.groupName = groupName;
+		this.groupName = "group." + groupName;
 	}
 }

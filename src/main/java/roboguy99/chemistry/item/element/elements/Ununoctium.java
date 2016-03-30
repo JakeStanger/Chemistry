@@ -26,7 +26,7 @@ public class Ununoctium extends ElementRadioactive
 	@Override
 	public Group giveGroup()
 	{
-		return Group.NOBLE_GASSES;
+		return Group.NOBLE_GASES;
 	}
 
 	@Override

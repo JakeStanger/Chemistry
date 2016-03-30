@@ -50,7 +50,7 @@ public class Argon extends Element
 	@Override
 	public Group giveGroup()
 	{
-		return Group.NOBLE_GASSES;
+		return Group.NOBLE_GASES;
 	}
 	
 }

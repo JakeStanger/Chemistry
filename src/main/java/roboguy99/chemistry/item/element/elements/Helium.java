@@ -50,6 +50,6 @@ public class Helium extends Element
 	@Override
 	public Group giveGroup()
 	{
-		return Group.NOBLE_GASSES;
+		return Group.NOBLE_GASES;
 	}
 }
