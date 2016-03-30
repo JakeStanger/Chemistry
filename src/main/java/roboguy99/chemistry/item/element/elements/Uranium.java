@@ -1,6 +1,7 @@
 package roboguy99.chemistry.item.element.elements;
 
 import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.Group;
 
 public class Uranium extends Element
 {
@@ -44,5 +45,11 @@ public class Uranium extends Element
 	public int[] giveElectronConfiguration()
 	{
 		return new int[]{2,8,18,32,21,9,2};
+	}
+
+	@Override
+	public Group giveGroup()
+	{
+		return Group.TRANSITION_METALS;
 	}
 }

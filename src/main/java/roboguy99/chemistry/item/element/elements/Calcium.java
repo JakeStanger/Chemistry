@@ -1,6 +1,7 @@
 package roboguy99.chemistry.item.element.elements;
 
 import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.Group;
 
 public class Calcium extends Element
 {
@@ -44,6 +45,12 @@ public class Calcium extends Element
 	public int[] giveElectronConfiguration()
 	{
 		return new int[]{2,8,2};
+	}
+
+	@Override
+	public Group giveGroup()
+	{
+		return Group.ALKALINE_EARTH_METALS;
 	}
 	
 }

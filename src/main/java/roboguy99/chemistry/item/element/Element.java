@@ -25,10 +25,14 @@ public abstract class Element extends Item
 	 * The unlocalised name of the element
 	 */
 	private String name;
-	/***
+	/**
 	 * The chemical symbol for the element
 	 */
 	private String symbol;
+	/**
+	 * The chemical group for the element
+	 */
+	private Group group;
 	
 	/**
 	 * The atomic number of the element
@@ -89,6 +93,11 @@ public abstract class Element extends Item
 		return this.symbol;
 	}
 	
+	public Group getGroup()
+	{
+		return this.group;
+	}
+	
 	/**
 	 * @return the atomic number
 	 */
@@ -123,6 +132,7 @@ public abstract class Element extends Item
 	
 	public abstract String giveName();
 	public abstract String giveSymbol();
+	public abstract Group giveGroup();
 	public abstract int giveAtomicNumber();
 	public abstract int giveAtomicMass();
 	public abstract int giveMeltingPoint();
@@ -151,6 +161,7 @@ public abstract class Element extends Item
 			tooltip.add(EnumColour.BRIGHT_PINK + "Electron Configuration: " + electronString);
 			tooltip.add(EnumColour.RED + "Melting Point: " + meltingPoint + "\u00B0C");
 			tooltip.add(EnumColour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
+			tooltip.add(this.group.groupName);
 		}
 	}
 }

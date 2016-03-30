@@ -1,6 +1,7 @@
 package roboguy99.chemistry.item.element.elements;
 
 import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.Group;
 
 public class Boron extends Element
 {
@@ -45,5 +46,11 @@ public class Boron extends Element
 	{
 		int[] config = {2, 3};
 		return new int[]{2,3};
+	}
+
+	@Override
+	public Group giveGroup()
+	{
+		return Group.NON_METALS;
 	}
 }

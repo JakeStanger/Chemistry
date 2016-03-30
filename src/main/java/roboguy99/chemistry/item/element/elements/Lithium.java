@@ -1,6 +1,7 @@
 package roboguy99.chemistry.item.element.elements;
 
 import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.Group;
 
 public class Lithium extends Element
 {
@@ -45,5 +46,11 @@ public class Lithium extends Element
 	{
 		int[] config = {2, 1};
 		return new int[]{2,1};
+	}
+
+	@Override
+	public Group giveGroup()
+	{
+		return Group.ALKALI_METALS;
 	}
 }

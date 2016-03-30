@@ -1,6 +1,7 @@
 package roboguy99.chemistry.item.element.elements;
 
 import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.Group;
 
 public class Oxygen extends Element
 {
@@ -44,5 +45,11 @@ public class Oxygen extends Element
 	public int[] giveElectronConfiguration()
 	{
 		return new int[]{2,6};
+	}
+
+	@Override
+	public Group giveGroup()
+	{
+		return Group.NON_METALS;
 	}
 }
