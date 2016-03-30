@@ -75,8 +75,13 @@ public abstract class Element extends Item
 		
 		this.setUnlocalizedName(name);
 		this.setMaxStackSize(64);
-		this.setCreativeTab(Chemistry.tabElements);
+		this.addToCreativeTab();
 		GameRegistry.registerItem(this, name);
+	}
+	
+	protected void addToCreativeTab()
+	{
+		this.setCreativeTab(Chemistry.tabElements);
 	}
 	
 	/**
