@@ -1,9 +1,9 @@
 package roboguy99.chemistry.item.element.elements;
 
-import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Group;
+import roboguy99.chemistry.item.element.elements.special.ElementRadioactive;
 
-public class Uranium extends Element
+public class Uranium extends ElementRadioactive
 {
 	@Override
 	public String giveName()
@@ -51,5 +51,11 @@ public class Uranium extends Element
 	public Group giveGroup()
 	{
 		return Group.TRANSITION_METALS;
+	}
+
+	@Override
+	public long giveHalfLife()
+	{
+		return 2365200000000000L;
 	}
 }
