@@ -62,6 +62,7 @@ public abstract class Element extends Item
 	{	
 		this.name = "element." + this.giveName();
 		this.symbol = this.giveSymbol();
+		this.group = this.giveGroup();
 		
 		this.atomicNumber = this.giveAtomicNumber();
 		this.atomicMass = this.giveAtomicMass();
@@ -155,13 +156,33 @@ public abstract class Element extends Item
 			}
 			electronString = electronString.substring(0, electronString.length() - 1); //Remove trailing dot
 			
+			EnumColour groupColour;
+			
+			switch(this.group)
+			{
+				case ALKALI_METALS:
+					groupColour = EnumColour.GREY;
+				case ALKALINE_EARTH_METALS:
+					groupColour = EnumColour.PINK;
+				case TRANSITION_METALS:
+					groupColour = EnumColour.AQUA;
+				case OTHER_METALS:
+					groupColour = EnumColour.ORANGE;
+				case NON_METALS:
+					groupColour = EnumColour.BRIGHT_GREEN;
+				case NOBLE_GASSES:
+					groupColour = EnumColour.YELLOW;
+				default:
+					groupColour = EnumColour.WHITE;
+			}
+			
 			tooltip.add(EnumColour.YELLOW + "Symbol: " + symbol);
 			tooltip.add(EnumColour.DARK_AQUA + "Atomic No: " + atomicNumber);
 			tooltip.add(EnumColour.DARK_AQUA + "Atomic Mass: " + atomicMass);
 			tooltip.add(EnumColour.BRIGHT_PINK + "Electron Configuration: " + electronString);
 			tooltip.add(EnumColour.RED + "Melting Point: " + meltingPoint + "\u00B0C");
 			tooltip.add(EnumColour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
-			tooltip.add(this.group.groupName);
+			tooltip.add(groupColour + this.group.groupName);
 		}
 	}
 }
