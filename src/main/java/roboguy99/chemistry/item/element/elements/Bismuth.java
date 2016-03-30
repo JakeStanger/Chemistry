@@ -52,5 +52,4 @@ public class Bismuth extends Element
 	{
 		return new int[]{2, 8, 18, 32, 18, 5};
 	}
-	
 }
