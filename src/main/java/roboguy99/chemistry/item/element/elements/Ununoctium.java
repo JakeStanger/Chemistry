@@ -38,7 +38,7 @@ public class Ununoctium extends ElementRadioactive
 	@Override
 	public int giveAtomicMass()
 	{
-		return 0;
+		return 294;
 	}
 
 	@Override
