@@ -1,8 +1,5 @@
 package roboguy99.chemistry.block;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -15,7 +12,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.compound.CompoundBuilder;
-import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 
 public class BlockCompoundCreator extends Block/*extends BlockContainer*/
@@ -53,9 +49,9 @@ public class BlockCompoundCreator extends Block/*extends BlockContainer*/
 		{
 			CompoundBuilder compoundHandler = new CompoundBuilder();
 			
-			//Build compound
-			
-			compoundHandler.putElements(compoundHandler.getElements(), 2);
+			compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 2);
+			compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN));
+			compoundHandler.endMolecule();
 				
 			ItemStack stack = compoundHandler.createCompound(false);
 		}
