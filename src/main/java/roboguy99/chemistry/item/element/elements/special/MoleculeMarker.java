@@ -1,6 +1,7 @@
 package roboguy99.chemistry.item.element.elements.special;
 
 import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.Group;
 
 /**
  * A special element with no mass used for marking the beginning/end of a molecule
@@ -49,6 +50,12 @@ public class MoleculeMarker extends Element
 	public int[] giveElectronConfiguration()
 	{
 		return new int[]{0};
+	}
+
+	@Override
+	public Group giveGroup()
+	{
+		return Group.SPECIAL;
 	}
 	
 }
