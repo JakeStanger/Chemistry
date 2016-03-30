@@ -3,6 +3,9 @@ package roboguy99.chemistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +22,7 @@ import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.compound.CompoundNames;
+import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.network.CommonProxy;
 import roboguy99.chemistry.network.packet.CompoundCreate;
@@ -71,8 +75,13 @@ public class Chemistry {
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-
+	public void postInit(FMLPostInitializationEvent event) 
+	{
+		if(event.getSide() == Side.CLIENT)
+		{
+			ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+			for(Element element : Elements.elements) mesher.register(element, 0, new ModelResourceLocation("chemistry:" +  element.getName(), "inventory"));
+		}
 	}
 	
 	public static CreativeTabs tabElements = new CreativeTabs("tabElements") {
