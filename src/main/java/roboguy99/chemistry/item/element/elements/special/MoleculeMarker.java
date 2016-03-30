@@ -1,4 +1,4 @@
-package roboguy99.chemistry.item.element.elements;
+package roboguy99.chemistry.item.element.elements.special;
 
 import roboguy99.chemistry.item.element.Element;
 
