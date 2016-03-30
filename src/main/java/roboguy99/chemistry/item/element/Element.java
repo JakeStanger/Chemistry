@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import roboguy99.chemistry.Chemistry;
@@ -161,28 +162,37 @@ public abstract class Element extends Item
 			switch(this.group)
 			{
 				case ALKALI_METALS:
-					groupColour = EnumColour.GREY;
+					groupColour = EnumColour.WHITE;
+					break;
 				case ALKALINE_EARTH_METALS:
 					groupColour = EnumColour.PINK;
+					break;
 				case TRANSITION_METALS:
 					groupColour = EnumColour.AQUA;
+					break;
 				case OTHER_METALS:
 					groupColour = EnumColour.ORANGE;
+					break;
 				case NON_METALS:
 					groupColour = EnumColour.BRIGHT_GREEN;
-				case NOBLE_GASSES:
+					break;
+				case NOBLE_GASES:
 					groupColour = EnumColour.YELLOW;
+					break;
 				default:
 					groupColour = EnumColour.WHITE;
+					break;
 			}
 			
 			tooltip.add(EnumColour.YELLOW + "Symbol: " + symbol);
 			tooltip.add(EnumColour.DARK_AQUA + "Atomic No: " + atomicNumber);
 			tooltip.add(EnumColour.DARK_AQUA + "Atomic Mass: " + atomicMass);
 			tooltip.add(EnumColour.BRIGHT_PINK + "Electron Configuration: " + electronString);
-			tooltip.add(EnumColour.RED + "Melting Point: " + meltingPoint + "\u00B0C");
-			tooltip.add(EnumColour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
-			tooltip.add(groupColour + this.group.groupName);
+			if(meltingPoint != Integer.MAX_VALUE) tooltip.add(EnumColour.RED + "Melting Point: " + meltingPoint + "\u00B0C"); 
+			else tooltip.add(EnumColour.RED + "Melting Point: Unknown");
+			if(boilingPoint != Integer.MAX_VALUE) tooltip.add(EnumColour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
+			else tooltip.add(EnumColour.RED + "Boiling Point: Unknown");
+			tooltip.add(groupColour + StatCollector.translateToLocal(this.group.groupName));
 		}
 	}
 }
