@@ -147,6 +147,12 @@ public abstract class Element extends Item
 	public abstract int[] giveElectronConfiguration();
 
 	@Override
+	public String getItemStackDisplayName(ItemStack stack)
+    {
+		return this.getGroupColour() + ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+    }
+	
+	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
 	{
 		if(!Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode()))
@@ -162,34 +168,6 @@ public abstract class Element extends Item
 			}
 			electronString = electronString.substring(0, electronString.length() - 1); //Remove trailing dot
 			
-			EnumColour groupColour;
-			
-			switch(this.group)
-			{
-				case ALKALI_METALS:
-					groupColour = EnumColour.WHITE;
-					break;
-				case ALKALINE_EARTH_METALS:
-					groupColour = EnumColour.PINK;
-					break;
-				case TRANSITION_METALS:
-					groupColour = EnumColour.AQUA;
-					break;
-				case OTHER_METALS:
-					groupColour = EnumColour.ORANGE;
-					break;
-				case NON_METALS:
-					groupColour = EnumColour.BRIGHT_GREEN;
-					break;
-				case NOBLE_GASES:
-					groupColour = EnumColour.YELLOW;
-					break;
-				default:
-					groupColour = EnumColour.WHITE;
-					break;
-			}
-			
-			tooltip.add(EnumColour.YELLOW + "Symbol: " + symbol);
 			tooltip.add(EnumColour.DARK_AQUA + "Atomic No: " + atomicNumber);
 			tooltip.add(EnumColour.DARK_AQUA + "Atomic Mass: " + atomicMass);
 			tooltip.add(EnumColour.BRIGHT_PINK + "Electron Configuration: " + electronString);
@@ -197,7 +175,39 @@ public abstract class Element extends Item
 			else tooltip.add(EnumColour.RED + "Melting Point: Unknown");
 			if(boilingPoint != Integer.MAX_VALUE) tooltip.add(EnumColour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
 			else tooltip.add(EnumColour.RED + "Boiling Point: Unknown");
-			tooltip.add(groupColour + StatCollector.translateToLocal(this.group.groupName));
+			tooltip.add(this.getGroupColour() + StatCollector.translateToLocal(this.group.groupName));
 		}
+	}
+	
+	private EnumColour getGroupColour()
+	{
+		EnumColour groupColour;
+		
+		switch(this.group)
+		{
+			case ALKALI_METALS:
+				groupColour = EnumColour.WHITE;
+				break;
+			case ALKALINE_EARTH_METALS:
+				groupColour = EnumColour.PINK;
+				break;
+			case TRANSITION_METALS:
+				groupColour = EnumColour.AQUA;
+				break;
+			case OTHER_METALS:
+				groupColour = EnumColour.ORANGE;
+				break;
+			case NON_METALS:
+				groupColour = EnumColour.BRIGHT_GREEN;
+				break;
+			case NOBLE_GASES:
+				groupColour = EnumColour.YELLOW;
+				break;
+			default:
+				groupColour = EnumColour.WHITE;
+				break;
+		}
+		
+		return groupColour;
 	}
 }
