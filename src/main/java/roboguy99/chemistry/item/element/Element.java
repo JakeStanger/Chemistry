@@ -79,6 +79,10 @@ public abstract class Element extends Item
 		GameRegistry.registerItem(this, name);
 	}
 	
+	/**
+	 * Add the element to the elements creative tab.
+	 * If you do not call this, the element will not be accessible in creative mode.
+	 */
 	protected void addToCreativeTab()
 	{
 		this.setCreativeTab(Chemistry.tabElements);
