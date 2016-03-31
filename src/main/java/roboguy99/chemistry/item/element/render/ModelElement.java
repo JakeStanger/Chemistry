@@ -16,11 +16,11 @@ import roboguy99.chemistry.item.element.Element;
 
 public class ModelElement implements IModel
 {
-	private Element element;
+	private String elementName;
 	
-	public ModelElement(Element element)
+	public ModelElement(String elementName)
 	{
-		this.element = element;
+		this.elementName = elementName;
 	}
 	
 	@Override
@@ -38,7 +38,7 @@ public class ModelElement implements IModel
 	@Override
 	public IFlexibleBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
 	{
-		return new BakedModelElement(element);
+		return new BakedModelElement(elementName);
 	}
 
 	@Override

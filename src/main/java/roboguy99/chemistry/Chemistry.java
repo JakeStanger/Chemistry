@@ -73,11 +73,12 @@ public class Chemistry {
 		{
 			ModelLoaderRegistry.registerLoader(new ModelLoader());
 			
+			ModelResourceLocation heldModel = new ModelResourceLocation("chemistry:elementHeld", "inventory");
 			for(Element element : Elements.elements)
 			{
 				ModelResourceLocation elementModel = new ModelResourceLocation("chemistry:" +  element.getName(), "inventory");
 				
-				ModelBakery.registerItemVariants(element, elementModel, new ModelResourceLocation("chemistry:elementHeld", "inventory"));
+				ModelBakery.registerItemVariants(element, elementModel, heldModel);
 				
 				//With this = elements have 1 texture used everywhere, without = elements do not have texture
 				//net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
