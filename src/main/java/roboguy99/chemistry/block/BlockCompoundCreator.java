@@ -19,7 +19,7 @@ public class BlockCompoundCreator extends Block/*extends BlockContainer*/
 	public BlockCompoundCreator() 
 	{
 		super(Material.iron);
-		this.setCreativeTab(Chemistry.tabElements);
+		this.setCreativeTab(Chemistry.tabMachines);
 		GameRegistry.registerBlock(this, "blockCompoundMaker");
 	}
 
