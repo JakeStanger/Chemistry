@@ -5,15 +5,13 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.elements.*;
@@ -147,7 +145,7 @@ public class Elements
 		elements[117] = new Ununoctium();
 		elements[118] = new MoleculeMarker();
 		
-		//this.generateTexturesForElements();
+		this.generateTexturesForElements();
     }
 	
 	/**
@@ -197,7 +195,7 @@ public class Elements
 		        		colour = Color.PINK;
 		        		break;
 		        	case TRANSITION_METALS:
-		        		colour = Color.BLUE;
+		        		colour = Color.CYAN.darker();
 		        		break;
 		        	case OTHER_METALS:
 		        		colour = Color.ORANGE;
@@ -214,8 +212,6 @@ public class Elements
 		        
 		        g2d.setFont(font);
 		        FontMetrics fm = g2d.getFontMetrics();
-		        //int width = fm.stringWidth(text);
-		        //int height = fm.getHeight();
 		        g2d.dispose();
 		
 		        img = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
@@ -228,10 +224,16 @@ public class Elements
 		        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
+		        g2d.setColor(colour);
+		        g2d.draw3DRect(0, 0, img.getWidth(), img.getHeight(), false);
+		        g2d.fill3DRect(0, 0, 64, 64, false);
+		        
 		        g2d.setFont(font);
 		        fm = g2d.getFontMetrics();
-		        g2d.setColor(colour);
-		        g2d.drawString(text, 32- fm.stringWidth(text)/2, 32+ fm.getDescent());
+		        g2d.setColor(colour.brighter().darker().brighter()); //This gives a colour slightly different to a single brighter
+		        
+		        g2d.drawString(text, 32- fm.stringWidth(text)/2, 32+ fm.getDescent() + 5);
 		        g2d.dispose();
 		        try 
 		        {
