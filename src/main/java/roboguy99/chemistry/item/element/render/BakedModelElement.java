@@ -23,7 +23,7 @@ import roboguy99.chemistry.item.element.Element;
 
 public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAwareModel
 {
-	private Element element;
+	Element element;
 	
 	public BakedModelElement(Element element)
 	{
@@ -38,7 +38,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 		{
 			model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory"));
 		}
-		else model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:" + this.element.getName(), "inventory"));
+		else model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:" + this.element, "inventory"));
 		
 		if(!(model instanceof IFlexibleBakedModel)) model = new IFlexibleBakedModel.Wrapper(model, DefaultVertexFormats.ITEM);
 		

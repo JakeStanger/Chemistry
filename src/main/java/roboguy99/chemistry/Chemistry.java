@@ -9,6 +9,7 @@ import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -25,6 +26,7 @@ import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.compound.CompoundNames;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
+import roboguy99.chemistry.item.element.render.ModelLoader;
 import roboguy99.chemistry.network.CommonProxy;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 import roboguy99.chemistry.network.packet.CompoundCreate.CompoundCreateHandle;
@@ -69,7 +71,17 @@ public class Chemistry {
 		
 		if(event.getSide() == Side.CLIENT)
 		{
-			for(Element element : Elements.elements) ModelBakery.registerItemVariants(element, new ModelResourceLocation("chemistry:" +  element.getName(), "inventory"), new ModelResourceLocation("chemistry:elementHeld", "inventory"));
+			ModelLoaderRegistry.registerLoader(new ModelLoader());
+			
+			for(Element element : Elements.elements)
+			{
+				ModelResourceLocation elementModel = new ModelResourceLocation("chemistry:" +  element.getName(), "inventory");
+				
+				ModelBakery.registerItemVariants(element, elementModel, new ModelResourceLocation("chemistry:elementHeld", "inventory"));
+				
+				//With this = elements have 1 texture used everywhere, without = elements do not have texture
+				//net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
+			}
 		}
 	}
 

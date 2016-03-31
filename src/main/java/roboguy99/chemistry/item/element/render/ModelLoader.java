@@ -7,16 +7,13 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
+import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.Elements;
 
 public class ModelLoader implements ICustomModelLoader
 {
-	private Element element;
-	
-	public ModelLoader(Element element)
-	{
-		this.element = element;
-	}
+	private Element element = Elements.getElement(1);
 	
 	@Override
 	public void onResourceManagerReload(IResourceManager resourceManager)
@@ -25,7 +22,8 @@ public class ModelLoader implements ICustomModelLoader
 	@Override
 	public boolean accepts(ResourceLocation modelLocation)
 	{
-		if(modelLocation == new ModelResourceLocation("chemistry:" + element.getName(), "inventory")) return true;
+		//Well I don't think this works. Also creating a new instance for EVERY MODEL in the game seems like a really bad idea...
+		if(modelLocation.equals(new ModelResourceLocation("chemistry:" + element.getName(), "inventory"))) return true;
 		return false;
 	}
 
