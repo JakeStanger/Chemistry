@@ -12,7 +12,6 @@ import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.IModelState;
 import net.minecraftforge.client.model.TRSRTransformation;
-import roboguy99.chemistry.item.element.Element;
 
 public class ModelElement implements IModel
 {
