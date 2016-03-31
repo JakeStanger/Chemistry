@@ -19,6 +19,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.TRSRTransformation;
+import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.item.element.Element;
 
 public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAwareModel

@@ -82,8 +82,7 @@ public class Chemistry {
 				
 				ModelBakery.registerItemVariants(element, elementModel, heldModel);
 				
-				//With this = elements have 1 texture used everywhere, without = elements do not have texture
-				//net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
+				net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
 			}
 		}
 	}
