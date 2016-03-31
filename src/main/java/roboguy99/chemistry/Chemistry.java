@@ -54,6 +54,8 @@ public class Chemistry {
 	public static SimpleNetworkWrapper networkWrapper;
 
 	public static Chemistry instance;
+	
+	private static BlockCompoundCreator blockCompoundCreator;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
@@ -93,7 +95,7 @@ public class Chemistry {
 		new Compound();
 		new CompoundNames();
 	
-	new BlockCompoundCreator();
+	this.blockCompoundCreator = new BlockCompoundCreator();
 		new TileEntities();
 	}
 
@@ -103,18 +105,22 @@ public class Chemistry {
 		
 	}
 	
-	public static CreativeTabs tabElements = new CreativeTabs("tabElements") {
+	public static CreativeTabs tabElements = new CreativeTabs("tabElements") 
+	{
 	    @Override
 	    @SideOnly(Side.CLIENT)
-	    public Item getTabIconItem() {
+	    public Item getTabIconItem() 
+	    {
 	        return Elements.getElement(EnumElement.CARBON);
 	    }
 	};
-	/*public static CreativeTabs tabMachines = new CreativeTabs("tabMachines") {
+	public static CreativeTabs tabMachines = new CreativeTabs("tabMachines") 
+	{
 	    @Override
 	    @SideOnly(Side.CLIENT)
-	    public Item getTabIconItem() {
-	        return Elements.ethanol; //TODO do something about this
+	    public Item getTabIconItem() 
+	    {
+	        return Item.getItemFromBlock(Chemistry.blockCompoundCreator);
 	    }
-	};*/
+	};
 }	

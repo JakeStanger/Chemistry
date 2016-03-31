@@ -1,4 +1,5 @@
 itemGroup.tabElements=Elements
+itemGroup.tabMachines=Chemistry Machines
 
 group.alkaliMetals=Alkali Metals
 group.alkalineEarthMetals=Alkaline Earth Metals
@@ -6,7 +7,7 @@ group.transitionMetals=Transition Metals
 group.otherMetals=Other Metals
 group.nonMetals=Non Metals
 group.nobleGases=Noble Gases
-group.special=NOT FOR YOUR EYES
+group.special=Internal Workings
 
 item.hydrogen.name=Hydrogen
 item.helium.name=Helium
