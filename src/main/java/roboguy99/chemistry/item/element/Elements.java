@@ -181,8 +181,7 @@ public class Elements
 		        Graphics2D g2d = img.createGraphics();
 		        
 		        Font font;
-		        if(text.length() == 1) font = new Font("Helvetica", Font.PLAIN, 60);
-		        else if(text.length() == 2) font = new Font("Helvetica", Font.PLAIN, 45);
+		        if(text.length() <= 2) font = new Font("Helvetica", Font.PLAIN, 45);
 		        else font = new Font("Helvetica", Font.PLAIN, 32);
 		        
 		        Color colour;
