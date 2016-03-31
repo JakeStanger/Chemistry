@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -27,6 +28,8 @@ import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.network.CommonProxy;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 import roboguy99.chemistry.network.packet.CompoundCreate.CompoundCreateHandle;
+import roboguy99.chemistry.network.packet.ItemDelete;
+import roboguy99.chemistry.network.packet.ItemDelete.ItemDeleteHandle;
 import roboguy99.chemistry.tileentity.TileEntities;
 
 /**
@@ -60,13 +63,20 @@ public class Chemistry {
 		
 		this.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("hotbarBag_inv");
 		this.networkWrapper.registerMessage(CompoundCreateHandle.class, CompoundCreate.class, 0, Side.SERVER);
+		this.networkWrapper.registerMessage(ItemDeleteHandle.class, ItemDelete.class, 1, Side.SERVER);
+		
+		new Elements();
+		
+		if(event.getSide() == Side.CLIENT)
+		{
+			for(Element element : Elements.elements) ModelBakery.registerItemVariants(element, new ModelResourceLocation("chemistry:" +  element.getName(), "inventory"), new ModelResourceLocation("chemistry:elementHeld", "inventory"));
+		}
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) // Initialisation loading
 	{
 		logger.info("Initialising");
-		new Elements();
 		new Compound();
 		new CompoundNames();
 	
@@ -77,11 +87,7 @@ public class Chemistry {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) 
 	{
-		if(event.getSide() == Side.CLIENT)
-		{
-			ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-			for(Element element : Elements.elements) mesher.register(element, 0, new ModelResourceLocation("chemistry:" +  element.getName(), "inventory"));
-		}
+		
 	}
 	
 	public static CreativeTabs tabElements = new CreativeTabs("tabElements") {
