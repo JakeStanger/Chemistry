@@ -22,7 +22,7 @@ public class ClientProxy extends CommonProxy
 			
 			ModelBakery.registerItemVariants(element, testModel, heldModel);
 			
-			net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, testModel);
+			net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
 		}
 	}
 }
