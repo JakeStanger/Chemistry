@@ -6,12 +6,23 @@
   "version": "0.0.0",
   "mcversion": "1.8.9",
   "updateUrl": "",
-  "authorList": [
-    "Roboguy99"
-  ],
+  "authorList": ["Roboguy99"],
   "credits": "Thanks to all those who helped me (especially on the Minecraft Forge forums)",
   "logoFile": "logo.png",
-  "screenshots": [
-  ]
+  "screenshots": []
+},
+{
+  "modid": "chemistry-worldgen",
+  "name": "Chemistry World Generation",
+  "description": "Find all of those elements in your world!",
+  "version": "0.0.0",
+  "mcversion": "1.8.9",
+  "requiredMods": [ "Forge", "chemistry" ],
+  "dependencies": [ "chemistry" ],
+  "updateUrl": "",
+  "authorList": ["Roboguy99"],
+  "credits": "Thanks to all those who helped me (especially on the Minecraft Forge forums)",
+  "logoFile": "logo.png",
+  "screenshots": []
 }
 ]
