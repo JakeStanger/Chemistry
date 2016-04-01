@@ -33,17 +33,17 @@ public class ChemistryWorldGen
 	{
 		this.instance = this;
 		
-		new Config(event);
+		//new Config(event);
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		for(Element element : Elements.getElements()) this.ores.add(new OreElement(element)); //TODO add these to list
-		GameRegistry.registerWorldGenerator(new OreGenerator(), 100);
+		//for(Element element : Elements.getElements()) this.ores.add(new OreElement(element)); //TODO add these to list
+		//GameRegistry.registerWorldGenerator(new OreGenerator(), 100);
 	}
 	
-	public static CreativeTabs tabOre = new CreativeTabs("tabOre") 
+	/*public static CreativeTabs tabOre = new CreativeTabs("tabOre") 
 	{
 	    @Override
 	    @SideOnly(Side.CLIENT)
@@ -51,7 +51,7 @@ public class ChemistryWorldGen
 	    {
 	        return Item.getItemFromBlock(ChemistryWorldGen.instance.ores.get(29)); //TODO Change to ore
 	    }
-	};
+	};*/
 	
 	public List<OreElement> getOres()
 	{
