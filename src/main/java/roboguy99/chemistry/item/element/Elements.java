@@ -19,9 +19,8 @@ import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
 
 public class Elements 
 {
-	private static Element[] elements = new Element[119];
-	
-	public static Compound ethanol;
+	private static Element[] elements = new Element[118];
+	private static Element moleculeMarker;
 	
 	public Elements()
 	{
@@ -143,7 +142,8 @@ public class Elements
 		elements[115] = new Livermorium();
 		elements[116] = new Ununseptium();
 		elements[117] = new Ununoctium();
-		elements[118] = new MoleculeMarker();
+		
+		this.moleculeMarker = new MoleculeMarker();
 		
 		this.generateTexturesForElements();
     }
@@ -249,5 +249,10 @@ public class Elements
 	public static Element[] getElements()
 	{
 		return Elements.elements;
+	}
+	
+	public static Element getMoleculeMarker()
+	{
+		return Elements.moleculeMarker;
 	}
 }
