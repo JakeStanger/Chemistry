@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry_worldgen.block.OreElement;
@@ -33,25 +34,25 @@ public class ChemistryWorldGen
 	{
 		this.instance = this;
 		
-		//new Config(event);
+		new Config(event);
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		//for(Element element : Elements.getElements()) this.ores.add(new OreElement(element)); //TODO add these to list
-		//GameRegistry.registerWorldGenerator(new OreGenerator(), 100);
+		for(Element element : Elements.getElements()) this.ores.add(new OreElement(element)); //TODO add these to list
+		GameRegistry.registerWorldGenerator(new OreGenerator(), 100);
 	}
 	
-	/*public static CreativeTabs tabOre = new CreativeTabs("tabOre") 
+	public static CreativeTabs tabOre = new CreativeTabs("tabOre") 
 	{
 	    @Override
 	    @SideOnly(Side.CLIENT)
 	    public Item getTabIconItem() 
 	    {
-	        return Item.getItemFromBlock(ChemistryWorldGen.instance.ores.get(29)); //TODO Change to ore
+	        return Item.getItemFromBlock(ChemistryWorldGen.instance.ores.get(Elements.getElement(EnumElement.COPPER).getAtomicNumber()));
 	    }
-	};*/
+	};
 	
 	public List<OreElement> getOres()
 	{

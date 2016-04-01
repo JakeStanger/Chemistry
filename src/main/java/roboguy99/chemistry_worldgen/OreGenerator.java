@@ -18,13 +18,13 @@ public class OreGenerator implements IWorldGenerator
 		{
 			for(OreElement ore : ChemistryWorldGen.instance.getOres())
 			{
-				for(int k = 0; k < 10; k++)
+				for(int k = 0; k < 5; k++)
 				{
 		        	int x = (chunkX*16) + random.nextInt(16);
 		        	int y = random.nextInt(64);
 		        	int z = (chunkZ*16) + random.nextInt(16);
 		        	
-		        	(new WorldGenMinable(ore.getDefaultState(), 10)).generate(world, random, new BlockPos(x, y, z));
+		        	(new WorldGenMinable(ore.getDefaultState(), 5)).generate(world, random, new BlockPos(x, y, z)); //TODO Make dependant on element
 		        }
 			}
 		}

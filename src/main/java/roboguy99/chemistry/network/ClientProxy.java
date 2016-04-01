@@ -14,7 +14,7 @@ public class ClientProxy extends CommonProxy
 	{
 		ModelLoaderRegistry.registerLoader(new ModelLoader());
 		
-		ModelResourceLocation heldModel = new ModelResourceLocation("chemistry:elementHeld", "inventory");
+		//ModelResourceLocation heldModel = new ModelResourceLocation("chemistry:elementHeld", "inventory");
 		for(Element element : Elements.getElements())
 		{
 			ModelResourceLocation elementModel = new ModelResourceLocation("chemistry:" +  element.getName(), "inventory");
