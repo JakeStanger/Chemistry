@@ -98,6 +98,7 @@ public class CompoundBuilder
 			for(Element element : elements) this.elements.add(element);
 			this.endMolecule();
 		}
+		this.removeTrailingMolecule();
 	}
 	
 	/**
@@ -123,5 +124,10 @@ public class CompoundBuilder
 	public void clearElements()
 	{
 		this.elements.clear();
+	}
+	
+	private void removeTrailingMolecule()
+	{
+		this.elements.remove(this.elements.size()-1);
 	}
 }
