@@ -34,7 +34,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 	public Pair<? extends IFlexibleBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType)
 	{
 		IBakedModel model;
-		if(cameraTransformType == TransformType.FIRST_PERSON || cameraTransformType == TransformType.THIRD_PERSON)
+		if(cameraTransformType != TransformType.GUI)
 		{
 			model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory"));
 		}

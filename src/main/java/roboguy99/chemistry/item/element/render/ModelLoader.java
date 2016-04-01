@@ -22,12 +22,12 @@ public class ModelLoader implements ICustomModelLoader
 	public boolean accepts(ResourceLocation modelLocation)
 	{
 		//TODO Rename textures to begin with "element_*/;
-		return modelLocation.getResourceDomain().equals("chemistry") && modelLocation.getResourcePath().startsWith("models/item/");
+		return modelLocation.getResourceDomain().equals("chemistry") && modelLocation.getResourcePath().startsWith("models/item/element_");
 	}
 
 	@Override
 	public IModel loadModel(ResourceLocation modelLocation) throws IOException
 	{
-		return new ModelElement(modelLocation.getResourcePath().substring("models/item/".length()));
+		return new ModelElement(modelLocation.getResourcePath().substring("models/item/element_".length()));
 	}
 }

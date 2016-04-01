@@ -14,14 +14,15 @@ public class ClientProxy extends CommonProxy
 	{
 		ModelLoaderRegistry.registerLoader(new ModelLoader());
 		
-		//ModelResourceLocation heldModel = new ModelResourceLocation("chemistry:elementHeld", "inventory");
+		ModelResourceLocation heldModel = new ModelResourceLocation("chemistry:elementHeld", "inventory");
+		ModelResourceLocation testModel = new ModelResourceLocation("chemistry:element", "inventory");
 		for(Element element : Elements.getElements())
 		{
-			ModelResourceLocation elementModel = new ModelResourceLocation("chemistry:" +  element.getName(), "inventory");
+			//ModelResourceLocation elementModel = new ModelResourceLocation("chemistry:element_" +  element.getName(), "inventory");
 			
-			//ModelBakery.registerItemVariants(element, elementModel, heldModel);
+			ModelBakery.registerItemVariants(element, testModel, heldModel);
 			
-			net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
+			net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, testModel);
 		}
 	}
 }
