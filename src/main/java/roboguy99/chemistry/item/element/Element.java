@@ -161,7 +161,7 @@ public abstract class Element extends Item
 	{
 		if(!Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode()))
 		{
-			tooltip.add(EnumColour.AQUA + "Sneak for more info");
+			tooltip.add(EnumColour.DARK_GREEN + "Sneak for more info");
 		}
 		else
 		{
