@@ -17,8 +17,8 @@ public class Config
 		this.config = new Configuration(new File(Chemistry.CONFIG_DIR, ChemistryWorldGen.modID +".cfg"));
 		
 		this.config.load();
-			this.config.get("general", "ReplaceVanillaOres", true);
 			for(Element element : Elements.getElements()) this.config.get("worldgen", element.getName(), true);
+			this.config.setCategoryComment("worldgen", "Individually enable/disable the worldgen for every single ore");
 		this.config.save();
 	}
 }
