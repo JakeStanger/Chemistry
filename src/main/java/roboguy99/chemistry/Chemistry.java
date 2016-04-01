@@ -67,29 +67,14 @@ public class Chemistry
 		this.instance = this;
 		
 		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry";
+		
+		new Elements();
 
 		proxy.registerProxies();
 		
 		this.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("hotbarBag_inv");
 		this.networkWrapper.registerMessage(CompoundCreateHandle.class, CompoundCreate.class, 0, Side.SERVER);
 		this.networkWrapper.registerMessage(ItemDeleteHandle.class, ItemDelete.class, 1, Side.SERVER);
-		
-		new Elements();
-		
-		/*if(event.getSide() == Side.CLIENT)
-		{
-			ModelLoaderRegistry.registerLoader(new ModelLoader());
-			
-			ModelResourceLocation heldModel = new ModelResourceLocation("chemistry:elementHeld", "inventory");
-			for(Element element : Elements.elements)
-			{
-				ModelResourceLocation elementModel = new ModelResourceLocation("chemistry:" +  element.getName(), "inventory");
-				
-				ModelBakery.registerItemVariants(element, elementModel, heldModel);
-				
-				net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
-			}
-		}*/
 	}
 
 	@EventHandler

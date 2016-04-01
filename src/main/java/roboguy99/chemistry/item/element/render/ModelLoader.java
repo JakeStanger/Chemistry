@@ -13,9 +13,7 @@ import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 
 public class ModelLoader implements ICustomModelLoader
-{	
-	private String elementName;
-	
+{		
 	@Override
 	public void onResourceManagerReload(IResourceManager resourceManager)
 	{}
@@ -23,15 +21,13 @@ public class ModelLoader implements ICustomModelLoader
 	@Override
 	public boolean accepts(ResourceLocation modelLocation)
 	{
-		boolean accepted = modelLocation.getResourceDomain().equals("chemistry") && modelLocation.getResourcePath().startsWith("models/item/"); //TODO Rename textures to begin with "element_*/;
-		this.elementName = modelLocation.getResourcePath().substring("models/item/".length());
-
-		return accepted;
+		//TODO Rename textures to begin with "element_*/;
+		return modelLocation.getResourceDomain().equals("chemistry") && modelLocation.getResourcePath().startsWith("models/item/");
 	}
 
 	@Override
 	public IModel loadModel(ResourceLocation modelLocation) throws IOException
 	{
-		return new ModelElement(this.elementName);
+		return new ModelElement(modelLocation.getResourcePath().substring("models/item/".length()));
 	}
 }

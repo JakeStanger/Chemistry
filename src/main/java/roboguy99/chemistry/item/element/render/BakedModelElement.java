@@ -1,8 +1,5 @@
 package roboguy99.chemistry.item.element.render;
 
-import java.awt.Color;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.vecmath.Matrix4f;
@@ -20,11 +17,9 @@ import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
-import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.TRSRTransformation;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.item.element.Element;
 
 public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAwareModel
 {
@@ -43,7 +38,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 		{
 			model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory"));
 		}
-		else model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:" + elementName, "inventory"));
+		else model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:titanium", "inventory"));
 		
 		if(!(model instanceof IFlexibleBakedModel)) model = new IFlexibleBakedModel.Wrapper(model, DefaultVertexFormats.ITEM);
 		
