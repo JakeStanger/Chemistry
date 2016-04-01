@@ -19,7 +19,7 @@ import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
 
 public class Elements 
 {
-	public static Element[] elements = new Element[119];
+	private static Element[] elements = new Element[119];
 	
 	public static Compound ethanol;
 	
@@ -244,5 +244,10 @@ public class Elements
 		        }
 			}
 		}
+	}
+	
+	public static Element[] getElements()
+	{
+		return Elements.elements;
 	}
 }

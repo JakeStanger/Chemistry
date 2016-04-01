@@ -18,7 +18,7 @@ public class Config
 		
 		this.config.load();
 			this.config.get("general", "ReplaceVanillaOres", true);
-			for(Element element : Elements.elements) this.config.get("worldgen", element.getName(), true);
+			for(Element element : Elements.getElements()) this.config.get("worldgen", element.getName(), true);
 		this.config.save();
 	}
 }

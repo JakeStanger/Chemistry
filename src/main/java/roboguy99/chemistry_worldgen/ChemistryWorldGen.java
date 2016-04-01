@@ -39,7 +39,7 @@ public class ChemistryWorldGen
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		for(Element element : Elements.elements) this.ores.add(new OreElement(element)); //TODO add these to list
+		for(Element element : Elements.getElements()) this.ores.add(new OreElement(element)); //TODO add these to list
 		GameRegistry.registerWorldGenerator(new OreGenerator(), 100);
 	}
 	
