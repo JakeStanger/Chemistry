@@ -41,7 +41,8 @@ import roboguy99.chemistry.tileentity.TileEntities;
  * 
  */
 @Mod(modid = Chemistry.modID, version = Chemistry.modVersion, name = Chemistry.name)
-public class Chemistry {
+public class Chemistry 
+{
 	// Mod data. Fallback if mc-mod.info fails to load.
 	public static final String modID = "chemistry";
 	public static final String modVersion = "0.0.0";
@@ -56,12 +57,16 @@ public class Chemistry {
 	public static Chemistry instance;
 	
 	private static BlockCompoundCreator blockCompoundCreator;
+	
+	public static String CONFIG_DIR;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
 	{
 		logger.info("Pre-initialising");
 		this.instance = this;
+		
+		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry";
 
 		proxy.registerProxies();
 		
@@ -71,7 +76,7 @@ public class Chemistry {
 		
 		new Elements();
 		
-		if(event.getSide() == Side.CLIENT)
+		/*if(event.getSide() == Side.CLIENT)
 		{
 			ModelLoaderRegistry.registerLoader(new ModelLoader());
 			
@@ -84,7 +89,7 @@ public class Chemistry {
 				
 				net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
 			}
-		}
+		}*/
 	}
 
 	@EventHandler
