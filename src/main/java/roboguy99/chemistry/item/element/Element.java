@@ -61,7 +61,7 @@ public abstract class Element extends Item
 	
 	public Element()
 	{	
-		this.name = this.giveName();
+		this.name = "element_" + this.giveName();
 		this.symbol = this.giveSymbol();
 		this.group = this.giveGroup();
 		
