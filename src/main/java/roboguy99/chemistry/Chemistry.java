@@ -69,6 +69,8 @@ public class Chemistry
 		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry";
 		
 		new Elements();
+		
+		
 
 		proxy.registerProxies();
 		
@@ -86,12 +88,18 @@ public class Chemistry
 	
 	this.blockCompoundCreator = new BlockCompoundCreator();
 		new TileEntities();
+		
+		//TEST CODE
+		if(event.getSide() == Side.CLIENT)
+ 		{
+	 		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+	 		for(Element element : Elements.getElements()) mesher.register(element, 0, new ModelResourceLocation("chemistry:element_base_carbon", "inventory"));
+ 		}
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) 
-	{
-		
+	{			
 	}
 	
 	public static CreativeTabs tabElements = new CreativeTabs("tabElements") 
