@@ -12,9 +12,9 @@ public class Config
 {
 	private Configuration config;
 	
-	public Config(FMLPreInitializationEvent event)
+	public Config()
 	{	
-		this.config = new Configuration(new File(Chemistry.CONFIG_DIR, ChemistryWorldGen.modID +".cfg"));
+		this.config = Chemistry.getConfig(ChemistryWorldGen.modID);
 		
 		this.config.load();
 			for(Element element : Elements.getElements()) this.config.get("worldgen", element.getName(), true);

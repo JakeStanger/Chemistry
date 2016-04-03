@@ -34,7 +34,7 @@ public class ChemistryWorldGen
 	{
 		this.instance = this;
 		
-		new Config(event);
+		new Config();
 	}
 	
 	@EventHandler

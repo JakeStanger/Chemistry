@@ -1,15 +1,13 @@
 package roboguy99.chemistry;
 
+import java.io.File;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -24,9 +22,7 @@ import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.compound.CompoundNames;
-import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
-import roboguy99.chemistry.item.element.render.ModelLoader;
 import roboguy99.chemistry.network.CommonProxy;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 import roboguy99.chemistry.network.packet.CompoundCreate.CompoundCreateHandle;
@@ -93,6 +89,17 @@ public class Chemistry
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) 
 	{			
+	}
+	
+	/**
+	 * Get the configuration file for the mod.
+	 * This will be placed in /config/Chemistry/modid.cfg
+	 * @param modId The name of the configuration file to generate
+	 * @return The configuration for the given modid
+	 */
+	public static Configuration getConfig(String modId)
+	{
+		return new Configuration(new File(Chemistry.CONFIG_DIR + modId + ".cfg"));
 	}
 	
 	public static CreativeTabs tabElements = new CreativeTabs("tabElements") 
