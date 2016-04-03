@@ -7,7 +7,7 @@ import net.minecraft.util.StatCollector;
  * @author AidanBrady
  *
  */
-public enum EnumColour
+public enum Colour
 {
 	BLACK("\u00a70", "black", "Black", new int[] {0, 0, 0}, 0),
 	DARK_BLUE("\u00a71", "darkBlue", "Blue", new int[] {0, 0, 170}, 4),
@@ -29,7 +29,7 @@ public enum EnumColour
 	BROWN("\u00a76", "brown", "Brown", new int[] {150, 75, 0}, 3),
 	BRIGHT_PINK("\u00a7d", "brightPink", "Pink", new int[] {255, 192, 203}, 9);
 
-	public static EnumColour[] DYES = new EnumColour[] {BLACK, RED, DARK_GREEN, BROWN, DARK_BLUE, PURPLE, DARK_AQUA, GREY, DARK_GREY, BRIGHT_PINK, BRIGHT_GREEN, YELLOW, INDIGO, PINK, ORANGE, WHITE};
+	public static Colour[] DYES = new Colour[] {BLACK, RED, DARK_GREEN, BROWN, DARK_BLUE, PURPLE, DARK_AQUA, GREY, DARK_GREY, BRIGHT_PINK, BRIGHT_GREEN, YELLOW, INDIGO, PINK, ORANGE, WHITE};
 
 	/** The color code that will be displayed */
 	public final String code;
@@ -43,7 +43,7 @@ public enum EnumColour
 	
 	public String dyeName;
 
-	private EnumColour(String s, String n, String dye, int[] rgb, int meta)
+	private Colour(String s, String n, String dye, int[] rgb, int meta)
 	{
 		code = s;
 		unlocalizedName = n;
