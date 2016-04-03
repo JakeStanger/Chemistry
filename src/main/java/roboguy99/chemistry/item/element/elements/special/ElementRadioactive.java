@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.api.EnumColour;
+import roboguy99.chemistry.api.Colour;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.network.packet.ItemDelete;
 
@@ -107,11 +107,11 @@ public abstract class ElementRadioactive extends Element
 		{
 			try
 			{
-				tooltip.add(EnumColour.BRIGHT_GREEN + "Radioactive: " + this.getDecayTimeReadable(stack.getTagCompound().getLong("timeUntilDecay")) + " until decay");
+				tooltip.add(Colour.BRIGHT_GREEN + "Radioactive: " + this.getDecayTimeReadable(stack.getTagCompound().getLong("timeUntilDecay")) + " until decay");
 			}
 			catch(NullPointerException e)
 			{
-				tooltip.add(EnumColour.BRIGHT_GREEN + "Radioactive: " + this.getDecayTimeReadable(this.halfLife) + " until decay");
+				tooltip.add(Colour.BRIGHT_GREEN + "Radioactive: " + this.getDecayTimeReadable(this.halfLife) + " until decay");
 			}
 		}
 	}

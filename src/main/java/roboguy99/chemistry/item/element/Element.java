@@ -12,7 +12,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.api.EnumColour;
+import roboguy99.chemistry.api.Colour;
 
 /**
  * The item class for a chemical element.
@@ -161,7 +161,7 @@ public abstract class Element extends Item
 	{
 		if(!Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode()))
 		{
-			tooltip.add(EnumColour.DARK_GREEN + "Sneak for more info");
+			tooltip.add(Colour.DARK_GREEN + "Sneak for more info");
 		}
 		else
 		{
@@ -172,43 +172,43 @@ public abstract class Element extends Item
 			}
 			electronString = electronString.substring(0, electronString.length() - 1); //Remove trailing dot
 			
-			tooltip.add(EnumColour.DARK_AQUA + "Atomic No: " + atomicNumber);
-			tooltip.add(EnumColour.DARK_AQUA + "Atomic Mass: " + atomicMass);
-			tooltip.add(EnumColour.BRIGHT_PINK + "Electron Configuration: " + electronString);
-			if(meltingPoint != Integer.MAX_VALUE) tooltip.add(EnumColour.RED + "Melting Point: " + meltingPoint + "\u00B0C"); 
-			else tooltip.add(EnumColour.RED + "Melting Point: Unknown");
-			if(boilingPoint != Integer.MAX_VALUE) tooltip.add(EnumColour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
-			else tooltip.add(EnumColour.RED + "Boiling Point: Unknown");
+			tooltip.add(Colour.DARK_AQUA + "Atomic No: " + atomicNumber);
+			tooltip.add(Colour.DARK_AQUA + "Atomic Mass: " + atomicMass);
+			tooltip.add(Colour.BRIGHT_PINK + "Electron Configuration: " + electronString);
+			if(meltingPoint != Integer.MAX_VALUE) tooltip.add(Colour.RED + "Melting Point: " + meltingPoint + "\u00B0C"); 
+			else tooltip.add(Colour.RED + "Melting Point: Unknown");
+			if(boilingPoint != Integer.MAX_VALUE) tooltip.add(Colour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
+			else tooltip.add(Colour.RED + "Boiling Point: Unknown");
 			tooltip.add(this.getGroupColour() + StatCollector.translateToLocal(this.group.groupName));
 		}
 	}
 	
-	private EnumColour getGroupColour()
+	private Colour getGroupColour()
 	{
-		EnumColour groupColour;
+		Colour groupColour;
 		
 		switch(this.group)
 		{
 			case ALKALI_METALS:
-				groupColour = EnumColour.WHITE;
+				groupColour = Colour.WHITE;
 				break;
 			case ALKALINE_EARTH_METALS:
-				groupColour = EnumColour.PINK;
+				groupColour = Colour.PINK;
 				break;
 			case TRANSITION_METALS:
-				groupColour = EnumColour.AQUA;
+				groupColour = Colour.AQUA;
 				break;
 			case OTHER_METALS:
-				groupColour = EnumColour.ORANGE;
+				groupColour = Colour.ORANGE;
 				break;
 			case NON_METALS:
-				groupColour = EnumColour.BRIGHT_GREEN;
+				groupColour = Colour.BRIGHT_GREEN;
 				break;
 			case NOBLE_GASES:
-				groupColour = EnumColour.YELLOW;
+				groupColour = Colour.YELLOW;
 				break;
 			default:
-				groupColour = EnumColour.WHITE;
+				groupColour = Colour.WHITE;
 				break;
 		}
 		

@@ -17,7 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.api.Elements;
-import roboguy99.chemistry.api.EnumColour;
+import roboguy99.chemistry.api.Colour;
 import roboguy99.chemistry.item.element.Element;
 
 public class Compound extends Item
@@ -121,19 +121,19 @@ public class Compound extends Item
 	{
 		if(!Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode()))
 		{
-			tooltip.add(EnumColour.AQUA + "Sneak for more info");
+			tooltip.add(Colour.AQUA + "Sneak for more info");
 		}
 		else
 		{
 			try
 			{
 				List<List<Element>> elements = this.convertNBTToList(stack.getTagCompound());
-				tooltip.add(EnumColour.YELLOW + this.subscript(this.getFormula(elements)));
-				tooltip.add(EnumColour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(elements));
+				tooltip.add(Colour.YELLOW + this.subscript(this.getFormula(elements)));
+				tooltip.add(Colour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(elements));
 			}
 			catch(Exception e)
 			{
-				tooltip.add(EnumColour.RED + "Well something broke...");
+				tooltip.add(Colour.RED + "Well something broke...");
 			}
 		}
 	}
