@@ -17,7 +17,7 @@ import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry_worldgen.block.OreElement;
 
-@Mod(modid = ChemistryWorldGen.modID, version = ChemistryWorldGen.modVersion, name = ChemistryWorldGen.name)
+//@Mod(modid = ChemistryWorldGen.modID, version = ChemistryWorldGen.modVersion, name = ChemistryWorldGen.name)
 public class ChemistryWorldGen
 {
 	// Mod data. Fallback if mc-mod.info fails to load.

@@ -90,11 +90,10 @@ public class Chemistry
 		new TileEntities();
 		
 		//TEST CODE
-		if(event.getSide() == Side.CLIENT)
- 		{
-	 		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-	 		for(Element element : Elements.getElements()) mesher.register(element, 0, new ModelResourceLocation("chemistry:element_base_carbon", "inventory"));
- 		}
+		/*ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+	 		//for(Element element : Elements.getElements()) mesher.register(element, 0, new ModelResourceLocation("chemistry:" + element.getName(), "inventory"));
+	 		ModelResourceLocation location = new ModelResourceLocation("chemistry:element", "inventory");
+	 		mesher.register(Elements.getElement(1), 0, location);*/
 	}
 
 	@EventHandler

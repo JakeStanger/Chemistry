@@ -14,17 +14,17 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerProxies()
 	{
-		/*ModelLoaderRegistry.registerLoader(new ModelLoader());
+		ModelLoaderRegistry.registerLoader(new ModelLoader());
 		
 		ModelResourceLocation heldModel = new ModelResourceLocation("chemistry:elementHeld", "inventory");
-		ModelResourceLocation baseModel = new ModelResourceLocation(new ResourceLocation("chemistry", "element_base_carbon"), "inventory");
+		ModelResourceLocation baseModel = new ModelResourceLocation(new ResourceLocation("chemistry", "element"), "inventory");
 		for(Element element : Elements.getElements())
 		{
 			ModelResourceLocation elementModel = new ModelResourceLocation("chemistry:" +  element.getName(), "inventory");
 			
 			net.minecraftforge.client.model.ModelLoader.setCustomModelResourceLocation(element, 0, elementModel);
 			ModelBakery.registerItemVariants(element, baseModel, heldModel);
-		}*/
+		}
 		
 		//Element carbon = Elements.getElement(6);
 		
