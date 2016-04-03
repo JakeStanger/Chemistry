@@ -3,6 +3,8 @@ package roboguy99.chemistry.api;
 import net.minecraft.util.StatCollector;
 
 /**
+ * This was taken from Mekanism, because I could see much use re-writing it. 
+ * <br>-------<br>
  * Simple color enum for adding colors to in-game GUI strings of text.
  * @author AidanBrady
  *

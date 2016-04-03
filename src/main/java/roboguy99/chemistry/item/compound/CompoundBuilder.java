@@ -50,7 +50,7 @@ public class CompoundBuilder
 		
 		ItemStack stack = new ItemStack(compound);
 		
-		Chemistry.instance.getNetworkWrapper().sendToServer(new CompoundCreate(stack, tag));
+		Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new CompoundCreate(stack, tag));
 		
 		if(!preserveAfterCreation) this.clearElements();
 		

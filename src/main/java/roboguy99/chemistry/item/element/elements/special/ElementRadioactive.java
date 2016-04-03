@@ -82,7 +82,7 @@ public abstract class ElementRadioactive extends Element
 				
 				Math.floor(stack.stackSize /= 2F);
 				
-				if(stack.stackSize <= 0) Chemistry.instance.getNetworkWrapper().sendToServer(new ItemDelete(stack));
+				if(stack.stackSize <= 0) Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new ItemDelete(stack));
 			}
 		}
 	}
