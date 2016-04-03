@@ -112,7 +112,7 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 64;
+		return 1;
 	}
 
 	@Override
