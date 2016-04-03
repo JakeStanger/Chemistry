@@ -5,6 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import roboguy99.chemistry.gui.container.slot.SlotElement;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 
 public class ContainerBlockCompoundCreator extends Container
@@ -18,7 +19,7 @@ public class ContainerBlockCompoundCreator extends Container
 		//Entity slots
 		for(int y = 0; y < 7; y++)
 		{
-			for(int x = 0; x < 9; x++) this.addSlotToContainer(new Slot(compoundCreator, x + y * 9, 8 + x*18, 5 + y*18));
+			for(int x = 0; x < 9; x++) this.addSlotToContainer(new SlotElement(compoundCreator, x + y * 9, 8 + x*18, 5 + y*18));
 		}
 		
 		//Player inventory
