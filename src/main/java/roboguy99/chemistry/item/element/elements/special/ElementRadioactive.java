@@ -15,9 +15,21 @@ import roboguy99.chemistry.api.EnumColour;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.network.packet.ItemDelete;
 
+/**
+ * A radioactive element.
+ * Unlike the base element, this includes a half-life system.
+ * The half-life is in Minecraft minutes, and once it runs out the parent itemstack halves in size.
+ * This is rounded down, so a stack of 3 will decay to a stack of 1, and a stack of 1 will be deleted.
+ * One Minecraft minute is equal to 1/20 of a real minute (3 real seconds).
+ * @author Roboguy99
+ *
+ */
 public abstract class ElementRadioactive extends Element
 {
-	private static final int TICKS_PER_MINUTE = 120; //1 Minecraft minute
+	/**
+	 * The number of ticks in a single Minecraft minute
+	 */
+	private static final int TICKS_PER_MINUTE = 120;
 	
 	/**
 	 * The half-life of the element, in minutes
@@ -34,14 +46,17 @@ public abstract class ElementRadioactive extends Element
 		this.halfLife = this.giveHalfLife();
 	}	
 	
+	/**
+	 * Get the half-life of the element.
+	 * @return The half-life of the element, in minutes.
+	 */
 	public long getHalfLife()
 	{
 		return this.halfLife;
 	}
 	
 	/**
-	 * The half-life of the element, in minutes
-	 * @return
+	 * The half-life of the element, in minutes.
 	 */
 	public abstract long giveHalfLife();
 	
@@ -67,7 +82,7 @@ public abstract class ElementRadioactive extends Element
 				
 				Math.floor(stack.stackSize /= 2F);
 				
-				if(stack.stackSize <= 0) Chemistry.getNetworkWrapper().sendToServer(new ItemDelete(stack));
+				if(stack.stackSize <= 0) Chemistry.instance.getNetworkWrapper().sendToServer(new ItemDelete(stack));
 			}
 		}
 	}
