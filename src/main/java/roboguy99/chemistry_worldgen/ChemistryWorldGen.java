@@ -5,17 +5,15 @@ import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.api.EnumElement;
+import roboguy99.chemistry.api.Elements;
+import roboguy99.chemistry.api.Elements.EnumElement;
 import roboguy99.chemistry.item.element.Element;
-import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry_worldgen.block.OreElement;
 
 //@Mod(modid = ChemistryWorldGen.modID, version = ChemistryWorldGen.modVersion, name = ChemistryWorldGen.name)

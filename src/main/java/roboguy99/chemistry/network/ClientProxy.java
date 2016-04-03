@@ -5,8 +5,8 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import roboguy99.chemistry.Chemistry;
+import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.item.element.Element;
-import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.item.element.render.ModelLoader;
 
 public class ClientProxy extends CommonProxy

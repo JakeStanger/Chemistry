@@ -10,9 +10,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.api.EnumElement;
+import roboguy99.chemistry.api.Elements;
+import roboguy99.chemistry.api.Elements.EnumElement;
 import roboguy99.chemistry.item.compound.CompoundBuilder;
-import roboguy99.chemistry.item.element.Elements;
 
 public class BlockCompoundCreator extends Block/*extends BlockContainer*/
 {

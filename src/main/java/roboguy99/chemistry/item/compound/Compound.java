@@ -16,9 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.EnumColour;
 import roboguy99.chemistry.item.element.Element;
-import roboguy99.chemistry.item.element.Elements;
 
 public class Compound extends Item
 {
