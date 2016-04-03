@@ -1,41 +1,47 @@
 package roboguy99.chemistry.network.packet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.netty.buffer.ByteBuf;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import roboguy99.chemistry.handler.CompoundCreationHandler;
 
 public class CompoundCreate implements IMessage
 {
-	private ItemStack compound;
-	private NBTTagCompound tag;
+	private List<ItemStack> stackArr = new ArrayList<ItemStack>();
+	private IInventory inventory;
 	
 	public CompoundCreate()
 	{}
 	
-	public CompoundCreate(ItemStack compound, NBTTagCompound tag)
+	public CompoundCreate(IInventory inventory)
 	{
-		this.compound = compound;
-		this.tag = tag;
+		this.inventory = inventory;
+
+		for(int i = 0; i < inventory.getSizeInventory(); i++)
+		{
+			if(inventory.getStackInSlot(i) != null) this.stackArr.add(inventory.getStackInSlot(i));
+		}
 	}
 	
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.compound = ByteBufUtils.readItemStack(buf);
-		this.tag = ByteBufUtils.readTag(buf);
+		for(int i = 0; i < this.inventory.getSizeInventory(); i++) if(ByteBufUtils.readItemStack(buf) != null) this.stackArr.add(ByteBufUtils.readItemStack(buf));
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		ByteBufUtils.writeItemStack(buf, compound);
-		ByteBufUtils.writeTag(buf, tag);
+		for(int i = 0; i < stackArr.size(); i++) if(this.stackArr.get(i) != null) ByteBufUtils.writeItemStack(buf, stackArr.get(i));
 	}
 	
 	public static class CompoundCreateHandle implements IMessageHandler<CompoundCreate, IMessage>
@@ -49,12 +55,9 @@ public class CompoundCreate implements IMessage
                 @Override
                 public void run() 
                 {
-                	ItemStack compound = message.compound;
-                	NBTTagCompound tag = message.tag;
-                	
-                	compound.setTagCompound(tag);
+                	List<ItemStack> inventory = message.stackArr;
                    
-                	ctx.getServerHandler().playerEntity.inventory.addItemStackToInventory(compound);
+                	CompoundCreationHandler.createCompound(ctx.getServerHandler().playerEntity, inventory);
                 }
             });
             return null;

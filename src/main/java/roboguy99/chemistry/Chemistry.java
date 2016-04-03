@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.Elements.EnumElement;
 import roboguy99.chemistry.block.BlockCompoundCreator;
+import roboguy99.chemistry.handler.GuiHandler;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.compound.CompoundNames;
 import roboguy99.chemistry.network.CommonProxy;
@@ -28,7 +29,7 @@ import roboguy99.chemistry.network.packet.CompoundCreate;
 import roboguy99.chemistry.network.packet.CompoundCreate.CompoundCreateHandle;
 import roboguy99.chemistry.network.packet.ItemDelete;
 import roboguy99.chemistry.network.packet.ItemDelete.ItemDeleteHandle;
-import roboguy99.chemistry.tileentity.TileEntities;
+import roboguy99.chemistry.tile.TileEntities;
 
 /**
  * Main class. Handles mod initialisation.
@@ -44,7 +45,7 @@ public class Chemistry
 	public static final String modVersion = "0.0.0";
 	public static final String name = "Chemistry";
 
-	protected static final Logger logger = LogManager.getLogger("Chemistry");
+	public static final Logger logger = LogManager.getLogger("Chemistry");
 	
 	public static String CONFIG_DIR;
 
@@ -52,7 +53,7 @@ public class Chemistry
 	protected static CommonProxy proxy;
 	private static SimpleNetworkWrapper networkWrapper;
 
-	public static Chemistry instance;
+	public static Chemistry INSTANCE;
 	
 	private static BlockCompoundCreator blockCompoundCreator; //TODO Give this a proper home
 	
@@ -60,7 +61,7 @@ public class Chemistry
 	public void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
 	{
 		logger.info("Pre-initialising");
-		this.instance = this;
+		this.INSTANCE = this;
 		
 		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry";
 		
@@ -68,9 +69,11 @@ public class Chemistry
 		
 		proxy.registerProxies();
 		
-		this.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("hotbarBag_inv");
+		this.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("chemisty");
 		this.getNetworkWrapper().registerMessage(CompoundCreateHandle.class, CompoundCreate.class, 0, Side.SERVER);
 		this.getNetworkWrapper().registerMessage(ItemDeleteHandle.class, ItemDelete.class, 1, Side.SERVER);
+		
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 	}
 
 	@EventHandler
