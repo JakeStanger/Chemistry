@@ -38,7 +38,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 		{
 			model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory"));
 		}
-		else model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:element", "inventory"));
+		else model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:element-" + this.elementName, "inventory"));
 		
 		if(!(model instanceof IFlexibleBakedModel)) model = new IFlexibleBakedModel.Wrapper(model, DefaultVertexFormats.ITEM);
 		
