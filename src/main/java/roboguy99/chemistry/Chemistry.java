@@ -88,12 +88,6 @@ public class Chemistry
 	
 	this.blockCompoundCreator = new BlockCompoundCreator();
 		new TileEntities();
-		
-		//TEST CODE
-		/*ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-	 		//for(Element element : Elements.getElements()) mesher.register(element, 0, new ModelResourceLocation("chemistry:" + element.getName(), "inventory"));
-	 		ModelResourceLocation location = new ModelResourceLocation("chemistry:element", "inventory");
-	 		mesher.register(Elements.getElement(1), 0, location);*/
 	}
 
 	@EventHandler
