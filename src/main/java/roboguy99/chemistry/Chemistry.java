@@ -45,6 +45,8 @@ public class Chemistry
 	public static final String name = "Chemistry";
 
 	protected static final Logger logger = LogManager.getLogger("Chemistry");
+	
+	public static String CONFIG_DIR;
 
 	@SidedProxy(clientSide = "roboguy99.chemistry.network.ClientProxy", serverSide = "roboguy99.chemistry.network.CommonProxy")
 	protected static CommonProxy proxy;
@@ -54,8 +56,6 @@ public class Chemistry
 	
 	private static BlockCompoundCreator blockCompoundCreator; //TODO Give this a proper home
 	
-	public static String CONFIG_DIR;
-
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
 	{
@@ -101,7 +101,7 @@ public class Chemistry
 	}
 	
 	/**
-	 * Get the network wrapper. This is used for sending/recieving packets.
+	 * Get the network wrapper. This is used for sending/receiving packets.
 	 * @return the networkWrapper
 	 */
 	public SimpleNetworkWrapper getNetworkWrapper()
