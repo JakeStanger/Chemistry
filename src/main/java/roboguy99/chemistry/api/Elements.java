@@ -147,7 +147,7 @@ public class Elements
     }
 	
 	/**
-	 * Get the element instance linking to the specified atomic number
+	 * Gets the element instance linking to the specified atomic number.
 	 * @param atomicNumber
 	 * @return The element with the specified atomic number
 	 */
@@ -157,7 +157,8 @@ public class Elements
 	}
 	
 	/**
-	 * Get the element instance linking to the specified enum value
+	 * Gets the element instance linking to the specified enum value.
+	 * See EnumElement.
 	 * @param enumElement
 	 * @return The element for the given enum
 	 */
@@ -166,11 +167,19 @@ public class Elements
 		return getElement(enumElement.atomicNumber);
 	}
 	
+	/**
+	 * Gets the array of elements
+	 * @return The array of elements
+	 */
 	public static Element[] getElements()
 	{
 		return Elements.elements;
 	}
 	
+	/**
+	 * Gets the molecule marker element
+	 * @return the registered instance of MoleculeMarker
+	 */
 	public static Element getMoleculeMarker()
 	{
 		return Elements.moleculeMarker;
