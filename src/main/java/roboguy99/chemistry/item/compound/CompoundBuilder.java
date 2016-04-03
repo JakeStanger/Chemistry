@@ -12,7 +12,8 @@ import roboguy99.chemistry.item.element.Elements;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 
 /**
- * TODO Properly implement this
+ * Creates compounds from given elements.
+ * The elements given are stored in a buffer until the buffer is wiped.
  * @author Roboguy99
  */
 public class CompoundBuilder
@@ -50,7 +51,7 @@ public class CompoundBuilder
 		
 		ItemStack stack = new ItemStack(compound);
 		
-		Chemistry.networkWrapper.sendToServer(new CompoundCreate(stack, tag));
+		Chemistry.instance.getNetworkWrapper().sendToServer(new CompoundCreate(stack, tag));
 		
 		if(!preserveAfterCreation) this.clearElements();
 		

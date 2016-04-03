@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.EnumElement;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.Elements;
@@ -40,7 +41,7 @@ public class ChemistryWorldGen
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		for(Element element : Elements.getElements()) this.ores.add(new OreElement(element)); //TODO add these to list
+		for(Element element : Elements.getElements()) this.ores.add(new OreElement(element));
 		GameRegistry.registerWorldGenerator(new OreGenerator(), 100);
 	}
 	

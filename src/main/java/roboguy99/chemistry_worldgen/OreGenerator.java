@@ -24,7 +24,7 @@ public class OreGenerator implements IWorldGenerator
 		        	int y = random.nextInt(64);
 		        	int z = (chunkZ*16) + random.nextInt(16);
 		        	
-		        	(new WorldGenMinable(ore.getDefaultState(), 5)).generate(world, random, new BlockPos(x, y, z)); //TODO Make dependant on element
+		        	(new WorldGenMinable(ore.getDefaultState(), 5)).generate(world, random, new BlockPos(x, y, z)); //TODO Make dependent on element
 		        }
 			}
 		}

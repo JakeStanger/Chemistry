@@ -21,7 +21,6 @@ public class ModelLoader implements ICustomModelLoader
 	@Override
 	public boolean accepts(ResourceLocation modelLocation)
 	{
-		//TODO Rename textures to begin with "element_*/;
 		return modelLocation.getResourceDomain().equals("chemistry") && modelLocation.getResourcePath().startsWith("models/item/element_");
 	}
 

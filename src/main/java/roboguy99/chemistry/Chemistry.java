@@ -44,15 +44,15 @@ public class Chemistry
 	public static final String modVersion = "0.0.0";
 	public static final String name = "Chemistry";
 
-	public static final Logger logger = LogManager.getLogger("Chemistry");
+	protected static final Logger logger = LogManager.getLogger("Chemistry");
 
 	@SidedProxy(clientSide = "roboguy99.chemistry.network.ClientProxy", serverSide = "roboguy99.chemistry.network.CommonProxy")
-	public static CommonProxy proxy;
-	public static SimpleNetworkWrapper networkWrapper;
+	protected static CommonProxy proxy;
+	private static SimpleNetworkWrapper networkWrapper;
 
 	public static Chemistry instance;
 	
-	private static BlockCompoundCreator blockCompoundCreator;
+	private static BlockCompoundCreator blockCompoundCreator; //TODO Give this a proper home
 	
 	public static String CONFIG_DIR;
 
@@ -66,13 +66,11 @@ public class Chemistry
 		
 		new Elements();
 		
-		
-
 		proxy.registerProxies();
 		
 		this.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("hotbarBag_inv");
-		this.networkWrapper.registerMessage(CompoundCreateHandle.class, CompoundCreate.class, 0, Side.SERVER);
-		this.networkWrapper.registerMessage(ItemDeleteHandle.class, ItemDelete.class, 1, Side.SERVER);
+		this.getNetworkWrapper().registerMessage(CompoundCreateHandle.class, CompoundCreate.class, 0, Side.SERVER);
+		this.getNetworkWrapper().registerMessage(ItemDeleteHandle.class, ItemDelete.class, 1, Side.SERVER);
 	}
 
 	@EventHandler
@@ -102,6 +100,18 @@ public class Chemistry
 		return new Configuration(new File(Chemistry.CONFIG_DIR + modId + ".cfg"));
 	}
 	
+	/**
+	 * Get the network wrapper. This is used for sending/recieving packets.
+	 * @return the networkWrapper
+	 */
+	public SimpleNetworkWrapper getNetworkWrapper()
+	{
+		return networkWrapper;
+	}
+
+	/**
+	 * The creative tab in which all of the elements are shown
+	 */
 	public static CreativeTabs tabElements = new CreativeTabs("tabElements") 
 	{
 	    @Override
@@ -111,6 +121,9 @@ public class Chemistry
 	        return Elements.getElement(EnumElement.CARBON);
 	    }
 	};
+	/**
+	 * The creative tab in which any machines are shown
+	 */
 	public static CreativeTabs tabMachines = new CreativeTabs("tabMachines") 
 	{
 	    @Override
