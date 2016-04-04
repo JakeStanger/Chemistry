@@ -20,6 +20,6 @@ public class SlotElement extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemStack)
 	{
-		return !(itemStack.getItem() instanceof Element);
+		return itemStack.getItem() instanceof Element;
 	}
 }

@@ -5,6 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import roboguy99.chemistry.gui.container.slot.SlotElement;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 
@@ -61,5 +62,10 @@ public class ContainerBlockCompoundCreator extends Container
 	        slot.onPickupFromSlot(playerIn, current);
 	    }
 	    return previous;
+	}
+	
+	public BlockPos getTilePos()
+	{
+		return this.compoundCreator.getPos();
 	}
 }

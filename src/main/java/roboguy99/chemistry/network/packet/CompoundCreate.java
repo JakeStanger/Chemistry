@@ -1,47 +1,42 @@
 package roboguy99.chemistry.network.packet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.netty.buffer.ByteBuf;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import roboguy99.chemistry.handler.CompoundCreationHandler;
 
 public class CompoundCreate implements IMessage
-{
-	private List<ItemStack> stackArr = new ArrayList<ItemStack>();
-	private IInventory inventory;
+{	
+	private BlockPos pos;
 	
 	public CompoundCreate()
 	{}
 	
-	public CompoundCreate(IInventory inventory)
+	public CompoundCreate(BlockPos pos)
 	{
-		this.inventory = inventory;
-
-		for(int i = 0; i < inventory.getSizeInventory(); i++)
-		{
-			if(inventory.getStackInSlot(i) != null) this.stackArr.add(inventory.getStackInSlot(i));
-		}
+		this.pos = pos;
 	}
 	
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		for(int i = 0; i < this.inventory.getSizeInventory(); i++) if(ByteBufUtils.readItemStack(buf) != null) this.stackArr.add(ByteBufUtils.readItemStack(buf));
+		int x = buf.readInt();
+		int y = buf.readInt();
+		int z = buf.readInt();
+		
+		this.pos = new BlockPos(x, y, z);
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		for(int i = 0; i < stackArr.size(); i++) if(this.stackArr.get(i) != null) ByteBufUtils.writeItemStack(buf, stackArr.get(i));
+		buf.writeInt(this.pos.getX());
+		buf.writeInt(this.pos.getY());
+		buf.writeInt(this.pos.getZ());
 	}
 	
 	public static class CompoundCreateHandle implements IMessageHandler<CompoundCreate, IMessage>
@@ -49,15 +44,13 @@ public class CompoundCreate implements IMessage
 		@Override
         public IMessage onMessage(final CompoundCreate message, final MessageContext ctx) 
 		{
-            IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.worldObj; // or Minecraft.getMinecraft() on the client
+            IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.worldObj;
             mainThread.addScheduledTask(new Runnable() 
             {
                 @Override
                 public void run() 
-                {
-                	List<ItemStack> inventory = message.stackArr;
-                   
-                	CompoundCreationHandler.createCompound(ctx.getServerHandler().playerEntity, inventory);
+                {  
+                	CompoundCreationHandler.createCompound(ctx.getServerHandler().playerEntity, message.pos);
                 }
             });
             return null;

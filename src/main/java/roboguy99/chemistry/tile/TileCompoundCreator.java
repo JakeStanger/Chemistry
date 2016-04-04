@@ -29,6 +29,11 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 		this.inventory = new ItemStack[this.getSizeInventory()];
 	}
 	
+	public ItemStack[] getInventory()
+	{
+		return this.inventory;
+	}
+	
 	@Override
 	public String getName()
 	{
@@ -176,8 +181,6 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 	    nbt.setTag("items", list);
 
 	    if (this.hasCustomName()) nbt.setString("customName", this.getCustomName());
-	    
-	    System.out.println(nbt);
 	}
 
 	@Override

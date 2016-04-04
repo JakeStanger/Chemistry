@@ -12,7 +12,7 @@ import roboguy99.chemistry.item.element.Element;
  */
 public abstract class ElementSpecial extends Element
 {
-	@Override
+	/*@Override
 	protected void addToCreativeTab()
-	{}
+	{}*/
 }

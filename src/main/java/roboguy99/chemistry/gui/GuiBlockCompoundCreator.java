@@ -2,11 +2,13 @@ package roboguy99.chemistry.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import roboguy99.chemistry.Chemistry;
+import roboguy99.chemistry.gui.container.ContainerBlockCompoundCreator;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 
@@ -51,7 +53,7 @@ public class GuiBlockCompoundCreator extends GuiContainer
 	@Override
 	protected void actionPerformed(GuiButton btn)
 	{
-		if(btn == this.btnCreate) Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new CompoundCreate(this.compoundCreator));
+		if(btn == this.btnCreate) Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new CompoundCreate(((ContainerBlockCompoundCreator) Minecraft.getMinecraft().thePlayer.openContainer).getTilePos()));
 	}
 	
 	/**
