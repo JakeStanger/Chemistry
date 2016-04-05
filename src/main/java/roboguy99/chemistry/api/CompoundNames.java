@@ -1,4 +1,4 @@
-package roboguy99.chemistry.item.compound;
+package roboguy99.chemistry.api;
 
 import java.util.HashMap;
 
