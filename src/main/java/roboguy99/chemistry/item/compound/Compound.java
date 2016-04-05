@@ -18,7 +18,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.Colour;
-import roboguy99.chemistry.api.CompoundNames;
+import roboguy99.chemistry.api.CompoundNamer;
 import roboguy99.chemistry.item.element.Element;
 
 public class Compound extends Item
@@ -44,7 +44,7 @@ public class Compound extends Item
 		String formula = this.getFormula(elements);
 		
 		String name = "";
-		if(CompoundNames.isFormulaInMap(formula)) name = CompoundNames.getName(formula);
+		if(CompoundNamer.isFormulaInMap(formula)) name = CompoundNamer.getName(formula);
 		else name = this.subscript(formula);
 		
 		return name;

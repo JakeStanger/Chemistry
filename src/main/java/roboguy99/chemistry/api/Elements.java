@@ -139,7 +139,7 @@ public class Elements
 	 * @param atomicNumber
 	 * @return The element with the specified atomic number
 	 */
-	public static Element getElement(int atomicNumber)
+	public static Element getElement(int atomicNumber) //TODO Remove support of getting by atomic number
 	{
 		return elements.get(atomicNumber-1);
 	}
@@ -153,6 +153,11 @@ public class Elements
 	public static Element getElement(EnumElement enumElement)
 	{
 		return getElement(enumElement.atomicNumber);
+	}
+	
+	public static void addElement(Element element)
+	{
+		elements.add(element);
 	}
 	
 	/**
