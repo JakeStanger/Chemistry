@@ -121,7 +121,7 @@ public class Chemistry
 	    @SideOnly(Side.CLIENT)
 	    public Item getTabIconItem() 
 	    {
-	        return Elements.getElement(EnumElement.CARBON);
+	        return EnumElement.CARBON.getElement();
 	    }
 	};
 	/**
