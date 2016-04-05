@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.elements.special.ElementSpecial;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 
 /**
@@ -24,7 +25,7 @@ public class CompoundBuilder
 	 * Factorising is supported, however you cannot factorise a factorised compound.
 	 * This means adding a factorised molecule more than once will not factorise it a second time, 
 	 * but instead will have strange and unwanted effects.
-	 * @param preserveAfterCreation should the compound in buffer be reset after creation?
+	 * @param preserveAfterCreation Should the buffer be reset after creation?
 	 * @return an itemstack for the compound
 	 */
 	public ItemStack createCompound(boolean preserveAfterCreation) throws NullPointerException
@@ -50,8 +51,6 @@ public class CompoundBuilder
 		
 		ItemStack stack = new ItemStack(compound);
 		stack.setTagCompound(tag);
-		
-		//Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new CompoundCreate(stack, tag));
 		
 		if(!preserveAfterCreation) this.clearElements();
 		
