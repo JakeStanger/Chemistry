@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -38,7 +39,7 @@ public class ChemistryWorldGen
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
-	{
+	{	
 		for(Element element : Elements.getElements()) this.ores.add(new OreElement(element));
 		GameRegistry.registerWorldGenerator(new OreGenerator(), 100);
 	}
