@@ -44,7 +44,7 @@ public class Compound extends Item
 		String formula = this.getFormula(elements);
 		
 		String name = "";
-		if(CompoundNames.names.containsKey(formula)) name = CompoundNames.names.get(formula);
+		if(CompoundNames.isFormulaInMap(formula)) name = CompoundNames.getName(formula);
 		else name = this.subscript(formula);
 		
 		return name;
@@ -170,18 +170,6 @@ public class Compound extends Item
 			for(int j = 0; j < quantity; j++) currentElement.add(element);
 			elements.add(currentElement);
 		}
-		
-		/*for(String position : tag.getKeySet())
-		{
-			int[] info = tag.getIntArray(position);
-			
-			Element element = Elements.getElement(info[0]);
-			quantity = info[1];
-			
-			List<Element> currentElement = new ArrayList<Element>();
-			for(int i = 0; i < quantity; i++) currentElement.add(element);
-			elements.add(currentElement);
-		}*/
 		return elements;
 	}
 }
