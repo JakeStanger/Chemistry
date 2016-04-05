@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.item.compound.CompoundBuilder;
+import roboguy99.chemistry.api.CompoundBuilder;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
 import roboguy99.chemistry.tile.TileCompoundCreator;

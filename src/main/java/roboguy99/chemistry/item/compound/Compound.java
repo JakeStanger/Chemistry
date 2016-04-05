@@ -18,6 +18,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.Colour;
+import roboguy99.chemistry.api.CompoundNames;
 import roboguy99.chemistry.item.element.Element;
 
 public class Compound extends Item
