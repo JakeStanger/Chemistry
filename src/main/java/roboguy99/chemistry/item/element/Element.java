@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Colour;
+import roboguy99.chemistry.api.Group;
 
 /**
  * The item class for a chemical element.

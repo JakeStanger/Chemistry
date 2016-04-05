@@ -1,6 +1,6 @@
 package roboguy99.chemistry.item.element.elements;
 
-import roboguy99.chemistry.item.element.Group;
+import roboguy99.chemistry.api.Group;
 import roboguy99.chemistry.item.element.elements.special.ElementRadioactive;
 
 public class Francium extends ElementRadioactive

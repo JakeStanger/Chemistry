@@ -2,7 +2,7 @@ package roboguy99.chemistry.api;
 
 import java.util.HashMap;
 
-public class CompoundNames
+public class CompoundNamer
 {
 	/**
 	 * A map of formulas to compound names.
@@ -11,7 +11,7 @@ public class CompoundNames
 	 */
 	private static HashMap<String, String> names;
 	
-	public CompoundNames()
+	public CompoundNamer()
 	{
 		names = new HashMap<String, String>();
 		

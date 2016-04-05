@@ -1,7 +1,7 @@
 package roboguy99.chemistry.item.element.elements;
 
+import roboguy99.chemistry.api.Group;
 import roboguy99.chemistry.item.element.Element;
-import roboguy99.chemistry.item.element.Group;
 
 /**
  * The boiling point of arsenic is lower than its melting point.

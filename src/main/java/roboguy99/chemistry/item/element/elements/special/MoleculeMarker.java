@@ -1,7 +1,7 @@
 package roboguy99.chemistry.item.element.elements.special;
 
+import roboguy99.chemistry.api.Group;
 import roboguy99.chemistry.item.element.Element;
-import roboguy99.chemistry.item.element.Group;
 
 /**
  * A special element with no mass used for marking the beginning/end of a molecule

@@ -1,4 +1,4 @@
-package roboguy99.chemistry.item.element;
+package roboguy99.chemistry.api;
 
 public enum Group
 {
