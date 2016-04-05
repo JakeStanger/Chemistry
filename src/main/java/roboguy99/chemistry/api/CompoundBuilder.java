@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import roboguy99.chemistry.Chemistry;
+import roboguy99.chemistry.api.Elements.EnumElement;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.elements.special.ElementSpecial;
