@@ -49,7 +49,7 @@ public class ChemistryWorldGen
 	    @SideOnly(Side.CLIENT)
 	    public Item getTabIconItem() 
 	    {
-	        return Item.getItemFromBlock(ChemistryWorldGen.instance.ores.get(Elements.getElement(EnumElement.COPPER).getAtomicNumber()));
+	        return Item.getItemFromBlock(ChemistryWorldGen.instance.ores.get(EnumElement.COPPER.getElement().getAtomicNumber()));
 	    }
 	};
 	

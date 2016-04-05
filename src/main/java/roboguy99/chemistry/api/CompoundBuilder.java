@@ -107,7 +107,7 @@ public class CompoundBuilder
 	 */
 	public void endMolecule()
 	{
-		this.elements.add(Elements.getElement(EnumElement.MOLECULE_MARKER));
+		this.elements.add(EnumElement.MOLECULE_MARKER.getElement());
 	}
 	
 	/**
