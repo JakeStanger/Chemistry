@@ -14,12 +14,12 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.IBakedModel;
+import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.TRSRTransformation;
-import roboguy99.chemistry.Chemistry;
 
 public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAwareModel
 {
@@ -33,14 +33,14 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 	@Override
 	public Pair<? extends IFlexibleBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType)
 	{
-		IBakedModel model;
-		if(cameraTransformType != TransformType.GUI && cameraTransformType != TransformType.GROUND)
-		{
-			model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory"));
-		}
-		else model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:element-" + this.elementName, "inventory"));
+		ModelManager manager = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager();
 		
-		if(!(model instanceof IFlexibleBakedModel)) model = new IFlexibleBakedModel.Wrapper(model, DefaultVertexFormats.ITEM);
+		IBakedModel model;
+		if(cameraTransformType != TransformType.GUI && cameraTransformType != TransformType.GROUND) 
+			 model = manager.getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory")); //Get held model
+		else model = manager.getModel(new ModelResourceLocation("chemistry:element-" + this.elementName, "inventory")); //Get inventory model
+		
+		if(!(model instanceof IFlexibleBakedModel)) model = new IFlexibleBakedModel.Wrapper(model, DefaultVertexFormats.ITEM); //Make sure model is IFlexibleBakedModel
 		
 		return (Pair<? extends IFlexibleBakedModel, Matrix4f>) Pair.of(model, TRSRTransformation.identity().getMatrix());
 	}
@@ -84,7 +84,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 	@Override
 	public ItemCameraTransforms getItemCameraTransforms()
 	{
-		return ItemCameraTransforms.DEFAULT;
+		return ItemCameraTransforms.DEFAULT; //The requirement for this is a bug
 	}
 
 	@Override
