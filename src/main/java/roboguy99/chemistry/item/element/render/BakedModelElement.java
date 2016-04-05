@@ -19,6 +19,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.TRSRTransformation;
+import roboguy99.chemistry.Chemistry;
 
 public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAwareModel
 {
@@ -33,7 +34,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 	public Pair<? extends IFlexibleBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType)
 	{
 		IBakedModel model;
-		if(cameraTransformType != TransformType.GUI)
+		if(cameraTransformType != TransformType.GUI && cameraTransformType != TransformType.GROUND)
 		{
 			model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory"));
 		}
@@ -83,7 +84,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 	@Override
 	public ItemCameraTransforms getItemCameraTransforms()
 	{
-		return null;
+		return ItemCameraTransforms.DEFAULT;
 	}
 
 	@Override
