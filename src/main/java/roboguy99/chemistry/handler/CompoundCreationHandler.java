@@ -25,7 +25,6 @@ public class CompoundCreationHandler
 				else compound.endMolecule();
 			}
 		}
-		Chemistry.logger.info(compound.getElements());
 		player.inventory.addItemStackToInventory(compound.createCompound(false));
 		
 		tile.clear();
