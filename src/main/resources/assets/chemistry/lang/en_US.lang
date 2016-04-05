@@ -130,6 +130,8 @@ item.element_livermorium.name=Livermorium
 item.element_ununseptium.name=Ununseptium
 item.element_ununoctium.name=Ununoctium
 
+item.element_marker.molecule.name=Molecule Marker
+
 item.compound.name=Compound
 compound.water=Water
 compound.tnt=Trinitrotoluene (TNT)
