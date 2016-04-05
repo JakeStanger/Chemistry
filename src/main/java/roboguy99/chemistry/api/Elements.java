@@ -144,17 +144,6 @@ public class Elements
 		return elements.get(atomicNumber-1);
 	}
 	
-	/**
-	 * Gets the element instance linking to the specified enum value.
-	 * See EnumElement.
-	 * @param enumElement
-	 * @return The element for the given enum
-	 */
-	public static Element getElement(EnumElement enumElement)
-	{
-		return enumElement.element;
-	}
-	
 	public static void addElement(Element element)
 	{
 		elements.add(element);
