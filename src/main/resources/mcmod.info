@@ -24,5 +24,19 @@
   "credits": "Thanks to all those who helped me (especially on the Minecraft Forge forums)",
   "logoFile": "logo.png",
   "screenshots": []
+},
+{
+  "modid": "chemistry-hydrocarbons",
+  "name": "Chemistry Hydrocarbons",
+  "description": "Oil, generators and alcohols!",
+  "version": "0.0.0",
+  "mcversion": "1.8.9",
+  "requiredMods": [ "Forge", "chemistry" ],
+  "dependencies": [ "chemistry" ],
+  "updateUrl": "",
+  "authorList": ["Roboguy99"],
+  "credits": "Thanks to all those who helped me (especially on the Minecraft Forge forums)",
+  "logoFile": "logo.png",
+  "screenshots": []
 }
 ]
