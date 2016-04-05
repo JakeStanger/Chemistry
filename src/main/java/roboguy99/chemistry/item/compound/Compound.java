@@ -122,7 +122,7 @@ public class Compound extends Item
 	{
 		if(!Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode()))
 		{
-			tooltip.add(Colour.AQUA + "Sneak for more info");
+			tooltip.add(Colour.DARK_GREEN + "Sneak for more info");
 		}
 		else
 		{
