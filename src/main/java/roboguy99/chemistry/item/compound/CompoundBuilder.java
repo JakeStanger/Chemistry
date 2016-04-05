@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements;
+import roboguy99.chemistry.api.Elements.EnumElement;
 import roboguy99.chemistry.item.element.Element;
 import roboguy99.chemistry.item.element.elements.special.ElementSpecial;
 import roboguy99.chemistry.network.packet.CompoundCreate;
@@ -106,7 +107,7 @@ public class CompoundBuilder
 	 */
 	public void endMolecule()
 	{
-		this.elements.add(Elements.getMoleculeMarker());
+		this.elements.add(Elements.getElement(EnumElement.MOLECULE_MARKER));
 	}
 	
 	/**

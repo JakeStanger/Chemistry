@@ -153,11 +153,24 @@ public class Compound extends Item
     }
 	
 	private List<List<Element>> convertNBTToList(NBTTagCompound tag)
-	{	
+	{			
 		List<List<Element>> elements = new ArrayList<List<Element>>();
 		
 		int quantity = 0;
-		for(String position : tag.getKeySet())
+		
+		for(int i = 0; i < tag.getKeySet().size(); i++)
+		{
+			int[] info = tag.getIntArray(Integer.toString(i));
+			
+			Element element = Elements.getElement(info[0]);
+			quantity = info[1];
+			
+			List<Element> currentElement = new ArrayList<Element>();
+			for(int j = 0; j < quantity; j++) currentElement.add(element);
+			elements.add(currentElement);
+		}
+		
+		/*for(String position : tag.getKeySet())
 		{
 			int[] info = tag.getIntArray(position);
 			
@@ -167,8 +180,7 @@ public class Compound extends Item
 			List<Element> currentElement = new ArrayList<Element>();
 			for(int i = 0; i < quantity; i++) currentElement.add(element);
 			elements.add(currentElement);
-		}
-		
+		}*/
 		return elements;
 	}
 }

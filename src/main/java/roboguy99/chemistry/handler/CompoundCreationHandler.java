@@ -21,14 +21,13 @@ public class CompoundCreationHandler
 		{
 			if(tile.getStackInSlot(i) != null)
 			{
-				Chemistry.logger.info(tile.getStackInSlot(i));
 				if(!(tile.getStackInSlot(i).getItem() instanceof MoleculeMarker)) compound.putElement((Element) tile.getStackInSlot(i).getItem());
 				else compound.endMolecule();
 			}
 		}
-		System.out.println(compound.getElements());
+		Chemistry.logger.info(compound.getElements());
 		player.inventory.addItemStackToInventory(compound.createCompound(false));
 		
-		//tile.clear();
+		tile.clear();
 	}
 }
