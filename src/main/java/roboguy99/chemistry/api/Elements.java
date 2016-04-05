@@ -19,8 +19,7 @@ import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
 
 public class Elements 
 {
-	private static Element[] elements = new Element[118];
-	private static Element moleculeMarker;
+	private static Element[] elements = new Element[119];
 	
 	public Elements()
 	{
@@ -142,8 +141,7 @@ public class Elements
 		elements[115] = new Livermorium();
 		elements[116] = new Ununseptium();
 		elements[117] = new Ununoctium();
-		
-		this.moleculeMarker = new MoleculeMarker();
+		elements[118] = new MoleculeMarker();
     }
 	
 	/**
@@ -174,15 +172,6 @@ public class Elements
 	public static Element[] getElements()
 	{
 		return Elements.elements;
-	}
-	
-	/**
-	 * Gets the molecule marker element
-	 * @return the registered instance of MoleculeMarker
-	 */
-	public static Element getMoleculeMarker()
-	{
-		return Elements.moleculeMarker;
 	}
 	
 	public enum EnumElement
