@@ -91,6 +91,7 @@ public class Chemistry
 		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 		
 	    mesher.register(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
+	    mesher.register(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
 	
 		new TileEntities();
 	}
