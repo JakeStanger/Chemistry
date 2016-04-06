@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -36,7 +37,7 @@ import roboguy99.chemistry.tile.TileEntities;
 /**
  * Main class. Handles mod initialisation.
  * 
- * @author Roboguy99uy99
+ * @author Roboguy99
  * 
  */
 @Mod(modid = Chemistry.modID, version = Chemistry.modVersion, name = Chemistry.name)
@@ -61,7 +62,7 @@ public class Chemistry
 	private static Compound compound;
 	
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
+	private void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
 	{
 		logger.info("Pre-initialising");
 		this.INSTANCE = this;
@@ -70,6 +71,7 @@ public class Chemistry
 		
 		new Elements();
 		this.compound = new Compound();
+		this.blockCompoundCreator = new BlockCompoundCreator();
 		
 		proxy.registerProxies();
 		
@@ -81,20 +83,20 @@ public class Chemistry
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event) // Initialisation loading
+	private void init(FMLInitializationEvent event) // Initialisation loading
 	{
 		logger.info("Initialising");
 		new CompoundNamer();
 		
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-	    .register(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
+		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+		
+	    mesher.register(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
 	
-	this.blockCompoundCreator = new BlockCompoundCreator();
 		new TileEntities();
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) 
+	private void postInit(FMLPostInitializationEvent event) 
 	{			
 	}
 	

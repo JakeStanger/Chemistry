@@ -22,7 +22,8 @@ public class BlockCompoundCreator extends BlockContainer
 	{
 		super(Material.iron);
 		this.setCreativeTab(Chemistry.tabMachines);
-		GameRegistry.registerBlock(this, "blockCompoundMaker");
+		this.setBlockBounds(0.095F, 0F, 0.095F, 0.905F, 0.825F, 0.905F);
+		GameRegistry.registerBlock(this, "blockCompoundCreator");
 	}
 	
 	@Override
@@ -43,40 +44,28 @@ public class BlockCompoundCreator extends BlockContainer
 	    }
 	}
 
-	/*public int getRenderType()
+	@Override
+	public int getRenderType()
 	{
-		return -1;
+		return 3;
 	}
 	
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 	
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}*/
-	
+	@Override
 	public TileEntity createNewTileEntity(World world, int var2) 
 	{
 		return new TileCompoundCreator();
 	}
 	
+	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if(!world.isRemote)
-		{
-			/*CompoundBuilder compoundHandler = new CompoundBuilder();
-			
-			compoundHandler.putElement(Elements.getElement(EnumElement.HYDROGEN), 2);
-			compoundHandler.putElement(Elements.getElement(EnumElement.OXYGEN));
-			compoundHandler.endMolecule();
-				
-			ItemStack stack = compoundHandler.createCompound(false);*/
-			
-			player.openGui(Chemistry.INSTANCE, GuiHandler.GUI_BLOCK_COMPOUND_CREATOR, world, pos.getX(), pos.getY(), pos.getZ());
-		}
+		if(!world.isRemote)player.openGui(Chemistry.INSTANCE, GuiHandler.GUI_BLOCK_COMPOUND_CREATOR, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 }
