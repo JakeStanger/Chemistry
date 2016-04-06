@@ -9,11 +9,20 @@ import roboguy99.chemistry_worldgen.ChemistryWorldGen;
 
 public class OreElement extends Block
 {
+	private String name;
+	
 	public OreElement(Element element)
-	{
+	{	
 		super(Blocks.stone.getMaterial());
+		this.name = element.getName().replaceAll("element_", "").toLowerCase();
+		
 		this.setCreativeTab(ChemistryWorldGen.tabOre);
-		this.setUnlocalizedName("ore_" + element.getName());
-		GameRegistry.registerBlock(this, "ore" + element.getName());
+		this.setUnlocalizedName("ore_" + name);
+		GameRegistry.registerBlock(this, "ore_" + name);
+	}
+	
+	public String getName()
+	{
+		return this.name;
 	}
 }
