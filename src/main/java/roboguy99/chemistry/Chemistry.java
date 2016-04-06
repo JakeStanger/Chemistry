@@ -5,6 +5,9 @@ import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
@@ -56,6 +59,7 @@ public class Chemistry
 	public static Chemistry INSTANCE;
 	
 	private static BlockCompoundCreator blockCompoundCreator; //TODO Give this a proper home
+	private static Compound compound;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
@@ -66,6 +70,7 @@ public class Chemistry
 		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry";
 		
 		new Elements();
+		this.compound = new Compound();
 		
 		proxy.registerProxies();
 		
@@ -80,8 +85,10 @@ public class Chemistry
 	public void init(FMLInitializationEvent event) // Initialisation loading
 	{
 		logger.info("Initialising");
-		new Compound();
 		new CompoundNamer();
+		
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+	    .register(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
 	
 	this.blockCompoundCreator = new BlockCompoundCreator();
 		new TileEntities();
@@ -110,6 +117,11 @@ public class Chemistry
 	public SimpleNetworkWrapper getNetworkWrapper()
 	{
 		return networkWrapper;
+	}
+	
+	public static Compound getCompound()
+	{
+		return Chemistry.compound;
 	}
 
 	/**
