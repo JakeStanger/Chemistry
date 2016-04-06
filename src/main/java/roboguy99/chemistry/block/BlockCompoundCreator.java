@@ -23,6 +23,7 @@ public class BlockCompoundCreator extends BlockContainer
 		super(Material.iron);
 		this.setCreativeTab(Chemistry.tabMachines);
 		this.setBlockBounds(0.095F, 0F, 0.095F, 0.905F, 0.825F, 0.905F);
+		this.setUnlocalizedName("blockCompoundCreator");
 		GameRegistry.registerBlock(this, "blockCompoundCreator");
 	}
 	

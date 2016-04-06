@@ -137,3 +137,5 @@ compound.water=Water
 compound.tnt=Trinitrotoluene (TNT)
 compound.limestone=Limestone
 compound.ethanol=Ethanol
+
+tile.blockCompoundCreator.name=Compound Creator
