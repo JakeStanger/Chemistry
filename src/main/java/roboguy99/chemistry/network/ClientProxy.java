@@ -2,19 +2,17 @@ package roboguy99.chemistry.network;
 
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
-import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.item.element.Element;
-import roboguy99.chemistry.item.element.render.ModelLoader;
+import roboguy99.chemistry.item.element.render.ElementModelLoader;
 
 public class ClientProxy extends CommonProxy
 {	
 	@Override
 	public void registerProxies()
 	{
-		ModelLoaderRegistry.registerLoader(new ModelLoader());
+		ModelLoaderRegistry.registerLoader(new ElementModelLoader());
 		
 		ModelResourceLocation heldModel = new ModelResourceLocation("chemistry:elementHeld", "inventory");
 		for(Element element : Elements.getElements())
