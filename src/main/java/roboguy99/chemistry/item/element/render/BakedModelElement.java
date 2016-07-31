@@ -44,7 +44,6 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 		if(!(model instanceof IFlexibleBakedModel)) model = new IFlexibleBakedModel.Wrapper(model, DefaultVertexFormats.ITEM); //Make sure model is IFlexibleBakedModel
 		
 		return (Pair<? extends IFlexibleBakedModel, Matrix4f>) Pair.of(model, TRSRTransformation.identity().getMatrix());
-	}return null;
 	}
 
 	@Override
