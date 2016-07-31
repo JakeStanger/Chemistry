@@ -1,19 +1,14 @@
 package roboguy99.chemistry.tile;
 
-import com.sun.org.apache.bcel.internal.Constants;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import roboguy99.chemistry.item.element.Element;
 
 public class TileCompoundCreator extends TileEntity implements IInventory
@@ -47,9 +42,9 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 	}
 
 	@Override
-	public IChatComponent getDisplayName()
+	public ITextComponent getDisplayName()
 	{
-		return this.hasCustomName() ? new ChatComponentText(this.getName()) : new ChatComponentTranslation(this.getName());
+		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
 	}
 
 	@Override
@@ -163,7 +158,7 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 	}
 	
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) 
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) 
 	{	
 		super.writeToNBT(nbt);
 
@@ -181,6 +176,8 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 	    nbt.setTag("items", list);
 
 	    if (this.hasCustomName()) nbt.setString("customName", this.getCustomName());
+	    
+	    return nbt; //TODO Investigate this return?
 	}
 
 	@Override

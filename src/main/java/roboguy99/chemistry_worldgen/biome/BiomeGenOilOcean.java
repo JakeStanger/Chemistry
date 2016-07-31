@@ -5,13 +5,13 @@
 
 package roboguy99.chemistry_worldgen.biome;
 
-import net.minecraft.world.biome.BiomeGenOcean;
+import net.minecraft.world.biome.BiomeOcean;
 import net.minecraftforge.common.BiomeDictionary;
 
 /**
  * @author SpaceToad and the BuildCraft Team
  */
-public class BiomeGenOilOcean extends BiomeGenOcean
+/*public class BiomeGenOilOcean extends BiomeOcean
 {
 	public BiomeGenOilOcean(int id)
 	{
@@ -30,3 +30,4 @@ public class BiomeGenOilOcean extends BiomeGenOcean
 	        return biome;
 	   }
 }
+*/ //TODO Fix this entire class...

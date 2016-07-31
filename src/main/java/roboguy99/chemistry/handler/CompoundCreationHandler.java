@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import roboguy99.chemistry.api.CompoundBuilder;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.Elements.EnumElement;

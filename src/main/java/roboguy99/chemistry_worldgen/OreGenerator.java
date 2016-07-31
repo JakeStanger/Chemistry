@@ -2,8 +2,9 @@ package roboguy99.chemistry_worldgen;
 
 import java.util.Random;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
@@ -12,9 +13,9 @@ import roboguy99.chemistry_worldgen.block.OreElement;
 public class OreGenerator implements IWorldGenerator
 {
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if(world.provider.getDimensionId() == 0)
+		if(world.provider.getDimension() == 0)
 		{
 			for(OreElement ore : ChemistryWorldGen.instance.getOres())
 			{

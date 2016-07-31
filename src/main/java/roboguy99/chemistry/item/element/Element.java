@@ -5,12 +5,11 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Colour;
 import roboguy99.chemistry.api.Group;
@@ -154,7 +153,7 @@ public abstract class Element extends Item
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
     {
-		return this.getGroupColour() + ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+		return this.getGroupColour() + ("" + I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
     }
 	
 	@Override
@@ -180,7 +179,7 @@ public abstract class Element extends Item
 			else tooltip.add(Colour.RED + "Melting Point: Unknown");
 			if(boilingPoint != Integer.MAX_VALUE) tooltip.add(Colour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
 			else tooltip.add(Colour.RED + "Boiling Point: Unknown");
-			tooltip.add(this.getGroupColour() + StatCollector.translateToLocal(this.group.groupName));
+			tooltip.add(this.getGroupColour() + I18n.format(this.group.groupName));
 		}
 	}
 	

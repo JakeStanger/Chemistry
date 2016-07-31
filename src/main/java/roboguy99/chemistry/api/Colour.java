@@ -1,9 +1,9 @@
 package roboguy99.chemistry.api;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.client.resources.I18n;
 
 /**
- * This was taken from Mekanism, because I could see much use re-writing it. 
+ * This was taken from Mekanism, because I could not see much use re-writing it. 
  * <br>-------<br>
  * Simple color enum for adding colors to in-game GUI strings of text.
  * @author AidanBrady
@@ -60,12 +60,12 @@ public enum Colour
 	 */
 	public String getLocalizedName()
 	{
-		return StatCollector.translateToLocal("color." + unlocalizedName);
+		return I18n.format("color." + unlocalizedName);
 	}
 
 	public String getDyeName()
 	{
-		return StatCollector.translateToLocal("dye." + unlocalizedName);
+		return I18n.format("dye." + unlocalizedName);
 	}
 	
 	public String getOreDictName()

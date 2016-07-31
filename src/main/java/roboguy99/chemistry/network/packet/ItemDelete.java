@@ -46,7 +46,7 @@ public class ItemDelete implements IMessage
                 public void run() 
                 {
                 	ItemStack stack = message.stack;
-                	stack.useItemRightClick(ctx.getServerHandler().playerEntity.worldObj, ctx.getServerHandler().playerEntity);
+                	stack.useItemRightClick(ctx.getServerHandler().playerEntity.worldObj, ctx.getServerHandler().playerEntity, ctx.getServerHandler().playerEntity.getActiveHand());
                 	stack = null; //TODO Fix this
                 }
             });

@@ -1,13 +1,22 @@
-/.git/
-.gradle/
-/.settings/
-/bin/
-/build/
-/run/
-/run/config/
-/run/logs/
-/eclipse/
+# eclipse
+bin
+*.launch
+.settings
+.metadata
 .classpath
 .project
-Chemistry_Client.launch
-Chemistry_Server.launch
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run

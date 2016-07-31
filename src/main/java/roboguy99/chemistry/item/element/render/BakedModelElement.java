@@ -6,20 +6,21 @@ import javax.vecmath.Matrix4f;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
+import net.minecraft.client.renderer.block.model.ItemOverrideList;
+import net.minecraft.client.renderer.block.model.ModelManager;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
-import net.minecraftforge.client.model.TRSRTransformation;
+import net.minecraftforge.common.model.TRSRTransformation;
 
 public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAwareModel
 {
@@ -43,18 +44,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 		if(!(model instanceof IFlexibleBakedModel)) model = new IFlexibleBakedModel.Wrapper(model, DefaultVertexFormats.ITEM); //Make sure model is IFlexibleBakedModel
 		
 		return (Pair<? extends IFlexibleBakedModel, Matrix4f>) Pair.of(model, TRSRTransformation.identity().getMatrix());
-	}
-	
-	@Override
-	public List<BakedQuad> getFaceQuads(EnumFacing face)
-	{
-		return null;
-	}
-
-	@Override
-	public List<BakedQuad> getGeneralQuads()
-	{
-		return null;
+	}return null;
 	}
 
 	@Override
@@ -88,8 +78,14 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 	}
 
 	@Override
-	public VertexFormat getFormat()
-	{
+	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ItemOverrideList getOverrides() {
+		// TODO Auto-generated method stub
 		return null;
 	}	
 }

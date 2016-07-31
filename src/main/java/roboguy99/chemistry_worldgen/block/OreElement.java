@@ -13,12 +13,12 @@ public class OreElement extends Block
 	
 	public OreElement(Element element)
 	{	
-		super(Blocks.stone.getMaterial());
+		super(Blocks.STONE.getMaterial(Blocks.STONE.getDefaultState())); //TODO Find replacement for this
 		this.name = element.getName().replaceAll("element_", "").toLowerCase();
 		
 		this.setCreativeTab(ChemistryWorldGen.tabOre);
 		this.setUnlocalizedName("ore_" + name);
-		GameRegistry.registerBlock(this, "ore_" + name);
+		GameRegistry.register(this);
 	}
 	
 	public String getName()

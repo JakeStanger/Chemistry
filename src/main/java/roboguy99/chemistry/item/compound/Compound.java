@@ -4,21 +4,19 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.Colour;
 import roboguy99.chemistry.api.CompoundNamer;
+import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.item.element.Element;
 
 public class Compound extends Item
@@ -144,12 +142,12 @@ public class Compound extends Item
     {
 		try
 		{
-			return StatCollector.translateToLocal(this.getCompoundName(this.convertNBTToList(stack.getTagCompound())));
+			return I18n.format(this.getCompoundName(this.convertNBTToList(stack.getTagCompound())));
 		}
 			
 		catch(Exception e)
 		{
-			return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+			return ("" + I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
 		}
     }
 	

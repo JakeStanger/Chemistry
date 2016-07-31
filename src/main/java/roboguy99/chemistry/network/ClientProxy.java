@@ -1,7 +1,7 @@
 package roboguy99.chemistry.network;
 
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.item.element.Element;
