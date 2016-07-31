@@ -5,6 +5,7 @@ import java.util.Collection;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.ResourceLocation;
@@ -34,7 +35,7 @@ public class ModelElement implements IModel
 	}
 
 	@Override
-	public IFlexibleBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
+	public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
 	{
 		return new BakedModelElement(elementName);
 	}

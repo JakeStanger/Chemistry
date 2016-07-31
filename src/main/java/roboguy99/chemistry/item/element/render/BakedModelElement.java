@@ -17,12 +17,11 @@ import net.minecraft.client.renderer.block.model.ModelManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 
-public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAwareModel
+public class BakedModelElement implements IBakedModel, IPerspectiveAwareModel
 {
 	private String elementName;
 	
@@ -32,7 +31,7 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 	}
 	
 	@Override
-	public Pair<? extends IFlexibleBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType)
+	public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType)
 	{
 		ModelManager manager = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager();
 		
@@ -41,9 +40,9 @@ public class BakedModelElement implements IFlexibleBakedModel, IPerspectiveAware
 			 model = manager.getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory")); //Get held model
 		else model = manager.getModel(new ModelResourceLocation("chemistry:element-" + this.elementName, "inventory")); //Get inventory model
 		
-		if(!(model instanceof IFlexibleBakedModel)) model = new IFlexibleBakedModel.Wrapper(model, DefaultVertexFormats.ITEM); //Make sure model is IFlexibleBakedModel
+		//if(!(model instanceof IBakedModel)) model = new IBakedModel.Wrapper(model, DefaultVertexFormats.ITEM); //Make sure model is IFlexibleBakedModel
 		
-		return (Pair<? extends IFlexibleBakedModel, Matrix4f>) Pair.of(model, TRSRTransformation.identity().getMatrix());
+		return (Pair<? extends IBakedModel, Matrix4f>) Pair.of(model, TRSRTransformation.identity().getMatrix());
 	}
 
 	@Override

@@ -25,6 +25,7 @@ public class BlockCompoundCreator extends BlockContainer
 		this.setCreativeTab(Chemistry.tabMachines);
 		//this.setBlockBounds(0.095F, 0F, 0.095F, 0.905F, 0.825F, 0.905F); //TODO Ask about this
 		this.setUnlocalizedName("blockCompoundCreator");
+		this.setRegistryName("blockCompoundCreator");
 		GameRegistry.register(this);
 	}
 	

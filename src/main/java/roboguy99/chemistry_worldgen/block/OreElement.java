@@ -18,6 +18,7 @@ public class OreElement extends Block
 		
 		this.setCreativeTab(ChemistryWorldGen.tabOre);
 		this.setUnlocalizedName("ore_" + name);
+		this.setRegistryName("ore_" + name);
 		GameRegistry.register(this);
 	}
 	
