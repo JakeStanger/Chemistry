@@ -65,7 +65,7 @@ public class BakedModelElement implements IBakedModel, IPerspectiveAwareModel
 	@Override
 	public TextureAtlasSprite getParticleTexture()
 	{
-		System.out.println("TEST");
+		System.out.println("TEST"); //Never called
 		return null;
 	}
 
