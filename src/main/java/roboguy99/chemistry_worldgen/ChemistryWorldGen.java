@@ -1,4 +1,4 @@
-package roboguy99.chemistry_worldgen;
+/*package roboguy99.chemistry_worldgen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,4 +70,4 @@ public class ChemistryWorldGen
 	{
 		return this.ores;
 	}
-}
+}*/
