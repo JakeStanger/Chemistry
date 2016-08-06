@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -27,7 +28,11 @@ public class BlockCompoundCreator extends BlockContainer
 		this.setCreativeTab(Chemistry.tabMachines);
 		this.setUnlocalizedName("blockCompoundCreator");
 		this.setRegistryName("blockCompoundCreator");
-		//GameRegistry.register(this);
+		
+		GameRegistry.register(this);
+		
+		ItemBlock itemBlock = new ItemBlock(this);
+		GameRegistry.register(itemBlock);
 	}
 	
 	
