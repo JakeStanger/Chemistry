@@ -74,9 +74,10 @@ public abstract class Element extends Item
 		this.electronConfiguration = this.giveElectronConfiguration();
 		
 		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
 		this.setMaxStackSize(64);
 		this.addToCreativeTab();
-		GameRegistry.registerItem(this, name);
+		GameRegistry.register(this);
 	}
 	
 	/**
