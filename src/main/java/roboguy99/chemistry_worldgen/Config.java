@@ -1,9 +1,6 @@
 package roboguy99.chemistry_worldgen;
 
-import java.io.File;
-
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.item.element.Element;
