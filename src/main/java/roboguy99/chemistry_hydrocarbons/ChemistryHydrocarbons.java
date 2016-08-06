@@ -1,4 +1,4 @@
-/*package roboguy99.chemistry_hydrocarbons;
+package roboguy99.chemistry_hydrocarbons;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -42,4 +42,3 @@ public class ChemistryHydrocarbons
 	    }
 	};
 }
-*/

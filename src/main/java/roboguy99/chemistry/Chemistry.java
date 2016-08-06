@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -80,6 +81,9 @@ public class Chemistry
 		this.getNetworkWrapper().registerMessage(ItemDeleteHandle.class, ItemDelete.class, 1, Side.SERVER);
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		
+		ModelLoader.setCustomModelResourceLocation(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
 	}
 
 	@EventHandler
@@ -88,10 +92,10 @@ public class Chemistry
 		logger.info("Initialising");
 		new CompoundNamer();
 		
-		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+		//ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 		
-	    mesher.register(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
-	    mesher.register(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
+	    //mesher.register(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
+	    //mesher.register(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
 	
 		new TileEntities();
 	}
