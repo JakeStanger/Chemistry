@@ -26,6 +26,7 @@ import roboguy99.chemistry.api.CompoundNamer;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.Elements.EnumElement;
 import roboguy99.chemistry.block.BlockCompoundCreator;
+import roboguy99.chemistry.block.BlockOreProcessor;
 import roboguy99.chemistry.handler.GuiHandler;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.network.CommonProxy;
@@ -60,6 +61,8 @@ public class Chemistry
 	public static Chemistry INSTANCE;
 	
 	private static BlockCompoundCreator blockCompoundCreator; //TODO Give this a proper home
+	private static BlockOreProcessor blockOreProcessor;
+	
 	private static Compound compound;
 	
 	@EventHandler
@@ -72,7 +75,9 @@ public class Chemistry
 		
 		new Elements();
 		this.compound = new Compound();
+		
 		this.blockCompoundCreator = new BlockCompoundCreator();
+		this.blockOreProcessor = new BlockOreProcessor();
 		
 		proxy.registerProxies();
 		
@@ -91,11 +96,6 @@ public class Chemistry
 	{
 		logger.info("Initialising");
 		new CompoundNamer();
-		
-		//ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-		
-	    //mesher.register(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
-	    //mesher.register(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
 	
 		new TileEntities();
 	}
