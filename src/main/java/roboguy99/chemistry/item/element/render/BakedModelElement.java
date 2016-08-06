@@ -1,5 +1,6 @@
 package roboguy99.chemistry.item.element.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.vecmath.Matrix4f;
@@ -12,11 +13,11 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
+import net.minecraft.client.renderer.block.model.ItemOverride;
 import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.block.model.ModelManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
@@ -39,8 +40,6 @@ public class BakedModelElement implements IBakedModel, IPerspectiveAwareModel
 		if(cameraTransformType != TransformType.GUI && cameraTransformType != TransformType.GROUND) 
 			 model = manager.getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory")); //Get held model
 		else model = manager.getModel(new ModelResourceLocation("chemistry:element-" + this.elementName, "inventory")); //Get inventory model
-		
-		//if(!(model instanceof IBakedModel)) model = new IBakedModel.Wrapper(model, DefaultVertexFormats.ITEM); //Make sure model is IFlexibleBakedModel
 		
 		return (Pair<? extends IBakedModel, Matrix4f>) Pair.of(model, TRSRTransformation.identity().getMatrix());
 	}
@@ -66,6 +65,7 @@ public class BakedModelElement implements IBakedModel, IPerspectiveAwareModel
 	@Override
 	public TextureAtlasSprite getParticleTexture()
 	{
+		System.out.println("TEST");
 		return null;
 	}
 
@@ -76,14 +76,14 @@ public class BakedModelElement implements IBakedModel, IPerspectiveAwareModel
 	}
 
 	@Override
-	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) 
+	{
+		return new ArrayList<BakedQuad>();
 	}
 
 	@Override
-	public ItemOverrideList getOverrides() {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemOverrideList getOverrides() 
+	{
+		return new ItemOverrideList(new ArrayList<ItemOverride>());
 	}	
 }
