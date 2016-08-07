@@ -90,7 +90,8 @@ public abstract class ItemElement extends Item
 	}
 	
 	/**
-	 * @return the unlocalised name
+	 * @return the unlocalised name, minus the package address
+	 * (so only the actual item name)
 	 */
 	public String getName()
 	{
@@ -105,6 +106,9 @@ public abstract class ItemElement extends Item
 		return this.symbol;
 	}
 	
+	/**
+	 * @return the group the element is in
+	 */
 	public Group getGroup()
 	{
 		return this.group;
