@@ -20,8 +20,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.api.Elements.EnumElement;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.api.Elements.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 import roboguy99.chemistry.tile.TileOreProcessor;
 
@@ -37,9 +37,9 @@ public class BlockOreProcessor extends BlockTile
 	{
 		if(!world.isRemote) 
 		{
-			HashMap<Element, Integer> elements = assignRandomElements(heldItem.getItem());
+			HashMap<ItemElement, Integer> elements = assignRandomElements(heldItem.getItem());
 			
-			for(Element element : elements.keySet())
+			for(ItemElement element : elements.keySet())
 			{
 				player.addChatMessage(new TextComponentString(element.getName() + " - " + elements.get(element)));
 			}
@@ -47,15 +47,15 @@ public class BlockOreProcessor extends BlockTile
 		return true;
 	}
 	
-	private HashMap<Element, Integer> assignRandomElements(Item item)
+	private HashMap<ItemElement, Integer> assignRandomElements(Item item)
 	{
-		HashMap<Element, Integer> elements = new HashMap<Element, Integer>();
+		HashMap<ItemElement, Integer> elements = new HashMap<ItemElement, Integer>();
 		
 		if(item == Item.getItemFromBlock(Blocks.STONE))
 		{
-			elements.put(EnumElement.ANTIMONY.getElement(), 45);
-			elements.put(EnumElement.CARBON.getElement(), 12);
-			elements.put(EnumElement.URANIUM.getElement(), 1);
+			elements.put(Element.ANTIMONY.getElement(), 45);
+			elements.put(Element.CARBON.getElement(), 12);
+			elements.put(Element.URANIUM.getElement(), 1);
 		}
 		
 		return elements;

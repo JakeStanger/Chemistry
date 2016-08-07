@@ -5,8 +5,6 @@ import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -24,9 +22,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.api.CompoundNamer;
 import roboguy99.chemistry.api.Elements;
-import roboguy99.chemistry.api.Elements.EnumElement;
+import roboguy99.chemistry.api.Elements.Element;
+import roboguy99.chemistry.api.Ores.Ore;
+import roboguy99.chemistry.api.Ores;
 import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.block.BlockOreProcessor;
+import roboguy99.chemistry.block.ore.OreLead;
+import roboguy99.chemistry.block.ore.OreTungsten;
 import roboguy99.chemistry.handler.GuiHandler;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.network.CommonProxy;
@@ -74,6 +76,8 @@ public class Chemistry
 		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry";
 		
 		new Elements();
+		new Ores();
+		
 		this.compound = new Compound();
 		
 		this.blockCompoundCreator = new BlockCompoundCreator();
@@ -139,7 +143,7 @@ public class Chemistry
 	    @SideOnly(Side.CLIENT)
 	    public Item getTabIconItem() 
 	    {
-	        return EnumElement.CARBON.getElement();
+	        return Element.CARBON.getElement();
 	    }
 	};
 	/**
@@ -152,6 +156,16 @@ public class Chemistry
 	    public Item getTabIconItem() 
 	    {
 	        return Item.getItemFromBlock(Chemistry.blockCompoundCreator);
+	    }
+	};
+	
+	public static CreativeTabs tabOres = new CreativeTabs("tabOre") 
+	{
+	    @Override
+	    @SideOnly(Side.CLIENT)
+	    public Item getTabIconItem() 
+	    {
+	        return Item.getItemFromBlock(Ore.COPPER.getOre()); //Just get whatever ore is at the top of the list
 	    }
 	};
 }	

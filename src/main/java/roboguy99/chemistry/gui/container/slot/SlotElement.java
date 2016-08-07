@@ -3,7 +3,7 @@ package roboguy99.chemistry.gui.container.slot;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 
 /**
  * A container slot which only allows elements to be placed in it.
@@ -20,6 +20,6 @@ public class SlotElement extends Slot
 	@Override
 	public boolean isItemValid(ItemStack itemStack)
 	{
-		return itemStack.getItem() instanceof Element;
+		return itemStack.getItem() instanceof ItemElement;
 	}
 }

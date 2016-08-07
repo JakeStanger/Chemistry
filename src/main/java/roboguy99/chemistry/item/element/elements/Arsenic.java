@@ -1,14 +1,14 @@
 package roboguy99.chemistry.item.element.elements;
 
 import roboguy99.chemistry.api.Group;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 
 /**
  * The boiling point of arsenic is lower than its melting point.
  * @author Roboguy99
  *
  */
-public class Arsenic extends Element
+public class Arsenic extends ItemElement
 {
 	@Override
 	public String giveName()

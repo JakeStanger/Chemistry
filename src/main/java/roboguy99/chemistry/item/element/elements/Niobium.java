@@ -1,9 +1,9 @@
 package roboguy99.chemistry.item.element.elements;
 
 import roboguy99.chemistry.api.Group;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 
-public class Niobium extends Element
+public class Niobium extends ItemElement
 {
 	@Override
 	public String giveName()

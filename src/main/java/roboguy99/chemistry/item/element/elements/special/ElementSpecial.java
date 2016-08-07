@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 
 /**
  * An element used for mod utility purposes.
@@ -14,7 +14,7 @@ import roboguy99.chemistry.item.element.Element;
  * @author Roboguy99
  *
  */
-public abstract class ElementSpecial extends Element
+public abstract class ElementSpecial extends ItemElement
 {
 	/*@Override
 	protected void addToCreativeTab()

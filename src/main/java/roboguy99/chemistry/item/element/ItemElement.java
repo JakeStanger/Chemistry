@@ -20,7 +20,7 @@ import roboguy99.chemistry.api.Group;
  * @author Roboguy99
  *
  */
-public abstract class Element extends Item
+public abstract class ItemElement extends Item
 {
 	/**
 	 * The unlocalised name of the element
@@ -59,7 +59,7 @@ public abstract class Element extends Item
 	 */
 	private int[] electronConfiguration;
 	
-	public Element()
+	public ItemElement()
 	{	
 		this.name = "element_" + this.giveName();
 		this.symbol = this.giveSymbol();

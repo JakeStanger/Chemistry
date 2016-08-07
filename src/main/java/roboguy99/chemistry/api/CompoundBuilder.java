@@ -6,9 +6,9 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.api.Elements.EnumElement;
+import roboguy99.chemistry.api.Elements.Element;
 import roboguy99.chemistry.item.compound.Compound;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.item.element.elements.special.ElementSpecial;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 
@@ -19,7 +19,7 @@ import roboguy99.chemistry.network.packet.CompoundCreate;
  */
 public class CompoundBuilder
 {
-	private List<Element> elements = new ArrayList<Element>();
+	private List<ItemElement> elements = new ArrayList<ItemElement>();
 	
 	/**
 	 * Creates a compound from the elements put into the elements list.
@@ -38,7 +38,7 @@ public class CompoundBuilder
 		int elementQuantity = 0; //The number of times the current element has occurred in a row
 		for(int i = 0; i < elements.size(); i++)
 		{
-			Element element = elements.get(i);
+			ItemElement element = elements.get(i);
 			
 			if(i > 0 && elements.get(i-1).getAtomicNumber() != element.getAtomicNumber())
 			{
@@ -62,7 +62,7 @@ public class CompoundBuilder
 	 * Add the given element to the buffer.
 	 * @param element The element to add
 	 */
-	public void putElement(Element element)
+	public void putElement(ItemElement element)
 	{
 		this.elements.add(element); //Add a molecule marker after each so it's factorised
 	}
@@ -72,7 +72,7 @@ public class CompoundBuilder
 	 * @param element The element to add
 	 * @param quantity The number of times to add the element
 	 */
-	public void putElement(Element element, int quantity)
+	public void putElement(ItemElement element, int quantity)
 	{
 		for(int i = 0; i < quantity; i++) this.elements.add(element);
 	}
@@ -81,9 +81,9 @@ public class CompoundBuilder
 	 * Add the given list of elements to the buffer.
 	 * @param elements The list of elements to add
 	 */
-	public void putElements(List<Element> elements)
+	public void putElements(List<ItemElement> elements)
 	{
-		for(Element element : elements) this.elements.add(element);
+		for(ItemElement element : elements) this.elements.add(element);
 	}
 	
 	/**
@@ -92,11 +92,11 @@ public class CompoundBuilder
 	 * @param elements The list of elements to add
 	 * @param quantity The number of times to add the element
 	 */
-	public void putElements(List<Element> elements, int quantity)
+	public void putElements(List<ItemElement> elements, int quantity)
 	{
 		for(int i = 0; i < quantity; i++)
 		{
-			for(Element element : elements) this.elements.add(element);
+			for(ItemElement element : elements) this.elements.add(element);
 			this.endMolecule();
 		}
 		this.removeTrailingMolecule();
@@ -107,14 +107,14 @@ public class CompoundBuilder
 	 */
 	public void endMolecule()
 	{
-		this.elements.add(EnumElement.MOLECULE_MARKER.getElement());
+		this.elements.add(Element.MOLECULE_MARKER.getElement());
 	}
 	
 	/**
 	 * Return a list of the elements in the buffer
 	 * @return The elements currently in the buffer
 	 */
-	public List<Element> getElements()
+	public List<ItemElement> getElements()
 	{
 		return this.elements;
 	}

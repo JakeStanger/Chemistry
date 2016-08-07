@@ -12,7 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Colour;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.network.packet.ItemDelete;
 
 /**
@@ -24,7 +24,7 @@ import roboguy99.chemistry.network.packet.ItemDelete;
  * @author Roboguy99
  *
  */
-public abstract class ElementRadioactive extends Element
+public abstract class ElementRadioactive extends ItemElement
 {
 	/**
 	 * The number of ticks in a single Minecraft minute

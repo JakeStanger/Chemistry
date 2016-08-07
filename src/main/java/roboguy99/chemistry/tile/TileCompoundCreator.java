@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 
 public class TileCompoundCreator extends TileEntity implements IInventory
 {	
@@ -132,7 +132,7 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		return stack.getItem() instanceof Element;
+		return stack.getItem() instanceof ItemElement;
 	}
 
 	@Override

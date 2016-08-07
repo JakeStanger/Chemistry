@@ -1,9 +1,9 @@
 package roboguy99.chemistry.item.element.elements;
 
 import roboguy99.chemistry.api.Group;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 
-public class Manganese extends Element
+public class Manganese extends ItemElement
 {
 	@Override
 	public String giveName()

@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.api.Colour;
 import roboguy99.chemistry.api.CompoundNamer;
 import roboguy99.chemistry.api.Elements;
-import roboguy99.chemistry.item.element.Element;
+import roboguy99.chemistry.item.element.ItemElement;
 
 public class Compound extends Item
 {
@@ -37,7 +37,7 @@ public class Compound extends Item
 	 * @param elements A 2D list of elements
 	 * @return The compound name
 	 */
-	private String getCompoundName(List<List<Element>> elements)
+	private String getCompoundName(List<List<ItemElement>> elements)
 	{
 		String formula = this.getFormula(elements);
 		
@@ -48,11 +48,11 @@ public class Compound extends Item
 		return name;
 	}
 	
-	private String getFormula(List<List<Element>> elements)
+	private String getFormula(List<List<ItemElement>> elements)
 	{
 		String formula = "";
 		
-		for(List<Element> currentElement : elements)
+		for(List<ItemElement> currentElement : elements)
 		{
 			formula += currentElement.get(0).getSymbol(); //Every element is identical, so looking at 0 will always be safe
 			if(currentElement.size() > 1) formula += currentElement.size();
@@ -87,10 +87,10 @@ public class Compound extends Item
 		return result; 
 	}
 	
-	private int getRelativeMass(List<List<Element>> elements)
+	private int getRelativeMass(List<List<ItemElement>> elements)
 	{
 		int mass = 0;
-		for(List<Element> element : elements) mass += (element.get(0).getAtomicMass() * element.size());
+		for(List<ItemElement> element : elements) mass += (element.get(0).getAtomicMass() * element.size());
 		return mass;
 	}
 	
@@ -126,7 +126,7 @@ public class Compound extends Item
 		{
 			try
 			{
-				List<List<Element>> elements = this.convertNBTToList(stack.getTagCompound());
+				List<List<ItemElement>> elements = this.convertNBTToList(stack.getTagCompound());
 				tooltip.add(Colour.YELLOW + this.subscript(this.getFormula(elements)));
 				tooltip.add(Colour.DARK_AQUA + "Relative mass: " + this.getRelativeMass(elements));
 			}
@@ -151,9 +151,9 @@ public class Compound extends Item
 		}
     }
 	
-	private List<List<Element>> convertNBTToList(NBTTagCompound tag)
+	private List<List<ItemElement>> convertNBTToList(NBTTagCompound tag)
 	{			
-		List<List<Element>> elements = new ArrayList<List<Element>>();
+		List<List<ItemElement>> elements = new ArrayList<List<ItemElement>>();
 		
 		int quantity = 0;
 		
@@ -161,10 +161,10 @@ public class Compound extends Item
 		{
 			int[] info = tag.getIntArray(Integer.toString(i));
 			
-			Element element = Elements.getElement(info[0]);
+			ItemElement element = Elements.getElement(info[0]);
 			quantity = info[1];
 			
-			List<Element> currentElement = new ArrayList<Element>();
+			List<ItemElement> currentElement = new ArrayList<ItemElement>();
 			for(int j = 0; j < quantity; j++) currentElement.add(element);
 			elements.add(currentElement);
 		}
