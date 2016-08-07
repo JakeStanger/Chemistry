@@ -1,5 +1,17 @@
 itemGroup.tabElements=Elements
 itemGroup.tabMachines=Chemistry Machines
+itemGroup.tabOre=Chemistry Ores
+
+tile.ore_aluminium.name=Bauxite
+tile.ore_copper.name=Copper Ore
+tile.ore_lead.name=Lead Ore
+tile.ore_platinum.name=Platinum Ore
+tile.ore_silver.name=Silver Ore
+tile.ore_sulphur.name=Sulphur Ore
+tile.ore_tin.name=Tin Ore
+tile.ore_titanium.name=Titanium Ore
+tile.ore_tungsten.name=Tungsten Ore
+tile.ore_uranium.name=Uranium Ore
 
 group.alkaliMetals=Alkali Metals
 group.alkalineEarthMetals=Alkaline Earth Metals
