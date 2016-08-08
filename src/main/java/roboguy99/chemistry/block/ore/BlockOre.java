@@ -18,7 +18,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Colour;
-import roboguy99.chemistry.api.Elements.Element;
+import roboguy99.chemistry.item.block.ItemBlockOre;
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.wrapper.MinMax;
 
@@ -41,7 +41,7 @@ public class BlockOre extends Block //TODO Display tooltip based on process resu
 		this.setHarvestLevel("pickaxe", 2);
 		GameRegistry.register(this);
 		
-		ItemBlock itemBlock = new ItemBlock(this);
+		ItemBlock itemBlock = new ItemBlockOre(this);
 		itemBlock.setRegistryName(this.name);
 		GameRegistry.register(itemBlock);
 		
@@ -90,7 +90,7 @@ public class BlockOre extends Block //TODO Display tooltip based on process resu
 						break;
 				}
 				
-				tooltip.add(I18n.format(element.getName()))
+				tooltip.add(groupColour + I18n.format(element.getUnlocalizedName() + ".name") + ": " + this.resourceMap.get(element).getMin() + "-" + this.resourceMap.get(element).getMax());
 			}
 		}
 	}
@@ -103,5 +103,10 @@ public class BlockOre extends Block //TODO Display tooltip based on process resu
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	public HashMap<ItemElement, MinMax> getResourceMap()
+	{
+		return this.resourceMap;
 	}
 }
