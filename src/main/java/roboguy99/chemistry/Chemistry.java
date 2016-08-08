@@ -84,7 +84,7 @@ public class Chemistry
 		this.compound = new Compound();
 		
 		this.blockCompoundCreator = new BlockCompoundCreator();
-		//this.blockOreProcessor = new BlockOreProcessor();
+		this.blockOreProcessor = new BlockOreProcessor();
 		
 		proxy.registerProxies();
 		
@@ -105,8 +105,6 @@ public class Chemistry
 		new CompoundNamer();
 	
 		new TileEntities();
-		
-		//this.ores.registerOres(event);
 	}
 
 	@EventHandler
