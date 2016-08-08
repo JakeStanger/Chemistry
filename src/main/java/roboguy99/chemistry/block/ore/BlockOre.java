@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements.Element;
@@ -33,7 +34,12 @@ public class BlockOre extends Block
 		ItemBlock itemBlock = new ItemBlock(this);
 		itemBlock.setRegistryName(this.name);
 		GameRegistry.register(itemBlock);
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, model);
+		
+		//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, model);
+		//ModelLoader.setCustomModelResourceLocation(itemBlock, 0, model);
+		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+		mesher.register(Item.getItemFromBlock(this), 0, model);
+		mesher.register(itemBlock, 0, model);
 	}
 	
 	/**
