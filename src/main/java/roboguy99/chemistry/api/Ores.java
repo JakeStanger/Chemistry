@@ -24,15 +24,19 @@ import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.wrapper.MinMax;
 
 /**
+ * Handles creation of ore blocks when the game loads.
+ * Reads ores from JSON file.
+ * Also contains list of all ores.
+ * TODO Find a new home for this class probably.
  * @author Roboguy99
  *
  */
 public class Ores 
 {
-	private static HashMap<String, HashMap<ItemElement, MinMax>> oreRegistrants = new HashMap<String, HashMap<ItemElement, MinMax>>();
-	private static HashMap<String, ModelResourceLocation> models = new HashMap<String, ModelResourceLocation>();
+	private static HashMap<String, HashMap<ItemElement, MinMax>> oreRegistrants = new HashMap<String, HashMap<ItemElement, MinMax>>(); //Ores to register
+	private static HashMap<String, ModelResourceLocation> models = new HashMap<String, ModelResourceLocation>(); //Ores and models
 	
-	private static List<BlockOre> oreList = new ArrayList<BlockOre>();
+	private static List<BlockOre> oreList = new ArrayList<BlockOre>(); //List of all ores (for public access)
 	
 	public static Ores INSTANCE;
 	
@@ -62,6 +66,7 @@ public class Ores
 				String name = oreData.get("name").getAsString();
 				String model = oreData.get("model").getAsString();
 				
+				//Avoids another wrapper class
 				this.models.put(name, new ModelResourceLocation(model));
 				
 				JsonObject processObj = oreData.get("processMap").getAsJsonObject();
@@ -69,8 +74,11 @@ public class Ores
 				
 				for(Entry<String, JsonElement> processData : processObj.entrySet())
 				{
+					//Get element and min/max processing values
 					ItemElement itemElement = Elements.getElement(processData.getKey());
-					MinMax minMax = new MinMax(processData.getValue().getAsJsonArray().get(0).getAsInt(), processData.getValue().getAsJsonArray().get(1).getAsInt());
+					
+					JsonArray minMaxArr = processData.getValue().getAsJsonArray();
+					MinMax minMax = new MinMax(minMaxArr.get(0).getAsInt(), minMaxArr.get(1).getAsInt());
 					
 					processMap.put(itemElement, minMax);
 				}
@@ -86,7 +94,6 @@ public class Ores
 	
 	/**
 	 * Add an ore to the ores list, ready to be registered.
-	 * Must be called in pre-init otherwise it will be ignored.
 	 * 
 	 * @param name The unlocalised name of the ore. There is no need to include "ore" in the name as this is automatically appended.
 	 * @param processContents The minimum and maximum. 
@@ -100,6 +107,9 @@ public class Ores
 		models.put(name, model);
 	}
 	
+	/**
+	 * Actually instance each block and register it in the game
+	 */
 	private void registerOres()
 	{
 		for(String name : oreRegistrants.keySet())
@@ -107,12 +117,6 @@ public class Ores
 			BlockOre ore = new BlockOre(name, models.get(name), oreRegistrants.get(name));
 			this.oreList.add(ore);
 		}
-	}
-	
-	public BlockOre getOre(String name)
-	{
-		//TODO Write method
-		return null;
 	}
 	
 	/**
