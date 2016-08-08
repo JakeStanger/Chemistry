@@ -1,6 +1,7 @@
 package roboguy99.chemistry;
 
 import java.io.File;
+import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -82,7 +83,7 @@ public class Chemistry
 		this.compound = new Compound();
 		
 		this.blockCompoundCreator = new BlockCompoundCreator();
-		this.blockOreProcessor = new BlockOreProcessor();
+		//this.blockOreProcessor = new BlockOreProcessor();
 		
 		proxy.registerProxies();
 		
@@ -168,7 +169,8 @@ public class Chemistry
 	    @SideOnly(Side.CLIENT)
 	    public Item getTabIconItem() 
 	    {
-	        return Item.getItemFromBlock(Blocks.ACTIVATOR_RAIL); //TODO Set to an ore
+	        Random random = new Random();
+	    	return Item.getItemFromBlock(Ores.INSTANCE.getOres().get(random.nextInt(Ores.INSTANCE.getOres().size())));
 	    }
 	};
 }	
