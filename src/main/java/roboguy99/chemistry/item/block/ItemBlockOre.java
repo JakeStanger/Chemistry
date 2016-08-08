@@ -4,6 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import roboguy99.chemistry.block.ore.BlockOre;
 
+/**
+ * A custom ItemBlock for ores, making it possible to get the ore block from Item/ItemStack instances
+ * @author Roboguy99
+ *
+ */
 public class ItemBlockOre extends ItemBlock
 {
 	private BlockOre ore;

@@ -158,7 +158,8 @@ public abstract class ItemElement extends Item
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
     {
-		return this.getGroupColour() + ("" + I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
+		//Add group colour to element name
+		return Group.getGroupColour(this.group) + ("" + I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".name")).trim();
     }
 	
 	@Override
@@ -184,39 +185,7 @@ public abstract class ItemElement extends Item
 			else tooltip.add(Colour.RED + "Melting Point: Unknown");
 			if(boilingPoint != Integer.MAX_VALUE) tooltip.add(Colour.RED + "Boiling Point: " + boilingPoint + "\u00B0C");
 			else tooltip.add(Colour.RED + "Boiling Point: Unknown");
-			tooltip.add(this.getGroupColour() + I18n.format(this.group.groupName));
+			tooltip.add(Group.getGroupColour(this.group) + I18n.format(this.group.groupName));
 		}
-	}
-	
-	private Colour getGroupColour()
-	{
-		Colour groupColour;
-		
-		switch(this.group)
-		{
-			case ALKALI_METALS:
-				groupColour = Colour.WHITE;
-				break;
-			case ALKALINE_EARTH_METALS:
-				groupColour = Colour.PINK;
-				break;
-			case TRANSITION_METALS:
-				groupColour = Colour.AQUA;
-				break;
-			case OTHER_METALS:
-				groupColour = Colour.ORANGE;
-				break;
-			case NON_METALS:
-				groupColour = Colour.BRIGHT_GREEN;
-				break;
-			case NOBLE_GASES:
-				groupColour = Colour.YELLOW;
-				break;
-			default:
-				groupColour = Colour.WHITE;
-				break;
-		}
-		
-		return groupColour;
 	}
 }

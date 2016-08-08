@@ -18,6 +18,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Colour;
+import roboguy99.chemistry.api.Group;
 import roboguy99.chemistry.item.block.ItemBlockOre;
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.wrapper.MinMax;
@@ -63,34 +64,9 @@ public class BlockOre extends Block //TODO Display tooltip based on process resu
 		{
 			for(ItemElement element: resourceMap.keySet())
 			{
-				Colour groupColour;
-				
-				switch(element.getGroup())
-				{
-					case ALKALI_METALS:
-						groupColour = Colour.WHITE;
-						break;
-					case ALKALINE_EARTH_METALS:
-						groupColour = Colour.PINK;
-						break;
-					case TRANSITION_METALS:
-						groupColour = Colour.AQUA;
-						break;
-					case OTHER_METALS:
-						groupColour = Colour.ORANGE;
-						break;
-					case NON_METALS:
-						groupColour = Colour.BRIGHT_GREEN;
-						break;
-					case NOBLE_GASES:
-						groupColour = Colour.YELLOW;
-						break;
-					default:
-						groupColour = Colour.WHITE;
-						break;
-				}
-				
-				tooltip.add(groupColour + I18n.format(element.getUnlocalizedName() + ".name") + ": " + this.resourceMap.get(element).getMin() + "-" + this.resourceMap.get(element).getMax());
+				String elementName = I18n.format(element.getUnlocalizedName() + ".name");
+				MinMax minMax = this.resourceMap.get(element); //Process quantity bounds
+				tooltip.add(Group.getGroupColour(element.getGroup()) + elementName + ": " + minMax.getMin() + "-" + minMax.getMax());
 			}
 		}
 	}
@@ -105,6 +81,10 @@ public class BlockOre extends Block //TODO Display tooltip based on process resu
 		return this.name;
 	}
 	
+	/**
+	 * Gets the list of all elements and their process values
+	 * @return
+	 */
 	public HashMap<ItemElement, MinMax> getResourceMap()
 	{
 		return this.resourceMap;

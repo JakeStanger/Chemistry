@@ -41,21 +41,28 @@ public class BlockOreProcessor extends BlockTile
 	{
 		if(!world.isRemote && heldItem != null) 
 		{
-			HashMap<ItemElement, Integer> elements = assignRandomElements(heldItem.getItem());
+			HashMap<ItemElement, Integer> elements = assignRandomElements(heldItem.getItem()); //Get random elements based on ore
 			
+			//TODO Replace with GUI
 			for(ItemElement element : elements.keySet())
 			{
-				player.addChatMessage(new TextComponentString(element.getName() + " - " + elements.get(element)));
+				player.addChatMessage(new TextComponentString(element.getName() + " - " + elements.get(element))); 
 			}
 		}
 		return true;
 	}
 	
+	/**
+	 * Assigns random elements based on the item given, assuming the item is an ore.
+	 * The quantity of elements is based on the ore's resource map.
+	 * @param item The item to assign elements to.
+	 * @return A map of assigned elements and quantities
+	 */
 	private HashMap<ItemElement, Integer> assignRandomElements(Item item)
 	{
 		HashMap<ItemElement, Integer> elements = new HashMap<ItemElement, Integer>();
 		
-		if(item instanceof ItemBlockOre)
+		if(item instanceof ItemBlockOre) //Check item is ore
 		{
 			Random random = new Random();
 			BlockOre ore = ((ItemBlockOre) item).getOre();
