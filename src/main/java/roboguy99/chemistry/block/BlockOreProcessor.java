@@ -1,6 +1,7 @@
 package roboguy99.chemistry.block;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -21,9 +22,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements.Element;
+import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.item.block.ItemBlockOre;
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 import roboguy99.chemistry.tile.TileOreProcessor;
+import roboguy99.chemistry.wrapper.MinMax;
 
 public class BlockOreProcessor extends BlockTile
 {
@@ -35,7 +39,7 @@ public class BlockOreProcessor extends BlockTile
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
-		if(!world.isRemote) 
+		if(!world.isRemote && heldItem != null) 
 		{
 			HashMap<ItemElement, Integer> elements = assignRandomElements(heldItem.getItem());
 			
@@ -51,11 +55,17 @@ public class BlockOreProcessor extends BlockTile
 	{
 		HashMap<ItemElement, Integer> elements = new HashMap<ItemElement, Integer>();
 		
-		if(item == Item.getItemFromBlock(Blocks.STONE))
+		if(item instanceof ItemBlockOre)
 		{
-			elements.put(Element.ANTIMONY.getElement(), 45);
-			elements.put(Element.CARBON.getElement(), 12);
-			elements.put(Element.URANIUM.getElement(), 1);
+			Random random = new Random();
+			BlockOre ore = ((ItemBlockOre) item).getOre();
+			
+			for(ItemElement element : ore.getResourceMap().keySet())
+			{
+				MinMax minMax = ore.getResourceMap().get(element);
+				int quantity = random.nextInt(minMax.getMax() - minMax.getMin()) + minMax.getMin(); //Get random quantity within bounds
+				elements.put(element, quantity);
+			}
 		}
 		
 		return elements;
