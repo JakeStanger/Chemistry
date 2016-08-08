@@ -2,7 +2,7 @@ itemGroup.tabElements=Elements
 itemGroup.tabMachines=Chemistry Machines
 itemGroup.tabOre=Chemistry Ores
 
-tile.ore_aluminium.name=Bauxite
+tile.ore_bauxite.name=Bauxite
 tile.ore_copper.name=Copper Ore
 tile.ore_lead.name=Lead Ore
 tile.ore_platinum.name=Platinum Ore
