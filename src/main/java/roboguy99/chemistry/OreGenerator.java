@@ -18,7 +18,7 @@ public class OreGenerator implements IWorldGenerator
 	{
 		if(world.provider.getDimension() == 0)
 		{
-			for(BlockOre ore : Ores.getOres())
+			for(BlockOre ore : Ores.INSTANCE.getOres())
 			{
 				for(int k = 0; k < 5; k++)
 				{
@@ -26,7 +26,7 @@ public class OreGenerator implements IWorldGenerator
 		        	int y = random.nextInt(64);
 		        	int z = (chunkZ*16) + random.nextInt(16);
 		        	
-		        	(new WorldGenMinable(ore.getDefaultState(), 5)).generate(world, random, new BlockPos(x, y, z)); //TODO Make dependent on element
+		        	(new WorldGenMinable(ore.getDefaultState(), 5)).generate(world, random, new BlockPos(x, y, z)); //TODO Make dependent on element TODO Replace magic number (what is 5?)
 		        }
 			}
 		}

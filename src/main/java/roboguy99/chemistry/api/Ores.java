@@ -1,86 +1,89 @@
 package roboguy99.chemistry.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import roboguy99.chemistry.api.Elements.Element;
 import roboguy99.chemistry.block.ore.BlockOre;
-import roboguy99.chemistry.block.ore.OreAluminium;
-import roboguy99.chemistry.block.ore.OreCopper;
-import roboguy99.chemistry.block.ore.OreLead;
-import roboguy99.chemistry.block.ore.OrePlatinum;
-import roboguy99.chemistry.block.ore.OreSilver;
-import roboguy99.chemistry.block.ore.OreSulphur;
-import roboguy99.chemistry.block.ore.OreTin;
-import roboguy99.chemistry.block.ore.OreTitanium;
-import roboguy99.chemistry.block.ore.OreTungsten;
-import roboguy99.chemistry.block.ore.OreUranium;
-import roboguy99.chemistry.item.element.ItemElement;
+import roboguy99.chemistry.wrapper.MinMax;
 
 /**
- * TODO Probably re-write this
  * @author Roboguy99
  *
  */
 public class Ores 
 {
+	private static HashMap<String, HashMap<Element, MinMax>> oreRegistrants = new HashMap<String, HashMap<Element, MinMax>>();
+	private static HashMap<String, ModelResourceLocation> models = new HashMap<String, ModelResourceLocation>();
+	
 	private static List<BlockOre> ores = new ArrayList<BlockOre>();
 	
-	public Ores()
-	{
-		ores.add(new OreAluminium());
-		ores.add(new OreCopper());
-		ores.add(new OreLead());
-		ores.add(new OrePlatinum());
-		ores.add(new OreSilver());
-		ores.add(new OreSulphur());
-		ores.add(new OreTin());
-		ores.add(new OreTitanium());
-		ores.add(new OreTungsten());
-		ores.add(new OreUranium());
-	}
+	public static Ores INSTANCE;
 	
-	private static BlockOre getOre(int index)
+	public Ores(FMLPreInitializationEvent event) //TODO Give ore registry code a new home
 	{
-		return ores.get(index);
-	}
-	
-	public static void addOre(BlockOre ore)
-	{
-		ores.add(ore);
+		INSTANCE = this;
+		
+		HashMap<Element, MinMax> bauxiteMap = new HashMap<Element, MinMax>();
+		bauxiteMap.put(Element.ALUMINIUM, new MinMax(3, 6));
+		try
+		{
+			this.addOre("bauxite", bauxiteMap, new ModelResourceLocation("chemistry:ore_bauxite"), event);
+		}
+		catch (OreWithNameExistsException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
-	 * Gets the array of elements
-	 * @return The array of elements
+	 * Add an ore to the ores list, ready to be registered.
+	 * Must be called in pre-init otherwise it will be ignored.
+	 * 
+	 * @param name The unlocalised name of the ore. There is no need to include "ore" in the name as this is automatically appended.
+	 * @param processContents The minimum and maximum. 
+	 * @param model The model to associate to the ore.
+	 * @param event The pre-init event as a fail-safe.
+	 * @throws OreWithNameExistsException If an ore is added to the registry with a duplicate key
 	 */
-	public static List<BlockOre> getOres()
+	public void addOre(String name, HashMap<Element, MinMax> processContents, ModelResourceLocation model, FMLPreInitializationEvent event) throws OreWithNameExistsException
 	{
-		return Ores.ores;
+		if(!oreRegistrants.containsKey(name))
+		{
+			oreRegistrants.put(name, processContents);
+			models.put(name, model);
+		}
+		else throw new OreWithNameExistsException();
 	}
 	
-	public enum Ore
+	public void registerOres(FMLInitializationEvent event)
 	{
-		ALUMINIUM(Ores.getOre(0)),
-		COPPER(Ores.getOre(1)),
-		LEAD(Ores.getOre(2)),
-		PLATINUM(Ores.getOre(3)),
-		SILVER(Ores.getOre(4)),
-		SULPHUR(Ores.getOre(5)),
-		TIN(Ores.getOre(6)),
-		TITANIUM(Ores.getOre(7)),
-		TUNGSTEN(Ores.getOre(8)),
-		URANIUM(Ores.getOre(9));
-		
-		private final BlockOre ore;
-		
-		private Ore(BlockOre ore)
+		for(String name : oreRegistrants.keySet())
 		{
-			this.ore = ore;
+			this.ores.add(new BlockOre(name, models.get(name)));
 		}
-		
-		public BlockOre getOre()
+	}
+	
+	public HashMap<String, HashMap<Element, MinMax>> getOreRegistrants()
+	{
+		return this.oreRegistrants;
+	}
+	
+	public List<BlockOre> getOres()
+	{
+		return this.ores;
+	}
+	
+	public class OreWithNameExistsException extends Exception
+	{
+		public OreWithNameExistsException()
 		{
-			return ore;
+			super("An ore with that name is already in the registry");
 		}
 	}
 }

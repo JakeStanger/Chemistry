@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
@@ -23,12 +24,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.api.CompoundNamer;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.Elements.Element;
-import roboguy99.chemistry.api.Ores.Ore;
 import roboguy99.chemistry.api.Ores;
 import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.block.BlockOreProcessor;
-import roboguy99.chemistry.block.ore.OreLead;
-import roboguy99.chemistry.block.ore.OreTungsten;
 import roboguy99.chemistry.handler.GuiHandler;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.network.CommonProxy;
@@ -67,6 +65,8 @@ public class Chemistry
 	
 	private static Compound compound;
 	
+	private static Ores ores;
+	
 	@EventHandler
 	private void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
 	{
@@ -76,7 +76,8 @@ public class Chemistry
 		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry";
 		
 		new Elements();
-		new Ores();
+		
+		this.ores = new Ores(event);
 		
 		this.compound = new Compound();
 		
@@ -102,6 +103,8 @@ public class Chemistry
 		new CompoundNamer();
 	
 		new TileEntities();
+		
+		this.ores.registerOres(event);
 	}
 
 	@EventHandler
@@ -165,7 +168,7 @@ public class Chemistry
 	    @SideOnly(Side.CLIENT)
 	    public Item getTabIconItem() 
 	    {
-	        return Item.getItemFromBlock(Ore.COPPER.getOre()); //Just get whatever ore is at the top of the list
+	        return Item.getItemFromBlock(Blocks.ACTIVATOR_RAIL); //TODO Set to an ore
 	    }
 	};
 }	

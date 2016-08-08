@@ -1,5 +1,7 @@
 package roboguy99.chemistry.block.ore;
 
+import java.util.HashMap;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -9,28 +11,29 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements.Element;
-import roboguy99.chemistry.item.element.ItemElement;
 
-public abstract class BlockOre extends Block
+public class BlockOre extends Block
 {
 	private String name;
+	private HashMap<Element, Integer> processRecipe;
 	
-	public BlockOre(Element element)
+	public BlockOre(String name, ModelResourceLocation model)
 	{	
 		super(Material.ROCK);
-		this.name = "ore_" + element.getElement().getName().replaceAll("element_", "").toLowerCase();
+		//this.name = "ore_" + element.getElement().getName().replaceAll("element_", "").toLowerCase();
+		this.name = "ore_" + name;
 		
 		this.setCreativeTab(Chemistry.tabOres);
-		this.setUnlocalizedName(name);
-		this.setRegistryName(name);
+		this.setUnlocalizedName(this.name);
+		this.setRegistryName(this.name);
 		this.setHardness(3F);
 		this.setHarvestLevel("pickaxe", 2);
 		GameRegistry.register(this);
 		
 		ItemBlock itemBlock = new ItemBlock(this);
-		itemBlock.setRegistryName(name);
+		itemBlock.setRegistryName(this.name);
 		GameRegistry.register(itemBlock);
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation("chemistry:" + name, "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, model);
 	}
 	
 	/**
@@ -42,6 +45,4 @@ public abstract class BlockOre extends Block
 	{
 		return this.name;
 	}
-	
-	//protected abstract void giveProcessRecipe();
 }
