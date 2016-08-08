@@ -136,12 +136,27 @@ public class Elements
 	
 	/**
 	 * Gets the element instance linking to the specified atomic number.
-	 * @param atomicNumber
-	 * @return The element with the specified atomic number
+	 * @param atomicNumber The atomic number of the element.
+	 * @return The element with the specified atomic number or null if no element with the given atomic number exists.
 	 */
 	public static ItemElement getElement(int atomicNumber)
 	{
 		return elements.get(atomicNumber-1);
+	}
+	
+	/**
+	 * Gets the element instance with the given name.
+	 * @param name The name of the element.
+	 * @return The element with the given name or null if no element with the given name exists.
+	 */
+	public static ItemElement getElement(String name)
+	{
+		for(ItemElement element : elements)
+		{
+			if(element.getName().equals(name)) return element;
+		}
+		
+		return null;
 	}
 	
 	public static void addElement(ItemElement element)
