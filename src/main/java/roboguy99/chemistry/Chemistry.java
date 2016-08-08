@@ -1,6 +1,7 @@
 package roboguy99.chemistry;
 
 import java.io.File;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
@@ -8,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
@@ -28,6 +28,7 @@ import roboguy99.chemistry.api.Elements.Element;
 import roboguy99.chemistry.api.Ores;
 import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.block.BlockOreProcessor;
+import roboguy99.chemistry.block.ore.BlockOre;
 import roboguy99.chemistry.handler.GuiHandler;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.network.CommonProxy;
@@ -74,7 +75,7 @@ public class Chemistry
 		logger.info("Pre-initialising");
 		this.INSTANCE = this;
 		
-		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry";
+		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry/";
 		
 		new Elements();
 		
@@ -105,12 +106,12 @@ public class Chemistry
 	
 		new TileEntities();
 		
-		this.ores.registerOres(event);
+		//this.ores.registerOres(event);
 	}
 
 	@EventHandler
 	private void postInit(FMLPostInitializationEvent event) 
-	{			
+	{
 	}
 	
 	/**
@@ -170,7 +171,8 @@ public class Chemistry
 	    public Item getTabIconItem() 
 	    {
 	        Random random = new Random();
-	    	return Item.getItemFromBlock(Ores.INSTANCE.getOres().get(random.nextInt(Ores.INSTANCE.getOres().size())));
+	        List<BlockOre> ores = Ores.INSTANCE.getOres();
+	    	return Item.getItemFromBlock(ores.get(random.nextInt(ores.size())));
 	    }
 	};
 }	
