@@ -7,7 +7,7 @@ import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.item.element.elements.*;
 import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
 
-public class Elements 
+public class Elements
 {
 	private static List<ItemElement> elements = new ArrayList<ItemElement>();
 	
@@ -146,14 +146,14 @@ public class Elements
 	
 	/**
 	 * Gets the element instance with the given name.
-	 * @param name The name of the element.
+	 * @param name The unlocalised name of the element, <b>discluding</b> the <i>'element_'</i> prefix.
 	 * @return The element with the given name or null if no element with the given name exists.
 	 */
 	public static ItemElement getElement(String name)
 	{
 		for(ItemElement element : elements)
 		{
-			if(element.getName().equals(name)) return element;
+			if(element.getName().equals("element_" + name)) return element;
 		}
 		
 		return null;
