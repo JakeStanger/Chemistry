@@ -1,14 +1,26 @@
 package roboguy99.chemistry.api;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements.Element;
 import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.wrapper.MinMax;
 
 /**
@@ -17,53 +29,56 @@ import roboguy99.chemistry.wrapper.MinMax;
  */
 public class Ores 
 {
-	private static HashMap<String, HashMap<Element, MinMax>> oreRegistrants = new HashMap<String, HashMap<Element, MinMax>>();
+	private static HashMap<String, HashMap<ItemElement, MinMax>> oreRegistrants = new HashMap<String, HashMap<ItemElement, MinMax>>();
 	private static HashMap<String, ModelResourceLocation> models = new HashMap<String, ModelResourceLocation>();
 	
-	private static List<BlockOre> ores = new ArrayList<BlockOre>();
+	private static HashMap<BlockOre, String> ores = new HashMap<BlockOre, String>();
 	
 	public static Ores INSTANCE;
 	
-	public Ores(FMLPreInitializationEvent event) //TODO Give ore registry code a new home
+	public Ores(FMLPreInitializationEvent event)
 	{
 		INSTANCE = this;
-		
-		HashMap<Element, MinMax> bauxiteMap = new HashMap<Element, MinMax>();
-		bauxiteMap.put(Element.ALUMINIUM, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> copperMap = new HashMap<Element, MinMax>();
-		copperMap.put(Element.COPPER, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> leadMap = new HashMap<Element, MinMax>();
-		leadMap.put(Element.LEAD, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> platinumMap = new HashMap<Element, MinMax>();
-		platinumMap.put(Element.PLATINUM, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> silverMap = new HashMap<Element, MinMax>();
-		silverMap.put(Element.SILVER, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> sulphurMap = new HashMap<Element, MinMax>();
-		sulphurMap.put(Element.SULPHUR, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> tinMap = new HashMap<Element, MinMax>();
-		tinMap.put(Element.TIN, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> titaniumMap = new HashMap<Element, MinMax>();
-		titaniumMap.put(Element.TITANIUM, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> tungstenMap = new HashMap<Element, MinMax>();
-		tungstenMap.put(Element.TUNGSTEN, new MinMax(3, 6));
-		
-		HashMap<Element, MinMax> uraniumMap = new HashMap<Element, MinMax>();
-		uraniumMap.put(Element.URANIUM, new MinMax(3, 6));
-		
+		getOresFromJSON();
+		registerOres();
+	}
+	
+	/**
+	 * Reads the ores to add to game from the ores.json file.
+	 * Who's Jason and why does he have the ores?
+	 */
+	private void getOresFromJSON()
+	{
+		JsonParser parser = new JsonParser();
 		try
-		{
-			this.addOre("bauxite", bauxiteMap, new ModelResourceLocation("chemistry:ore_bauxite"), event);
-			this.addOre("copper", copperMap, new ModelResourceLocation("chemistry:ore_copper"), event);
+		{	
+			JsonElement element = parser.parse(new FileReader(Chemistry.CONFIG_DIR + "ores.json"));
+			JsonArray arr = element.getAsJsonArray();
+			
+			for(JsonElement ele : arr)
+			{
+				JsonObject oreData = ele.getAsJsonObject();
+				
+				String name = oreData.get("name").getAsString();
+				String model = oreData.get("model").getAsString();
+				
+				this.models.put(name, new ModelResourceLocation(model));
+				
+				JsonObject processObj = oreData.get("processMap").getAsJsonObject();
+				HashMap<ItemElement, MinMax> processMap = new HashMap<ItemElement, MinMax>();
+				
+				for(Entry<String, JsonElement> processData : processObj.entrySet())
+				{
+					ItemElement itemElement = Elements.getElement(processData.getKey());
+					MinMax minMax = new MinMax(processData.getValue().getAsJsonArray().get(0).getAsInt(), processData.getValue().getAsJsonArray().get(1).getAsInt());
+					
+					processMap.put(itemElement, minMax);
+				}
+				
+				this.oreRegistrants.put(name, processMap);
+			}
 		}
-		catch (OreWithNameExistsException e)
+		catch (JsonIOException | JsonSyntaxException | FileNotFoundException e)
 		{
 			e.printStackTrace();
 		}
@@ -79,21 +94,17 @@ public class Ores
 	 * @param event The pre-init event as a fail-safe.
 	 * @throws OreWithNameExistsException If an ore is added to the registry with a duplicate key
 	 */
-	public void addOre(String name, HashMap<Element, MinMax> processContents, ModelResourceLocation model, FMLPreInitializationEvent event) throws OreWithNameExistsException
+	private void addOre(String name, HashMap<ItemElement, MinMax> processContents, ModelResourceLocation model)
 	{
-		if(!oreRegistrants.containsKey(name))
-		{
-			oreRegistrants.put(name, processContents);
-			models.put(name, model);
-		}
-		else throw new OreWithNameExistsException();
+		oreRegistrants.put(name, processContents);
+		models.put(name, model);
 	}
 	
-	public void registerOres(FMLInitializationEvent event)
+	private void registerOres()
 	{
 		for(String name : oreRegistrants.keySet())
 		{
-			this.ores.add(new BlockOre(name, models.get(name)));
+			this.ores.put(new BlockOre(name, models.get(name), oreRegistrants.get(name)), name);
 		}
 	}
 	
@@ -103,21 +114,13 @@ public class Ores
 		return null;
 	}
 	
-	public HashMap<String, HashMap<Element, MinMax>> getOreRegistrants()
+	public HashMap<String, HashMap<ItemElement, MinMax>> getOreRegistrants()
 	{
 		return this.oreRegistrants;
 	}
 	
-	public List<BlockOre> getOres()
+	public HashMap<BlockOre, String> getOres()
 	{
 		return this.ores;
-	}
-	
-	public class OreWithNameExistsException extends Exception
-	{
-		public OreWithNameExistsException()
-		{
-			super("An ore with that name is already in the registry");
-		}
 	}
 }
