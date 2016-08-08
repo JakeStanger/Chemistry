@@ -146,14 +146,14 @@ public abstract class ItemElement extends Item
 		return this.boilingPoint;
 	}
 	
-	public abstract String giveName();
-	public abstract String giveSymbol();
-	public abstract Group giveGroup();
-	public abstract int giveAtomicNumber();
-	public abstract int giveAtomicMass();
-	public abstract int giveMeltingPoint();
-	public abstract int giveBoilingPoint();
-	public abstract int[] giveElectronConfiguration();
+	protected abstract String giveName();
+	protected abstract String giveSymbol();
+	protected abstract Group giveGroup();
+	protected abstract int giveAtomicNumber();
+	protected abstract int giveAtomicMass();
+	protected abstract int giveMeltingPoint();
+	protected abstract int giveBoilingPoint();
+	protected abstract int[] giveElectronConfiguration();
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
