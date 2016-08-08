@@ -32,7 +32,7 @@ public class Ores
 	private static HashMap<String, HashMap<ItemElement, MinMax>> oreRegistrants = new HashMap<String, HashMap<ItemElement, MinMax>>();
 	private static HashMap<String, ModelResourceLocation> models = new HashMap<String, ModelResourceLocation>();
 	
-	private static HashMap<BlockOre, String> ores = new HashMap<BlockOre, String>();
+	private static List<BlockOre> oreList = new ArrayList<BlockOre>();
 	
 	public static Ores INSTANCE;
 	
@@ -104,7 +104,8 @@ public class Ores
 	{
 		for(String name : oreRegistrants.keySet())
 		{
-			this.ores.put(new BlockOre(name, models.get(name), oreRegistrants.get(name)), name);
+			BlockOre ore = new BlockOre(name, models.get(name), oreRegistrants.get(name));
+			this.oreList.add(ore);
 		}
 	}
 	
@@ -114,13 +115,12 @@ public class Ores
 		return null;
 	}
 	
-	public HashMap<String, HashMap<ItemElement, MinMax>> getOreRegistrants()
+	/**
+	 * Get a list of all registered ores.
+	 * @return A list of all the registered ores.
+	 */
+	public List<BlockOre> getOres()
 	{
-		return this.oreRegistrants;
-	}
-	
-	public HashMap<BlockOre, String> getOres()
-	{
-		return this.ores;
+		return this.oreList;
 	}
 }
