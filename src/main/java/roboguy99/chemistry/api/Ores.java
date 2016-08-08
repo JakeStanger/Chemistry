@@ -30,13 +30,41 @@ public class Ores
 		
 		HashMap<Element, MinMax> bauxiteMap = new HashMap<Element, MinMax>();
 		bauxiteMap.put(Element.ALUMINIUM, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> copperMap = new HashMap<Element, MinMax>();
+		copperMap.put(Element.COPPER, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> leadMap = new HashMap<Element, MinMax>();
+		leadMap.put(Element.LEAD, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> platinumMap = new HashMap<Element, MinMax>();
+		platinumMap.put(Element.PLATINUM, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> silverMap = new HashMap<Element, MinMax>();
+		silverMap.put(Element.SILVER, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> sulphurMap = new HashMap<Element, MinMax>();
+		sulphurMap.put(Element.SULPHUR, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> tinMap = new HashMap<Element, MinMax>();
+		tinMap.put(Element.TIN, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> titaniumMap = new HashMap<Element, MinMax>();
+		titaniumMap.put(Element.TITANIUM, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> tungstenMap = new HashMap<Element, MinMax>();
+		tungstenMap.put(Element.TUNGSTEN, new MinMax(3, 6));
+		
+		HashMap<Element, MinMax> uraniumMap = new HashMap<Element, MinMax>();
+		uraniumMap.put(Element.URANIUM, new MinMax(3, 6));
+		
 		try
 		{
 			this.addOre("bauxite", bauxiteMap, new ModelResourceLocation("chemistry:ore_bauxite"), event);
+			this.addOre("copper", copperMap, new ModelResourceLocation("chemistry:ore_copper"), event);
 		}
 		catch (OreWithNameExistsException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -67,6 +95,12 @@ public class Ores
 		{
 			this.ores.add(new BlockOre(name, models.get(name)));
 		}
+	}
+	
+	public BlockOre getOre(String name)
+	{
+		//TODO Write method
+		return null;
 	}
 	
 	public HashMap<String, HashMap<Element, MinMax>> getOreRegistrants()
