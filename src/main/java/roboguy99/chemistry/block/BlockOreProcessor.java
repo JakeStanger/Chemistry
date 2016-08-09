@@ -70,7 +70,7 @@ public class BlockOreProcessor extends BlockTile
 			for(ItemElement element : ore.getResourceMap().keySet())
 			{
 				MinMax minMax = ore.getResourceMap().get(element);
-				int quantity = random.nextInt(minMax.getMax() - minMax.getMin()) + minMax.getMin(); //Get random quantity within bounds
+				int quantity = random.nextInt(minMax.getMax()+1 - minMax.getMin()) + minMax.getMin(); //Get random quantity within bounds
 				elements.put(element, quantity);
 			}
 		}
