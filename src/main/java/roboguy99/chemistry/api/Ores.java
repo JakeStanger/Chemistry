@@ -1,12 +1,20 @@
 package roboguy99.chemistry.api;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.apache.commons.io.FileUtils;
+
+import com.google.common.io.Files;
+import com.google.common.io.InputSupplier;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
@@ -15,10 +23,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.api.Elements.Element;
 import roboguy99.chemistry.block.ore.BlockOre;
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.wrapper.MinMax;
@@ -86,10 +92,30 @@ public class Ores
 				this.oreRegistrants.put(name, processMap);
 			}
 		}
-		catch (JsonIOException | JsonSyntaxException | FileNotFoundException e)
+		catch (JsonIOException | JsonSyntaxException e)
 		{
 			e.printStackTrace();
 		}
+		catch(FileNotFoundException e)
+		{
+			try
+			{
+				this.copyDefaultJSONFromJar();
+			}
+			catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	private void copyDefaultJSONFromJar() throws IOException
+	{
+		Chemistry.logger.info("Copying default ores config");
+		URL inputUrl = getClass().getResource("/assets/chemistry/config/ores.json");
+		File dest = new File(Chemistry.CONFIG_DIR + "ores.json");
+		FileUtils.copyURLToFile(inputUrl, dest);
+		this.getOresFromJSON();
 	}
 	
 	/**
