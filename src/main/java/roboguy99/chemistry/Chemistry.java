@@ -132,13 +132,17 @@ public class Chemistry
 		return networkWrapper;
 	}
 	
+	/**
+	 * Returns the compound item instance
+	 * @return
+	 */
 	public static Compound getCompound()
 	{
 		return Chemistry.compound;
 	}
 
 	/**
-	 * The creative tab in which all of the elements are shown
+	 * The creative tab for elements
 	 */
 	public static CreativeTabs tabElements = new CreativeTabs("tabElements") 
 	{
@@ -150,7 +154,7 @@ public class Chemistry
 	    }
 	};
 	/**
-	 * The creative tab in which any machines are shown
+	 * The creative tab for machines
 	 */
 	public static CreativeTabs tabMachines = new CreativeTabs("tabMachines") 
 	{
@@ -162,6 +166,9 @@ public class Chemistry
 	    }
 	};
 	
+	/**
+	 * The creative tab for ores
+	 */
 	public static CreativeTabs tabOres = new CreativeTabs("tabOre") 
 	{
 	    @Override
