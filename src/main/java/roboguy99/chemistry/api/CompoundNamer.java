@@ -6,8 +6,10 @@ public class CompoundNamer
 {
 	/**
 	 * A map of formulas to compound names.
-	 * Formulas should be structural, and without subscript
-	 * (C2H5OH)
+	 * Formulas should be structural, and without subscript. <br>
+	 * A structural formula is one which describes the order of elements 
+	 * rather than the total number of elements. <br> For example
+	 * C2H5OH, as opposed to C2H6O.
 	 */
 	private static HashMap<String, String> names;
 	

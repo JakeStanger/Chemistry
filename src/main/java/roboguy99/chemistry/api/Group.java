@@ -1,5 +1,11 @@
 package roboguy99.chemistry.api;
 
+/**
+ * Handles element groups and group colours.
+ * TODO Add more groups and change elements accordingly
+ * @author Roboguy99
+ *
+ */
 public enum Group
 {
 	ALKALI_METALS("alkaliMetals"),

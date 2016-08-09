@@ -22,10 +22,11 @@ public class CompoundBuilder
 	private List<ItemElement> elements = new ArrayList<ItemElement>();
 	
 	/**
-	 * Creates a compound from the elements put into the elements list.
+	 * Creates a compound from the elements put into the elements list.<br>
 	 * Factorising is supported, however you cannot factorise a factorised compound.
 	 * This means adding a factorised molecule more than once will not factorise it a second time, 
-	 * but instead will have strange and unwanted effects.
+	 * but instead will have strange and unwanted effects.<br>
+	 * In other words, you can't have brackets inside brackets.
 	 * @param preserveAfterCreation Should the buffer be reset after creation?
 	 * @return an itemstack for the compound
 	 */
@@ -99,7 +100,7 @@ public class CompoundBuilder
 			for(ItemElement element : elements) this.elements.add(element);
 			this.endMolecule();
 		}
-		this.removeTrailingMolecule();
+		this.removeTrailingMoleculeMarker();
 	}
 	
 	/**
@@ -127,7 +128,12 @@ public class CompoundBuilder
 		this.elements.clear();
 	}
 	
-	private void removeTrailingMolecule()
+	/**
+	 * Remove the last element from the buffer.
+	 * When this method is called, 
+	 * it will always be a molecule marker.
+	 */
+	private void removeTrailingMoleculeMarker()
 	{
 		this.elements.remove(this.elements.size()-1);
 	}
