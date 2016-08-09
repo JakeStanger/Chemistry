@@ -109,6 +109,13 @@ public class Ores
 		}
 	}
 	
+	/**
+	 * In the case the ores config does not exist
+	 * (such as when the mod is first loaded),
+	 * copy the default config from inside the JAR
+	 * to the Forge config folder.
+	 * @throws IOException
+	 */
 	private void copyDefaultJSONFromJar() throws IOException
 	{
 		Chemistry.logger.info("Copying default ores config");
@@ -121,7 +128,8 @@ public class Ores
 	/**
 	 * Add an ore to the ores list, ready to be registered.
 	 * 
-	 * @param name The unlocalised name of the ore. There is no need to include "ore" in the name as this is automatically appended.
+	 * @param name The unlocalised name of the ore. 
+	 * There is no need to include "ore" in the name as this is automatically appended.
 	 * @param processContents The minimum and maximum. 
 	 * @param model The model to associate to the ore.
 	 * @param event The pre-init event as a fail-safe.
