@@ -1,0 +1,83 @@
+[
+    {
+        "name": "bauxite",
+        "model": "chemistry:ore_bauxite",
+        "processMap": 
+        {
+            "aluminium": [3, 6],
+            "oxygen": [1, 2]
+        }
+    },
+    {
+        "name": "copper",
+        "model": "chemistry:ore_copper",
+        "processMap": 
+        {
+            "copper": [3, 6]
+        }
+    },
+    {
+        "name": "lead",
+        "model": "chemistry:ore_lead",
+        "processMap": 
+        {
+            "lead": [3, 6]
+        }
+    },
+    {
+        "name": "platinum",
+        "model": "chemistry:ore_platinum",
+        "processMap": 
+        {
+            "platinum": [3, 6]
+        }
+    },
+    {
+        "name": "silver",
+        "model": "chemistry:ore_silver",
+        "processMap": 
+        {
+            "silver": [3, 6]
+        }
+    },
+    {
+        "name": "sulphur",
+        "model": "chemistry:ore_sulphur",
+        "processMap": 
+        {
+            "sulphur": [3, 6]
+        }
+    },
+    {
+        "name": "tin",
+        "model": "chemistry:ore_tin",
+        "processMap": 
+        {
+            "tin": [3, 6]
+        }
+    },
+    {
+        "name": "titanium",
+        "model": "chemistry:ore_titanium",
+        "processMap": 
+        {
+            "titanium": [3, 6]
+        }
+    },
+    {
+        "name": "tungsten",
+        "model": "chemistry:ore_tungsten",
+        "processMap": 
+        {
+            "tungsten": [3, 6]
+        }
+    },
+    {
+        "name": "uranium",
+        "model": "chemistry:ore_uranium",
+        "processMap": 
+        {
+            "uranium": [3, 6]
+        }
+    }
+]
