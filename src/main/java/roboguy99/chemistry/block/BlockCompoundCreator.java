@@ -34,9 +34,9 @@ public class BlockCompoundCreator extends BlockTile
 		return true;
 	}
 	
-	/*@Override
+	@Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return new AxisAlignedBB(0.095, 0, 0.095, 0.905, 0.825, 0.905);
-    }*/
+    }
 }
