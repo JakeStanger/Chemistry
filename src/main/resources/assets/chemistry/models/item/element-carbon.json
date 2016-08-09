@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:items/element_carbon"
+		"layer0": "chemistry:item/element_carbon"
 	},
 	"display": {
 		"thirdperson": {

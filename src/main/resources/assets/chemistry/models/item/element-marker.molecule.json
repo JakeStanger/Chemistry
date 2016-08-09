@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:items/element_marker.molecule"
+		"layer0": "chemistry:item/element_marker.molecule"
 	},
 	"display": {
 		"thirdperson": {

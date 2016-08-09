@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:items/testtube/full"
+		"layer0": "chemistry:item/testtube/full"
 	},
 	"display": {
 		"thirdperson": {

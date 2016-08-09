@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:items/element_radium"
+		"layer0": "chemistry:item/element_radium"
 	},
 	"display": {
 		"thirdperson": {

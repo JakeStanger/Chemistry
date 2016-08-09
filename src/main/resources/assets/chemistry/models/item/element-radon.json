@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:items/element_radon"
+		"layer0": "chemistry:item/element_radon"
 	},
 	"display": {
 		"thirdperson": {

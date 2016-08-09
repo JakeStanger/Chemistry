@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:items/element_ytterbium"
+		"layer0": "chemistry:item/element_ytterbium"
 	},
 	"display": {
 		"thirdperson": {

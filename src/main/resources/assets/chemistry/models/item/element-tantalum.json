@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:items/element_tantalum"
+		"layer0": "chemistry:item/element_tantalum"
 	},
 	"display": {
 		"thirdperson": {
