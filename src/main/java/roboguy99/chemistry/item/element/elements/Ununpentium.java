@@ -26,7 +26,7 @@ public class Ununpentium extends ElementRadioactive
 	@Override
 	public Group giveGroup()
 	{
-		return Group.OTHER_METALS;
+		return Group.HALOGENS;
 	}
 
 	@Override

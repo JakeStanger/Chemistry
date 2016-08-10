@@ -20,7 +20,7 @@ public class Selenium extends ItemElement
 	@Override
 	public Group giveGroup()
 	{
-		return Group.NON_METALS;
+		return Group.METALLOIDS;
 	}
 
 	@Override

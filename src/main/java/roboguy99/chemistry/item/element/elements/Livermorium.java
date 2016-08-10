@@ -26,7 +26,7 @@ public class Livermorium extends ElementRadioactive
 	@Override
 	public Group giveGroup()
 	{
-		return Group.NON_METALS;
+		return Group.POST_TRANSITION_METALS;
 	}
 
 	@Override

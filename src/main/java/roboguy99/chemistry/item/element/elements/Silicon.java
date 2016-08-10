@@ -50,7 +50,7 @@ public class Silicon extends ItemElement
 	@Override
 	public Group giveGroup()
 	{
-		return Group.NON_METALS;
+		return Group.METALLOIDS;
 	}
 	
 }

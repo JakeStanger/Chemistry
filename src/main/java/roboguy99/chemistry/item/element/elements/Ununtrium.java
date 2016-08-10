@@ -26,7 +26,7 @@ public class Ununtrium extends ElementRadioactive
 	@Override
 	public Group giveGroup()
 	{
-		return Group.OTHER_METALS;
+		return Group.NOBLE_GASES;
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public class Aluminium extends ItemElement
 	@Override
 	public Group giveGroup()
 	{
-		return Group.OTHER_METALS;
+		return Group.POST_TRANSITION_METALS;
 	}
 	
 }

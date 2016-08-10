@@ -20,7 +20,7 @@ public class Iodine extends ItemElement
 	@Override
 	public Group giveGroup()
 	{
-		return Group.NON_METALS;
+		return Group.HALOGENS;
 	}
 
 	@Override

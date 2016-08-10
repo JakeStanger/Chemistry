@@ -94,6 +94,7 @@ public class Chemistry
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
+		//Textures
 		ModelLoader.setCustomModelResourceLocation(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockOreProcessor), 0, new ModelResourceLocation("chemistry:blockOreProcessor", "inventory"));

@@ -20,7 +20,7 @@ public class Ytterbium extends ItemElement
 	@Override
 	public Group giveGroup()
 	{
-		return Group.TRANSITION_METALS;
+		return Group.LANTHANOIDS;
 	}
 
 	@Override

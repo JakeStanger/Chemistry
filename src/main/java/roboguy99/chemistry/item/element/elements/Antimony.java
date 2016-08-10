@@ -20,7 +20,7 @@ public class Antimony extends ItemElement
 	@Override
 	public Group giveGroup()
 	{
-		return Group.OTHER_METALS;
+		return Group.METALLOIDS;
 	}
 
 	@Override

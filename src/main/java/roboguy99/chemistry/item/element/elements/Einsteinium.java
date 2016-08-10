@@ -31,7 +31,7 @@ public class Einsteinium extends ElementRadioactive
 	@Override
 	public Group giveGroup()
 	{
-		return Group.TRANSITION_METALS;
+		return Group.ACTINOIDS;
 	}
 
 	@Override
