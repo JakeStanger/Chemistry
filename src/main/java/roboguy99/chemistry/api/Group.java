@@ -66,7 +66,7 @@ public enum Group
 				groupColour = Colour.BRIGHT_GREEN;
 				break;
 			case NOBLE_GASES:
-				groupColour = Colour.DARK_AQUA;
+				groupColour = Colour.DARK_RED;
 				break;
 			case HALOGENS:
 				groupColour = Colour.PURPLE;
