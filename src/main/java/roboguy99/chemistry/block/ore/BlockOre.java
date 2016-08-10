@@ -23,7 +23,13 @@ import roboguy99.chemistry.item.block.ItemBlockOre;
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.wrapper.MinMax;
 
-public class BlockOre extends Block //TODO Display tooltip based on process results
+/**
+ * An ore block. Stores processing data, 
+ * read from JSON file on launch.
+ * @author Roboguy99
+ *
+ */
+public class BlockOre extends Block
 {
 	private String name;
 	private HashMap<ItemElement, MinMax> resourceMap;

@@ -2,7 +2,7 @@ package roboguy99.chemistry.api;
 
 /**
  * Handles element groups and group colours.
- * TODO Change elements to new groups TODO Generate textures for new groups
+ * TODO Generate textures for new groups
  * @author Roboguy99
  *
  */
