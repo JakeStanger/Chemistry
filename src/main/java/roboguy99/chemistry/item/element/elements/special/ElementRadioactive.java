@@ -1,19 +1,16 @@
 package roboguy99.chemistry.item.element.elements.special;
 
-import java.util.List;
-
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import roboguy99.chemistry.Chemistry;
+import org.lwjgl.input.Keyboard;
 import roboguy99.chemistry.api.Colour;
 import roboguy99.chemistry.item.element.ItemElement;
-import roboguy99.chemistry.network.packet.ItemDelete;
+
+import java.util.List;
 
 /**
  * A radioactive element.
@@ -60,14 +57,26 @@ public abstract class ElementRadioactive extends ItemElement
 	 */
 	public abstract long giveHalfLife();
 	
-	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) 
-	{		
+	/**
+	 * Runs when the item ticks.
+	 * Updates half-life
+	 * @param stack
+	 * @param world
+	 * @param entity
+	 * @param par4
+	 * @param par5
+	 */
+	@Override
+	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5)
+	{
 		this.ticksUntilUpdate--;
+		System.out.println(this.ticksUntilUpdate); //Prints irregularly + different on server/client
 		if(this.ticksUntilUpdate <= 0)
 		{
+			//System.out.println(world.isRemote);
 			long timeUntilDecay;
 			
-			if(stack.getTagCompound() != null) timeUntilDecay = stack.getTagCompound().getLong("timeUntilDecay");
+			if (stack.getTagCompound() != null) timeUntilDecay = stack.getTagCompound().getLong("timeUntilDecay");
 			else timeUntilDecay = this.halfLife;
 			
 			this.ticksUntilUpdate = this.TICKS_PER_MINUTE;
@@ -75,14 +84,29 @@ public abstract class ElementRadioactive extends ItemElement
 			timeUntilDecay--;
 			this.updateNBT(stack, timeUntilDecay);
 			
-			if(timeUntilDecay <= 0)
+			if (timeUntilDecay <= 0)
 			{
 				timeUntilDecay = this.halfLife;
 				this.updateNBT(stack, timeUntilDecay);
 				
-				Math.floor(stack.stackSize /= 2F);
+				if(!world.isRemote)
+				{
+					System.out.println("RTGHG"); //Never prints
+					Math.floor(stack.stackSize /= 2F); //Reduce stack size
+					if(stack.stackSize == 0) stack = null;
+				}
 				
-				if(stack.stackSize <= 0) Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new ItemDelete(stack));
+				/*if (stack.stackSize <= 0 && !world.isRemote)
+				{
+					//Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new ItemDelete(stack));
+					
+					EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+					player.inventory.markDirty();
+					player.inventory.deleteStack(stack);
+					
+					stack.stackSize = 0;
+					stack = null;
+				}*/
 			}
 		}
 	}

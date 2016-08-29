@@ -53,8 +53,8 @@ import java.util.Random;
 public class Chemistry 
 {
 	// Mod data. Fallback if mc-mod.info fails to load.
-	public static final String modID = "chemistry";
-	public static final String modVersion = "0.0.0";
+	static final String modID = "chemistry";
+	static final String modVersion = "0.0.0";
 	public static final String name = "Chemistry";
 
 	public static final Logger logger = LogManager.getLogger("Chemistry");
@@ -62,7 +62,7 @@ public class Chemistry
 	public static String CONFIG_DIR;
 
 	@SidedProxy(clientSide = "roboguy99.chemistry.network.ClientProxy", serverSide = "roboguy99.chemistry.network.CommonProxy")
-	protected static CommonProxy proxy;
+	private static CommonProxy proxy;
 	private static SimpleNetworkWrapper networkWrapper;
 
 	public static Chemistry INSTANCE;
@@ -78,31 +78,35 @@ public class Chemistry
 	private void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
 	{
 		logger.info("Pre-initialising");
-		this.INSTANCE = this;
+		Chemistry.INSTANCE = this;
 		
-		this.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry/";
+		Chemistry.CONFIG_DIR = event.getModConfigurationDirectory() + "/Chemistry/";
 		
 		new Elements();
 		
-		this.ores = new Ores(event);
+		Chemistry.ores = new Ores(event);
 		
-		this.compound = new Compound();
+		Chemistry.compound = new Compound();
 		
-		this.blockCompoundCreator = new BlockCompoundCreator();
-		this.blockOreProcessor = new BlockOreProcessor();
+		Chemistry.blockCompoundCreator = new BlockCompoundCreator();
+		Chemistry.blockOreProcessor = new BlockOreProcessor();
 		
 		proxy.registerProxies();
 		
-		this.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("chemisty");
+		Chemistry.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("chemisty");
 		this.getNetworkWrapper().registerMessage(CompoundCreateHandle.class, CompoundCreate.class, 0, Side.SERVER);
 		this.getNetworkWrapper().registerMessage(ItemDeleteHandle.class, ItemDelete.class, 1, Side.SERVER);
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
-		//Textures
-		ModelLoader.setCustomModelResourceLocation(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockOreProcessor), 0, new ModelResourceLocation("chemistry:blockOreProcessor", "inventory"));
+		//Client-side
+		if(event.getSide() == Side.CLIENT)
+		{
+			//Textures
+			ModelLoader.setCustomModelResourceLocation(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockOreProcessor), 0, new ModelResourceLocation("chemistry:blockOreProcessor", "inventory"));
+		}
 	}
 
 	@EventHandler

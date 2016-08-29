@@ -2,7 +2,6 @@ package roboguy99.chemistry.network.packet;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -39,7 +38,7 @@ public class ItemDelete implements IMessage
 		@Override
         public IMessage onMessage(final ItemDelete message, final MessageContext ctx) 
 		{
-            IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.worldObj; // or Minecraft.getMinecraft() on the client
+            IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.worldObj;
             mainThread.addScheduledTask(new Runnable() 
             {
                 @Override
@@ -47,7 +46,9 @@ public class ItemDelete implements IMessage
                 {
                 	ItemStack stack = message.stack;
                 	stack.useItemRightClick(ctx.getServerHandler().playerEntity.worldObj, ctx.getServerHandler().playerEntity, ctx.getServerHandler().playerEntity.getActiveHand());
-                	stack = null; //TODO Fix this
+                	stack.stackSize = 0;
+	                stack = null;
+	                ctx.getServerHandler().playerEntity.inventory.deleteStack(stack);
                 }
             });
             return null;

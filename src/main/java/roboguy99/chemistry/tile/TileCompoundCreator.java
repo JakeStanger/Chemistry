@@ -177,7 +177,7 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 
 	    if (this.hasCustomName()) nbt.setString("customName", this.getCustomName());
 	    
-	    return nbt; //TODO Investigate this return?
+	    return nbt;
 	}
 
 	@Override
