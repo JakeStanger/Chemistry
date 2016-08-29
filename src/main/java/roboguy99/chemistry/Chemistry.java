@@ -46,7 +46,7 @@ import java.util.Random;
 /**
  * Main class. Handles mod initialisation.
  * 
- * @author Roboguy99
+ * @author Jake Stanger
  * 
  */
 @Mod(modid = Chemistry.modID, version = Chemistry.modVersion, name = Chemistry.name)
@@ -72,7 +72,7 @@ public class Chemistry
 	
 	private static Compound compound;
 	
-	private static Ores ores; //A test
+	private static Ores ores;
 	
 	@EventHandler
 	private void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading

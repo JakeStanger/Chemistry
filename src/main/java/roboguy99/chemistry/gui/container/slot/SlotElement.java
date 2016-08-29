@@ -7,7 +7,7 @@ import roboguy99.chemistry.item.element.ItemElement;
 
 /**
  * A container slot which only allows elements to be placed in it.
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class SlotElement extends Slot

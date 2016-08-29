@@ -5,7 +5,7 @@ import roboguy99.chemistry.item.element.ItemElement;
 
 /**
  * The boiling point of arsenic is lower than its melting point.
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class Arsenic extends ItemElement

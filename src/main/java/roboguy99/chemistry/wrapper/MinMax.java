@@ -4,7 +4,7 @@ package roboguy99.chemistry.wrapper;
  * A wrapper class for two integers.
  * Used for where a minimum and maximum value are both required.
  * @see roboguy99.chemistry.api.Ores Ore registry class
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class MinMax

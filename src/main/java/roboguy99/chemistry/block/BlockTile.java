@@ -21,7 +21,7 @@ import roboguy99.chemistry.tile.TileCompoundCreator;
 
 /**
  * A block which has an associated TileEntity
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public abstract class BlockTile extends BlockContainer

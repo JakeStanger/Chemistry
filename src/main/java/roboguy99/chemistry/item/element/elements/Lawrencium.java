@@ -6,7 +6,7 @@ import roboguy99.chemistry.item.element.elements.special.ElementRadioactive;
 /**
  * The boiling point of Lawrencium is unknown
  * The electron configuration of Lawrencium is predicted
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class Lawrencium extends ElementRadioactive

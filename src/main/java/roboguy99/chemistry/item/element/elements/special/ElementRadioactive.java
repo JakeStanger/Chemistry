@@ -21,7 +21,7 @@ import roboguy99.chemistry.network.packet.ItemDelete;
  * The half-life is in Minecraft minutes, and once it runs out the parent itemstack halves in size.
  * This is rounded down, so a stack of 3 will decay to a stack of 1, and a stack of 1 will be deleted.
  * One Minecraft minute is equal to 1/20 of a real minute (3 real seconds).
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public abstract class ElementRadioactive extends ItemElement

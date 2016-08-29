@@ -5,7 +5,7 @@ import roboguy99.chemistry.item.element.elements.special.ElementRadioactive;
 
 /**
  * The melting and boiling points of Dubnium are unknown
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class Dubnium extends ElementRadioactive

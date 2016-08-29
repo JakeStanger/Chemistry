@@ -11,7 +11,7 @@ import roboguy99.chemistry.item.element.ItemElement;
  * If you require an element that is not part of your periodic table, 
  * but you need for some internal mechanism, extend this.
  * For example, see the MoleculeMarker element.
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public abstract class ElementSpecial extends ItemElement

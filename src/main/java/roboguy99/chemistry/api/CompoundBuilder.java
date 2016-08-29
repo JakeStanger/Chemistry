@@ -15,7 +15,7 @@ import roboguy99.chemistry.network.packet.CompoundCreate;
 /**
  * Creates compounds from given elements.
  * The elements given are stored in a buffer until the buffer is wiped.
- * @author Roboguy99
+ * @author Jake Stanger
  */
 public class CompoundBuilder
 {

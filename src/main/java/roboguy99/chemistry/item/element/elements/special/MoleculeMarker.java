@@ -5,7 +5,7 @@ import roboguy99.chemistry.item.element.ItemElement;
 
 /**
  * A special element with no mass used for marking the beginning/end of a molecule
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class MoleculeMarker extends ElementSpecial

@@ -26,7 +26,7 @@ import roboguy99.chemistry.wrapper.MinMax;
 /**
  * An ore block. Stores processing data, 
  * read from JSON file on launch.
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class BlockOre extends Block

@@ -5,7 +5,7 @@ import roboguy99.chemistry.item.element.elements.special.ElementRadioactive;
 
 /**
  * The boiling point of Fermium is unknown
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class Fermium extends ElementRadioactive

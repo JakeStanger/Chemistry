@@ -17,7 +17,7 @@ import roboguy99.chemistry.api.Group;
 /**
  * The item class for a chemical element.
  * Extend this to create an element.
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public abstract class ItemElement extends Item

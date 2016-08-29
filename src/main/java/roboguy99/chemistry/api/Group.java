@@ -2,8 +2,7 @@ package roboguy99.chemistry.api;
 
 /**
  * Handles element groups and group colours.
- * TODO Generate textures for new groups
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public enum Group
@@ -33,7 +32,7 @@ public enum Group
 	 * Gets the associated chat colour for the given group.
 	 * @param group The group.
 	 * @return The colour.
-	 * @author Roboguy99
+	 * @author Jake Stanger
 	 */
 	public static Colour getGroupColour(Group group)
 	{

@@ -34,7 +34,7 @@ import roboguy99.chemistry.wrapper.MinMax;
  * Reads ores from JSON file.
  * Also contains list of all ores.
  * TODO Find a new home for this class probably.
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class Ores 

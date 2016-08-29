@@ -9,7 +9,7 @@ import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
 
 /**
  * Handles element instancing, and contains element getter methods.
- * @author Roboguy99
+ * @author Jake Stanger
  *
  */
 public class Elements
