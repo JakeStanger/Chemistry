@@ -1,12 +1,5 @@
 package roboguy99.chemistry;
 
-import java.io.File;
-import java.util.List;
-import java.util.Random;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -22,21 +15,33 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import roboguy99.chemistry.api.CompoundNamer;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.api.Elements.Element;
+import roboguy99.chemistry.api.Group;
 import roboguy99.chemistry.api.Ores;
 import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.block.BlockOreProcessor;
 import roboguy99.chemistry.block.ore.BlockOre;
 import roboguy99.chemistry.handler.GuiHandler;
 import roboguy99.chemistry.item.compound.Compound;
+import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.network.CommonProxy;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 import roboguy99.chemistry.network.packet.CompoundCreate.CompoundCreateHandle;
 import roboguy99.chemistry.network.packet.ItemDelete;
 import roboguy99.chemistry.network.packet.ItemDelete.ItemDeleteHandle;
 import roboguy99.chemistry.tile.TileEntities;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Main class. Handles mod initialisation.
@@ -67,7 +72,7 @@ public class Chemistry
 	
 	private static Compound compound;
 	
-	private static Ores ores;
+	private static Ores ores; //A test
 	
 	@EventHandler
 	private void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
@@ -112,6 +117,63 @@ public class Chemistry
 	@EventHandler
 	private void postInit(FMLPostInitializationEvent event) 
 	{
+		//this.generateTexturesForElements();
+	}
+	
+	private void generateTexturesForElements()
+	{
+		for(ItemElement element : Elements.getElements())
+		{
+			if(element != null && !new File("generatedtextures" + element.getName() + "png").isFile()) 
+			{
+				String text = element.getSymbol();
+				Group group = element.getGroup();
+			
+		        BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+		        Graphics2D g2d = img.createGraphics();
+		        
+		        Font font;
+		        if(text.length() <= 2) font = new Font("Helvetica", Font.PLAIN, 45);
+		        else font = new Font("Helvetica", Font.PLAIN, 32);
+		        
+		        int[] color = Group.getGroupColour(group).rgbCode;
+		        Color colour = new Color(color[0], color[1], color[2]);
+		        
+		        g2d.setFont(font);
+		        java.awt.FontMetrics fm = g2d.getFontMetrics();
+		        g2d.dispose();
+		
+		        img = new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB);
+		        g2d = img.createGraphics();
+		        g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+		        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+		        g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+		        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+		        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
+		        g2d.setColor(colour);
+		        g2d.draw3DRect(0, 0, img.getWidth(), img.getHeight(), false);
+		        g2d.fill3DRect(0, 0, 64, 64, false);
+		        
+		        g2d.setFont(font);
+		        fm = g2d.getFontMetrics();
+		        g2d.setColor(colour.brighter().darker().brighter()); //This gives a colour slightly different to a single brighter
+		        
+		        g2d.drawString(text, 32- fm.stringWidth(text)/2, 32+ fm.getDescent() + 5);
+		        g2d.dispose();
+		        try 
+		        {
+		            ImageIO.write(img, "png", new File("../generatedtextures/" + element.getName() + ".png"));
+		        } 
+		        catch (IOException ex) 
+		        {
+		            ex.printStackTrace();
+		        }
+			}
+		}
 	}
 	
 	/**
