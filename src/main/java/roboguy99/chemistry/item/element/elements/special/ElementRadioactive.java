@@ -107,13 +107,8 @@ public abstract class ElementRadioactive extends ItemElement
 					stack.stackSize = (int) Math.floor(stack.stackSize / 2F); //Reduce stack size
 					if (stack != null && stack.stackSize == 0)
 					{
-						EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-						if(player != null)
-						{
-							player.inventory.deleteStack(stack);
-							//int slot = Minecraft.getMinecraft().thePlayer.inventory.getSlotFor(stack);
-							//if(slot >= 0) player.inventory.setInventorySlotContents(slot, null);
-						}
+						EntityPlayer player = (EntityPlayer) entity;
+						if(player != null) player.inventory.deleteStack(stack);
 					}
 				}
 			}
