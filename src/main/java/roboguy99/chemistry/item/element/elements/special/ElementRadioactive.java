@@ -24,32 +24,28 @@ import java.util.List;
 public abstract class ElementRadioactive extends ItemElement
 {
 	/**
-	 * The number of ticks in a single Minecraft minute
-	 */
-	private static final int TICKS_PER_MINUTE = 120;
-	
-	/**
 	 * The half-life of the element, in minutes
 	 */
-	private long halfLife;
+	private long HALF_LIFE;
 	
 	/**
-	 * The number of ticks until the next MC minute is up.
+	 * The time between decay updates in milliseconds
 	 */
-	private int ticksUntilUpdate = 1; //Update straight away
+	private static final int UPDATE_GAP = 3000;
+	
 	
 	public ElementRadioactive()
 	{
-		this.halfLife = this.giveHalfLife();
+		this.HALF_LIFE = this.giveHalfLife();
 	}	
 	
 	/**
 	 * Get the half-life of the element.
 	 * @return The half-life of the element, in minutes.
 	 */
-	public long getHalfLife()
+	public long getHALF_LIFE()
 	{
-		return this.halfLife;
+		return this.HALF_LIFE;
 	}
 	
 	/**
@@ -59,7 +55,7 @@ public abstract class ElementRadioactive extends ItemElement
 	
 	/**
 	 * Runs when the item ticks.
-	 * Updates half-life
+	 * Updates half-life.
 	 * @param stack
 	 * @param world
 	 * @param entity
@@ -69,58 +65,61 @@ public abstract class ElementRadioactive extends ItemElement
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5)
 	{
-		this.ticksUntilUpdate--;
-		System.out.println(this.ticksUntilUpdate); //Prints irregularly + different on server/client
-		if(this.ticksUntilUpdate <= 0)
+		if(!world.isRemote)
 		{
-			//System.out.println(world.isRemote);
-			long timeUntilDecay;
+			NBTTagCompound compound;
+			if (stack.getTagCompound() != null) compound = stack.getTagCompound();
+			else compound = new NBTTagCompound();
 			
-			if (stack.getTagCompound() != null) timeUntilDecay = stack.getTagCompound().getLong("timeUntilDecay");
-			else timeUntilDecay = this.halfLife;
-			
-			this.ticksUntilUpdate = this.TICKS_PER_MINUTE;
-			
-			timeUntilDecay--;
-			this.updateNBT(stack, timeUntilDecay);
-			
-			if (timeUntilDecay <= 0)
+			long startTime;
+			if (compound.hasKey("startDecayTick")) startTime = compound.getLong("startDecayTick");
+			else
 			{
-				timeUntilDecay = this.halfLife;
-				this.updateNBT(stack, timeUntilDecay);
+				startTime = System.currentTimeMillis();
+				compound.setLong("startDecayTick", startTime);
+			}
+			
+			long currentTime = System.currentTimeMillis();
+			
+			if (currentTime - startTime >= ElementRadioactive.UPDATE_GAP) //Reduce decay time every 3 seconds
+			{
+				compound.removeTag("startDecayTick");
 				
-				if(!world.isRemote)
+				long timeUntilDecay;
+				
+				if (compound.hasKey("timeUntilDecay"))
 				{
-					System.out.println("RTGHG"); //Never prints
-					Math.floor(stack.stackSize /= 2F); //Reduce stack size
-					if(stack.stackSize == 0) stack = null;
+					timeUntilDecay = compound.getLong("timeUntilDecay");
+					timeUntilDecay--;
+					compound.setLong("timeUntilDecay", timeUntilDecay);
+				}
+				else
+				{
+					timeUntilDecay = this.HALF_LIFE;
+					compound.setLong("timeUntilDecay", timeUntilDecay);
 				}
 				
-				/*if (stack.stackSize <= 0 && !world.isRemote)
+				if (timeUntilDecay <= 0)
 				{
-					//Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new ItemDelete(stack));
+					timeUntilDecay = this.HALF_LIFE;
+					compound.setLong("timeUntilDecay", timeUntilDecay);
 					
-					EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-					player.inventory.markDirty();
-					player.inventory.deleteStack(stack);
-					
-					stack.stackSize = 0;
-					stack = null;
-				}*/
+					stack.stackSize = (int) Math.floor(stack.stackSize / 2F); //Reduce stack size
+					if (stack != null && stack.stackSize == 0)
+					{
+						EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+						if(player != null)
+						{
+							player.inventory.deleteStack(stack);
+							//int slot = Minecraft.getMinecraft().thePlayer.inventory.getSlotFor(stack);
+							//if(slot >= 0) player.inventory.setInventorySlotContents(slot, null);
+						}
+					}
+				}
 			}
+			
+			stack.setTagCompound(compound);
 		}
-	}
-	
-	/**
-	 * Adds the given time until delay to the given item in a new tag
-	 * @param stack the itemstack to update the NBT of
-	 * @param timeUntilDecay the value to write to NBT
-	 */
-	private void updateNBT(ItemStack stack, long timeUntilDecay)
-	{
-		NBTTagCompound tag = new NBTTagCompound();
-		tag.setLong("timeUntilDecay", timeUntilDecay);
-		stack.setTagCompound(tag);
 	}
 	
 	@Override
@@ -135,7 +134,7 @@ public abstract class ElementRadioactive extends ItemElement
 			}
 			catch(NullPointerException e)
 			{
-				tooltip.add(Colour.BRIGHT_GREEN + "Radioactive: " + this.getDecayTimeReadable(this.halfLife) + " until decay");
+				tooltip.add(Colour.BRIGHT_GREEN + "Radioactive: " + this.getDecayTimeReadable(this.HALF_LIFE) + " until decay");
 			}
 		}
 	}
