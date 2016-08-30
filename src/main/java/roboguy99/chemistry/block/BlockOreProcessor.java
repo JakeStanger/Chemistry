@@ -3,22 +3,14 @@ package roboguy99.chemistry.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.block.ore.BlockOre;
 import roboguy99.chemistry.handler.GuiHandler;
-import roboguy99.chemistry.item.block.ItemBlockOre;
-import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.tile.TileOreProcessor;
-import roboguy99.chemistry.wrapper.MinMax;
-
-import java.util.HashMap;
-import java.util.Random;
 
 public class BlockOreProcessor extends BlockTile
 {
@@ -32,43 +24,7 @@ public class BlockOreProcessor extends BlockTile
 	{
 		if(!world.isRemote) player.openGui(Chemistry.INSTANCE, GuiHandler.GUI_BLOCK_ORE_PROCESSOR, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
-		
-		/*if(!world.isRemote && heldItem != null) TODO Move
-		{
-			HashMap<ItemElement, Integer> elements = assignRandomElements(heldItem.getItem()); //Get random elements based on ore
-			
-			//TODO Replace with GUI
-			for(ItemElement element : elements.keySet())
-			{
-				player.addChatMessage(new TextComponentString(element.getName() + " - " + elements.get(element))); 
-			}
-		}
-		return true;*/
 	}
 	
-	/**
-	 * Assigns random elements based on the item given, assuming the item is an ore. TODO Move
-	 * The quantity of elements is based on the ore's resource map.
-	 * @param item The item to assign elements to.
-	 * @return A map of assigned elements and quantities
-	 */
-	private HashMap<ItemElement, Integer> assignRandomElements(Item item)
-	{
-		HashMap<ItemElement, Integer> elements = new HashMap<>();
-		
-		if(item instanceof ItemBlockOre) //Check item is ore
-		{
-			Random random = new Random();
-			BlockOre ore = ((ItemBlockOre) item).getOre();
-			
-			for(ItemElement element : ore.getResourceMap().keySet())
-			{
-				MinMax minMax = ore.getResourceMap().get(element);
-				int quantity = random.nextInt(minMax.getMax() +1 - minMax.getMin()) + minMax.getMin(); //Get random quantity within bounds (inclusive)
-				elements.put(element, quantity);
-			}
-		}
-		
-		return elements;
-	}
+	
 }
