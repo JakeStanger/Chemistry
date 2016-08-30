@@ -8,7 +8,7 @@ public class Roentgenium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 2;
+		return 126;
 	}
 
 	@Override

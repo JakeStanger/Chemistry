@@ -14,7 +14,7 @@ public class Lawrencium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 216;
+		return 216 * 60;
 	}
 
 	@Override

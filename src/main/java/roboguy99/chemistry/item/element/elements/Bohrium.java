@@ -8,7 +8,7 @@ public class Bohrium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 1;
+		return 54;
 	}
 
 	@Override

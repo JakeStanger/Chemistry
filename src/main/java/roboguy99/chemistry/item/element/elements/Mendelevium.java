@@ -13,7 +13,7 @@ public class Mendelevium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 73440;
+		return 73440 * 60;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public class Francium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 22;
+		return 22 * 60;
 	}
 
 	@Override

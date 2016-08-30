@@ -8,7 +8,7 @@ public class Copernicium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 1;
+		return 29;
 	}
 
 	@Override

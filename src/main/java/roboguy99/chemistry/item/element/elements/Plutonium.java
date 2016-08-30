@@ -8,7 +8,7 @@ public class Plutonium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 12672216000L;
+		return 12672216000L * 60;
 	}
 
 	@Override

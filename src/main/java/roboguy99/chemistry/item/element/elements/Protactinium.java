@@ -8,7 +8,7 @@ public class Protactinium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 17218656000L;
+		return 17218656000L * 60;
 	}
 
 	@Override

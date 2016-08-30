@@ -13,7 +13,7 @@ public class Fermium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 144720;
+		return 144720 * 60;
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class Nobelium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 58;
+		return 58 * 60;
 	}
 
 	@Override

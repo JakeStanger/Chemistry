@@ -8,7 +8,7 @@ public class Astatine extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 486;
+		return 486 * 60;
 	}
 
 	@Override

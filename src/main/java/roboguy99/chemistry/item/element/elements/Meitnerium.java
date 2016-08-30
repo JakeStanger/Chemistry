@@ -8,7 +8,7 @@ public class Meitnerium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 1;
+		return 8;
 	}
 
 	@Override

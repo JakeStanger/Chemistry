@@ -8,7 +8,7 @@ public class Promethium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 9303120;
+		return 9303120 * 60;
 	}
 
 	@Override

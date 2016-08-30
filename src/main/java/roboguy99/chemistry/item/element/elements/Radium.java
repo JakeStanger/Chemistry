@@ -8,7 +8,7 @@ public class Radium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 2242560000L;
+		return 2242560000L * 60;
 	}
 
 	@Override

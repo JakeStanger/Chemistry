@@ -8,7 +8,7 @@ public class Polonium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 65700000;
+		return 65700000L * 60;
 	}
 
 	@Override

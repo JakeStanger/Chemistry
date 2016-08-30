@@ -8,7 +8,7 @@ public class Californium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 473040000;
+		return 473040000L * 60;
 	}
 
 	@Override

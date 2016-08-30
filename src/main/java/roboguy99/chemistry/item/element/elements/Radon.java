@@ -8,7 +8,7 @@ public class Radon extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 5472;
+		return 5472 * 60;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public class Ununtrium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 1;
+		return 20;
 	}
 
 	@Override

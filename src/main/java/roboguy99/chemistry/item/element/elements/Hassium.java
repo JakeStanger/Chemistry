@@ -8,7 +8,7 @@ public class Hassium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 1;
+		return 27;
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class Hassium extends ElementRadioactive
 	@Override
 	public int giveAtomicMass()
 	{
-		return 239;
+		return 269;
 	}
 
 	@Override

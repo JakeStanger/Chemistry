@@ -8,7 +8,7 @@ public class Berkelium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 726642000;
+		return 726642000L * 60;
 	}
 
 	@Override

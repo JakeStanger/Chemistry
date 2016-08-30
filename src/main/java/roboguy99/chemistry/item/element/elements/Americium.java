@@ -8,7 +8,7 @@ public class Americium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 3873672000L;
+		return 3873672000L * 60;
 	}
 
 	@Override

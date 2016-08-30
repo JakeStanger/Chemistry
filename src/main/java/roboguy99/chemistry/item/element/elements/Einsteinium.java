@@ -13,7 +13,7 @@ public class Einsteinium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 397080;
+		return 397080 * 60;
 	}
 
 	@Override

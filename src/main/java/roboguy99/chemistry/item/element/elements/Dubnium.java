@@ -13,7 +13,7 @@ public class Dubnium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 1740;
+		return 1740 * 60;
 	}
 
 	@Override

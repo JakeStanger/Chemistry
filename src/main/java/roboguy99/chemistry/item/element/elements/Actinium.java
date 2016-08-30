@@ -8,7 +8,7 @@ public class Actinium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 11405520;
+		return 11405520L * 60;
 	}
 
 	@Override

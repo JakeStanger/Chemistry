@@ -56,7 +56,7 @@ public class Technetium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 110901600000L;
+		return 110901600000L * 60;
 	}
 	
 }

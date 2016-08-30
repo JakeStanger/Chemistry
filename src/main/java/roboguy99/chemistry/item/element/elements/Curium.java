@@ -8,7 +8,7 @@ public class Curium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 8225640000000L;
+		return 8225640000000L + 60;
 	}
 
 	@Override

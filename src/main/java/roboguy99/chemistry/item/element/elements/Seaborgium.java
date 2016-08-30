@@ -1,7 +1,5 @@
 package roboguy99.chemistry.item.element.elements;
 
-import java.awt.Color;
-
 import roboguy99.chemistry.api.Group;
 import roboguy99.chemistry.item.element.elements.special.ElementRadioactive;
 
@@ -10,7 +8,7 @@ public class Seaborgium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 3;
+		return 186;
 	}
 
 	@Override

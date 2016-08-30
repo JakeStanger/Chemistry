@@ -56,6 +56,6 @@ public class Uranium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 2365200000000000L;
+		return 2365200000000000L * 60;
 	}
 }

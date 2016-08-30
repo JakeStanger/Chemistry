@@ -8,7 +8,7 @@ public class Flerovium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 1;
+		return 3;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public class Thorium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 7384680000000000L;
+		return 7384680000000000L * 60;
 	}
 
 	@Override

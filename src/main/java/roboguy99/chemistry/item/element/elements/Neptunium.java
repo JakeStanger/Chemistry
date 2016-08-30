@@ -8,7 +8,7 @@ public class Neptunium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 1124784000000L;
+		return 1124784000000L * 60;
 	}
 
 	@Override

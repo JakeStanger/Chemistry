@@ -8,7 +8,7 @@ public class Rutherfordium extends ElementRadioactive
 	@Override
 	public long giveHalfLife()
 	{
-		return 78;
+		return 78 * 60;
 	}
 
 	@Override
