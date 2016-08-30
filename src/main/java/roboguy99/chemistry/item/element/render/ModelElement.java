@@ -13,7 +13,7 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 
-public class ModelElement implements IModel
+class ModelElement implements IModel
 {
 	private String elementName;
 	

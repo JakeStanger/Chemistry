@@ -16,8 +16,6 @@ public class GuiBlockCompoundCreator extends GuiContainer
 {
 	private GuiButton btnCreate;
 	
-	private TileCompoundCreator compoundCreator;
-	
 	@Override
 	public void initGui()
 	{
@@ -25,8 +23,6 @@ public class GuiBlockCompoundCreator extends GuiContainer
 		btnCreate = new GuiButton(0, this.guiLeft + 8 + 18 + 12, this.guiTop + 133, 100, 20, "Create Compound");
 		this.buttonList.add(btnCreate);
 	}
-	
-	private float xSize_lo, ySize_lo;
 	
 	private static final ResourceLocation texture = new ResourceLocation("chemistry", "textures/gui/compoundCreator.png");
 	
@@ -36,7 +32,7 @@ public class GuiBlockCompoundCreator extends GuiContainer
 		this.xSize = 176;
 		this.ySize = 241;
 		
-		this.compoundCreator = compoundCreator;
+		TileCompoundCreator compoundCreator1 = compoundCreator;
 	}
 	
 	/**
@@ -46,8 +42,8 @@ public class GuiBlockCompoundCreator extends GuiContainer
 	public void drawScreen(int var1, int var2, float var3)
 	{
 		super.drawScreen(var1, var2, var3);
-		this.xSize_lo = var1;
-		this.ySize_lo = var2;
+		float xSize_lo = var1;
+		float ySize_lo = var2;
 	}
 	
 	@Override

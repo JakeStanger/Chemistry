@@ -1,11 +1,11 @@
 package roboguy99.chemistry.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.item.element.elements.*;
 import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles element instancing, and contains element getter methods.
@@ -307,7 +307,7 @@ public class Elements
 		
 		private final ItemElement element;
 		
-		private Element(ItemElement ele)
+		Element(ItemElement ele)
 		{
 			element = ele;
 		}

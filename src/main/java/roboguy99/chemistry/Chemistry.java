@@ -55,7 +55,7 @@ public class Chemistry
 	// Mod data. Fallback if mc-mod.info fails to load.
 	static final String modID = "chemistry";
 	static final String modVersion = "0.0.0";
-	public static final String name = "Chemistry";
+	static final String name = "Chemistry";
 
 	public static final Logger logger = LogManager.getLogger("Chemistry");
 	

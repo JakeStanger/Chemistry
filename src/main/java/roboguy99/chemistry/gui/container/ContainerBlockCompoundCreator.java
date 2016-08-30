@@ -46,7 +46,7 @@ public class ContainerBlockCompoundCreator extends Container
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int fromSlot) 
 	{
 	    ItemStack previous = null;
-	    Slot slot = (Slot) this.inventorySlots.get(fromSlot);
+	    Slot slot = this.inventorySlots.get(fromSlot);
 
 	    if (slot != null && slot.getHasStack()) 
 	    {
@@ -55,7 +55,7 @@ public class ContainerBlockCompoundCreator extends Container
 
 	        //Custom behaviour
 
-	        if (current.stackSize == 0)slot.putStack((ItemStack) null);
+	        if (current.stackSize == 0)slot.putStack(null);
 	        else slot.onSlotChanged();
 
 	        if (current.stackSize == previous.stackSize) return null;

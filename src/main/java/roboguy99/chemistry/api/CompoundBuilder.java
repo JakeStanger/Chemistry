@@ -5,12 +5,9 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.api.Elements.Element;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.ItemElement;
-import roboguy99.chemistry.item.element.elements.special.ElementSpecial;
-import roboguy99.chemistry.network.packet.CompoundCreate;
 
 /**
  * Creates compounds from given elements.
@@ -123,7 +120,7 @@ public class CompoundBuilder
 	/**
 	 * Clear all elements from the buffer
 	 */
-	public void clearElements()
+	private void clearElements()
 	{
 		this.elements.clear();
 	}

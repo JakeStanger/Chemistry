@@ -1,48 +1,37 @@
 package roboguy99.chemistry.api;
 
+import com.google.gson.*;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.commons.io.FileUtils;
+import roboguy99.chemistry.Chemistry;
+import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.item.element.ItemElement;
+import roboguy99.chemistry.wrapper.MinMax;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.commons.io.FileUtils;
-
-import com.google.common.io.Files;
-import com.google.common.io.InputSupplier;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
-
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.block.ore.BlockOre;
-import roboguy99.chemistry.item.element.ItemElement;
-import roboguy99.chemistry.wrapper.MinMax;
-
 /**
  * Handles creation of ore blocks when the game loads.
  * Reads ores from JSON file.
  * Also contains list of all ores.
- * TODO Find a new home for this class probably.
  * @author Jake Stanger
  *
  */
 public class Ores 
 {
-	private static HashMap<String, HashMap<ItemElement, MinMax>> oreRegistrants = new HashMap<String, HashMap<ItemElement, MinMax>>(); //Ores to register
-	private static HashMap<String, ModelResourceLocation> models = new HashMap<String, ModelResourceLocation>(); //Ores and models
+	private HashMap<String, HashMap<ItemElement, MinMax>> oreRegistrants = new HashMap<String, HashMap<ItemElement, MinMax>>(); //Ores to register
+	private HashMap<String, ModelResourceLocation> models = new HashMap<>(); //Ores and models
 	
-	private static List<BlockOre> oreList = new ArrayList<BlockOre>(); //List of all ores (for public access)
+	private List<BlockOre> oreList = new ArrayList<>(); //List of all ores (for public access)
 	
 	public static Ores INSTANCE;
 	
@@ -132,8 +121,6 @@ public class Ores
 	 * There is no need to include "ore" in the name as this is automatically appended.
 	 * @param processContents The minimum and maximum. 
 	 * @param model The model to associate to the ore.
-	 * @param event The pre-init event as a fail-safe.
-	 * @throws OreWithNameExistsException If an ore is added to the registry with a duplicate key
 	 */
 	private void addOre(String name, HashMap<ItemElement, MinMax> processContents, ModelResourceLocation model)
 	{

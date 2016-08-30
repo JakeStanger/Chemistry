@@ -35,7 +35,7 @@ public abstract class ElementRadioactive extends ItemElement
 	private static final int UPDATE_GAP = 1000;
 	
 	
-	public ElementRadioactive()
+	protected ElementRadioactive()
 	{
 		this.HALF_LIFE = this.giveHalfLife();
 	}	
@@ -44,7 +44,7 @@ public abstract class ElementRadioactive extends ItemElement
 	/**
 	 * The half-life of the element, in minutes.
 	 */
-	public abstract long giveHalfLife();
+	protected abstract long giveHalfLife();
 	
 	/**
 	 * Runs when the item ticks.

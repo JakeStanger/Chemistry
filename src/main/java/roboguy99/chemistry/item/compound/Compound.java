@@ -1,12 +1,5 @@
 package roboguy99.chemistry.item.compound;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,10 +7,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.lwjgl.input.Keyboard;
 import roboguy99.chemistry.api.Colour;
 import roboguy99.chemistry.api.CompoundNamer;
 import roboguy99.chemistry.api.Elements;
 import roboguy99.chemistry.item.element.ItemElement;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Compound extends Item
 {
@@ -25,11 +24,11 @@ public class Compound extends Item
 	
 	public Compound()
 	{
-		this.instance = this;
+		Compound.instance = this;
 		
 		this.setUnlocalizedName("compound");
 		this.setMaxStackSize(64);
-		GameRegistry.registerItem(this, "compound");
+		GameRegistry.register(this);
 	}
 	
 	/**

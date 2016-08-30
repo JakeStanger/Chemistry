@@ -18,8 +18,8 @@ public class CompoundNamer
 		names = new HashMap<String, String>();
 		
 		//Example names
-		this.putName("H2O", "water");
-		this.putName("C6H2(NO2)3CH3", "tnt");
+		CompoundNamer.putName("H2O", "water");
+		CompoundNamer.putName("C6H2(NO2)3CH3", "tnt");
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public class CompoundNamer
 	 * @param formula The formula to give a name for
 	 * @param unlocalisedName The unlocalised name for the formula
 	 */
-	public static void putName(String formula, String unlocalisedName)
+	private static void putName(String formula, String unlocalisedName)
 	{
 		names.put(formula, "compound." + unlocalisedName);
 	}

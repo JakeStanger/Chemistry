@@ -22,7 +22,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 
-public class BakedModelElement implements IBakedModel, IPerspectiveAwareModel
+class BakedModelElement implements IBakedModel, IPerspectiveAwareModel
 {
 	private String elementName;
 	
@@ -41,7 +41,7 @@ public class BakedModelElement implements IBakedModel, IPerspectiveAwareModel
 			 model = manager.getModel(new ModelResourceLocation("chemistry:elementHeld", "inventory")); //Get held model
 		else model = manager.getModel(new ModelResourceLocation("chemistry:element-" + this.elementName, "inventory")); //Get inventory model
 		
-		return (Pair<? extends IBakedModel, Matrix4f>) Pair.of(model, TRSRTransformation.identity().getMatrix());
+		return Pair.of(model, TRSRTransformation.identity().getMatrix());
 	}
 
 	@Override

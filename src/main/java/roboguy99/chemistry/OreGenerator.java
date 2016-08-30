@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import roboguy99.chemistry.api.Ores;
 import roboguy99.chemistry.block.ore.BlockOre;
 
-public class OreGenerator implements IWorldGenerator
+class OreGenerator implements IWorldGenerator
 {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)

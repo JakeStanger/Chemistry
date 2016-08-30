@@ -23,7 +23,7 @@ public enum Group
 	
 	public final String groupName;
 	
-	private Group(String groupName)
+	Group(String groupName)
 	{
 		this.groupName = "group." + groupName;
 	}

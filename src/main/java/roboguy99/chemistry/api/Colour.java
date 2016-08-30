@@ -34,18 +34,18 @@ public enum Colour
 	public static Colour[] DYES = new Colour[] {BLACK, RED, DARK_GREEN, BROWN, DARK_BLUE, PURPLE, DARK_AQUA, GREY, DARK_GREY, BRIGHT_PINK, BRIGHT_GREEN, YELLOW, INDIGO, PINK, ORANGE, WHITE};
 
 	/** The color code that will be displayed */
-	public final String code;
+	private final String code;
 
 	public final int[] rgbCode;
 
-	public final int mcMeta;
+	private final int mcMeta;
 
 	/** A friendly name of the color. */
-	public String unlocalizedName;
+	private String unlocalizedName;
 	
-	public String dyeName;
+	private String dyeName;
 
-	private Colour(String s, String n, String dye, int[] rgb, int meta)
+	Colour(String s, String n, String dye, int[] rgb, int meta)
 	{
 		code = s;
 		unlocalizedName = n;
@@ -58,12 +58,12 @@ public enum Colour
 	 * Gets the localized name of this color by translating the unlocalized name.
 	 * @return localized name
 	 */
-	public String getLocalizedName()
+	private String getLocalizedName()
 	{
 		return I18n.format("color." + unlocalizedName);
 	}
 
-	public String getDyeName()
+	private String getDyeName()
 	{
 		return I18n.format("dye." + unlocalizedName);
 	}

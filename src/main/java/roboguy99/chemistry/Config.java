@@ -2,19 +2,17 @@ package roboguy99.chemistry;
 
 import net.minecraftforge.common.config.Configuration;
 
-public class Config
+class Config
 {
-	public static Config INSTANCE;
-	
-	private final Configuration config;
+	private static Config INSTANCE;
 	
 	public Config()
 	{
-		this.INSTANCE = this;
+		Config.INSTANCE = this;
 		
-		this.config = Chemistry.getConfig(Chemistry.modID);
-		this.config.load();
+		Configuration config = config = Chemistry.getConfig(Chemistry.modID);
+		config.load();
 			//Config
-		this.config.save();
+		config.save();
 	}
 }

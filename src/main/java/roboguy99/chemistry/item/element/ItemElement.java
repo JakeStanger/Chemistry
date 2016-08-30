@@ -59,7 +59,7 @@ public abstract class ItemElement extends Item
 	 */
 	private int[] electronConfiguration;
 	
-	public ItemElement()
+	protected ItemElement()
 	{	
 		this.name = "element_" + this.giveName();
 		this.symbol = this.giveSymbol();
@@ -84,7 +84,7 @@ public abstract class ItemElement extends Item
 	 * Add the element to the elements creative tab.
 	 * If you do not call this, the element will not be accessible in creative mode.
 	 */
-	protected void addToCreativeTab()
+	private void addToCreativeTab()
 	{
 		this.setCreativeTab(Chemistry.tabElements);
 	}

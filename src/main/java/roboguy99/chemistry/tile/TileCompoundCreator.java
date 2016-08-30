@@ -32,7 +32,7 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 	@Override
 	public String getName()
 	{
-		return this.hasCustomName() ? this.customName : this.NAME;
+		return this.hasCustomName() ? this.customName : TileCompoundCreator.NAME;
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class TileCompoundCreator extends TileEntity implements IInventory
 	@Override
 	public int getSizeInventory()
 	{
-		return this.SIZE;
+		return TileCompoundCreator.SIZE;
 	}
 
 	@Override

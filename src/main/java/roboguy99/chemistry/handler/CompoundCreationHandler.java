@@ -1,13 +1,8 @@
 package roboguy99.chemistry.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import roboguy99.chemistry.api.CompoundBuilder;
-import roboguy99.chemistry.api.Elements;
-import roboguy99.chemistry.api.Elements.Element;
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.item.element.elements.special.MoleculeMarker;
 import roboguy99.chemistry.tile.TileCompoundCreator;

@@ -16,7 +16,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import roboguy99.chemistry.Chemistry;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 
 /**
@@ -24,11 +23,11 @@ import roboguy99.chemistry.tile.TileCompoundCreator;
  * @author Jake Stanger
  *
  */
-public abstract class BlockTile extends BlockContainer
+abstract class BlockTile extends BlockContainer
 {
 	private Class tile;
 	
-	protected BlockTile(Material materialIn, String name, CreativeTabs creativeTab, Class<? extends TileEntity> tile) 
+	BlockTile(Material materialIn, String name, CreativeTabs creativeTab, Class<? extends TileEntity> tile)
 	{
 		super(materialIn);
 		
