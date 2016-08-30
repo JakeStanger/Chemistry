@@ -16,8 +16,11 @@ tile.ore_uranium.name=Uranium Ore
 group.alkaliMetals=Alkali Metals
 group.alkalineEarthMetals=Alkaline Earth Metals
 group.transitionMetals=Transition Metals
-group.otherMetals=Other Metals
+group.lanthanoids=Lanthanoids
+group.actinoids=Actinoids
+group.postTransitionMetals=Post Transition Metals
 group.nonMetals=Non Metals
+group.halogens=Halogens
 group.nobleGases=Noble Gases
 group.special=Internal Workings
 
