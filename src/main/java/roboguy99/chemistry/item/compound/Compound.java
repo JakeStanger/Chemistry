@@ -26,8 +26,12 @@ public class Compound extends Item
 	{
 		Compound.instance = this;
 		
-		this.setUnlocalizedName("compound");
+		String name = "compound";
+		
+		this.setUnlocalizedName(name);
 		this.setMaxStackSize(64);
+		
+		this.setRegistryName(name);
 		GameRegistry.register(this);
 	}
 	

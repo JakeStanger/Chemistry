@@ -13,7 +13,7 @@ public class ContainerBlockCompoundCreator extends Container
 {
 	private TileCompoundCreator compoundCreator;
 	
-	public ContainerBlockCompoundCreator(EntityPlayer player, InventoryPlayer inventoryPlayer, TileCompoundCreator compoundCreator)
+	public ContainerBlockCompoundCreator(InventoryPlayer inventoryPlayer, TileCompoundCreator compoundCreator)
 	{
 		this.compoundCreator = compoundCreator;
 		
@@ -54,7 +54,6 @@ public class ContainerBlockCompoundCreator extends Container
 	        previous = current.copy();
 
 	        //Custom behaviour
-
 	        if (current.stackSize == 0)slot.putStack(null);
 	        else slot.onSlotChanged();
 
