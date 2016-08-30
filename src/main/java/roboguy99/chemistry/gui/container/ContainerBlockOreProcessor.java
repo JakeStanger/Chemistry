@@ -29,8 +29,13 @@ public class ContainerBlockOreProcessor extends Container
 		//Output slots
 		for(int y = 0; y < 3; y++)
 		{
-			for(int x = 0; x < 6; x++) this.addSlotToContainer(new SlotOreOutput(oreProcessor, x + y * 9 + 1, 62 + x * 18, 9 + y * 18));
+			for(int x = 0; x < 6; x++)
+			{
+				System.out.println(x + y * 9 + 1);
+				this.addSlotToContainer(new SlotOreOutput(oreProcessor, x + y * 6 + 1, 62 + x * 18, 9 + y * 18));
+			}
 		}
+		System.out.println(this.inventorySlots.size());
 		
 		//Player inventory
 		for(int y = 0; y < 3; y++)

@@ -5,6 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
@@ -28,7 +30,7 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	private String customName;
 	
 	private static final int PROCESS_TIME = 200;
-	private int processTimeRemaining;
+	private int processTimeRemaining = PROCESS_TIME;
 	
 	public TileOreProcessor()
 	{
@@ -38,12 +40,13 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	@Override
 	public void update()
 	{
-		boolean markDirty = false;
 		ItemStack input = this.getStackInSlot(0);
 		
-		if(input != null)
+		if(input != null) this.processTimeRemaining--;
+		
+		if(input != null /*&& this.processTimeRemaining == 0*/)
 		{
-			input.stackSize--;
+			this.processTimeRemaining = TileOreProcessor.PROCESS_TIME;
 			
 			Random random = new Random();
 			
@@ -55,46 +58,41 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 				//Get random quantity within bounds (inclusive)
 				int quantity = random.nextInt(minMax.getMax() +1 - minMax.getMin()) + minMax.getMin();
 				
-				for(int i = 0; i < quantity; i++)
+				//System.out.println(element + " " + quantity);
+				
+				ItemStack stack = new ItemStack(element, quantity);
+				int slot = this.getFirstEmptySlot();
+				//System.out.println(slot);
+				
+				if(slot != -1)
 				{
-					//1 = starting output slot TODO make constants
-					for (int j = 1; j < inventory.length; j++)
+					input.stackSize--;
+					this.setInventorySlotContents(slot, stack);
+				}
+				else
+				{
+					while (stack.stackSize > 0)
 					{
-						System.out.println(element + " " + i + " " + j);
-						
-						ItemStack stack = inventory[j];
-						if(stack == null)
+						slot = this.getFirstSlotWithRoom();
+						if(slot != -1)
 						{
-							this.setInventorySlotContents(j, new ItemStack(element));
-							break;
-						}
-						else if(stack.getItem() == element && stack.stackSize < 64)
-						{
-							stack.stackSize++;
-							break;
+							ItemStack stackInSlot = this.inventory[slot];
+							int room = this.getInventoryStackLimit() - stackInSlot.stackSize;
+							if(room > 0)
+							{
+								stackInSlot.stackSize++;
+								stack.stackSize--;
+							}
 						}
 					}
 				}
 			}
-			markDirty = true;
+			//System.out.println("----");
 			
-			if(input.stackSize == 0)
-			{
-				input = null;
-				this.setInventorySlotContents(0, null);
-				markDirty = true;
-			}
+			if(input.stackSize == 0) this.setInventorySlotContents(0, null);
+			
+			this.markDirty();
 		}
-		
-		/*if(this.processTimeRemaining > 0 && this.canProcess()) this.processTimeRemaining--;
-		else this.processTimeRemaining = TileOreProcessor.PROCESS_TIME;
-		
-		if(!this.worldObj.isRemote  && this.canProcess() && this.processTimeRemaining == 0)
-		{
-			this.setInventorySlotContents(2, new ItemStack(Items.IRON_AXE));
-		}*/
-		
-		if(markDirty) this.markDirty();
 	}
 	
 	/**
@@ -132,6 +130,26 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		return this.inventory;
 	}
 	
+	private int getFirstEmptySlot()
+	{
+		for (int i = 1; i < this.inventory.length; i++)
+		{
+			if (this.inventory[i] == null) return i;
+		}
+		
+		return -1;
+	}
+	
+	private int getFirstSlotWithRoom()
+	{
+		for(int i = 1; i < this.inventory.length; i++)
+		{
+			if(this.inventory[i] != null && this.inventory[i].stackSize < this.getInventoryStackLimit()) return i;
+		}
+		
+		return -1;
+	}
+	
 	@Override
 	public int getSizeInventory()
 	{
@@ -146,6 +164,7 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		return this.inventory[index];
 	}
 	
+	@SuppressWarnings("ConstantConditions")
 	@Nullable
 	@Override
 	public ItemStack decrStackSize(int index, int count)
@@ -187,6 +206,7 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	@Override
 	public void setInventorySlotContents(int index, @Nullable ItemStack stack)
 	{
+		//System.out.println(index + "  " + stack);
 		if (index < 0 || index >= this.getSizeInventory()) return;
 		
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) stack.stackSize = this.getInventoryStackLimit();
@@ -244,6 +264,57 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	public void clear()
 	{
 		for (int i = 0; i < this.getSizeInventory(); i++)this.setInventorySlotContents(i, null);
+	}
+	
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		
+		NBTTagList list = new NBTTagList();
+		for (int i = 0; i < this.getSizeInventory(); ++i)
+		{
+			if (this.getStackInSlot(i) != null)
+			{
+				NBTTagCompound stackTag = new NBTTagCompound();
+				stackTag.setByte("slot", (byte) i);
+				this.getStackInSlot(i).writeToNBT(stackTag);
+				list.appendTag(stackTag);
+			}
+		}
+		nbt.setTag("items", list);
+		
+		if (this.hasCustomName()) nbt.setString("customName", this.getCustomName());
+		
+		return nbt;
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		
+		NBTTagList list = nbt.getTagList("items", 10);
+		for (int i = 0; i < list.tagCount(); ++i)
+		{
+			NBTTagCompound stackTag = list.getCompoundTagAt(i);
+			int slot = stackTag.getByte("slot") & 255;
+			this.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(stackTag));
+		}
+		
+		if (nbt.hasKey("customName", 8)) {
+			this.setCustomName(nbt.getString("customName"));
+		}
+	}
+	
+	private String getCustomName()
+	{
+		return this.customName;
+	}
+	
+	public void setCustomName(String customName)
+	{
+		this.customName = customName;
 	}
 	
 	@Override
