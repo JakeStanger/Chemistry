@@ -13,9 +13,9 @@ import roboguy99.chemistry.api.Elements.Element;
 public class ChemistryHydrocarbons
 {
 	// Mod data. Fallback if mc-mod.info fails to load.
-	private static final String modID = "chemistry-hydrocarbons";
-	private static final String modVersion = "0.0.0";
-	private static final String name = "Chemistry Hydrocarbons";
+	static final String modID = "chemistry-hydrocarbons";
+	static final String modVersion = "0.0.0";
+	static final String name = "Chemistry Hydrocarbons";
 	
 	public static ChemistryHydrocarbons instance;
 	
