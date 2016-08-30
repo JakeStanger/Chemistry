@@ -3,16 +3,23 @@ package roboguy99.chemistry.tile;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.item.block.ItemBlockOre;
+import roboguy99.chemistry.item.element.ItemElement;
+import roboguy99.chemistry.wrapper.MinMax;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Random;
 
-public class TileOreProcessor extends TileEntity implements IInventory
+public class TileOreProcessor extends TileEntity implements IInventory, ITickable
 {
 	private static final int SIZE = 19;
 	private static final String NAME = "tileCompoundCreator.inventory";
@@ -20,9 +27,104 @@ public class TileOreProcessor extends TileEntity implements IInventory
 	private ItemStack[] inventory;
 	private String customName;
 	
+	private static final int PROCESS_TIME = 200;
+	private int processTimeRemaining;
+	
 	public TileOreProcessor()
 	{
 		this.inventory = new ItemStack[this.getSizeInventory()];
+	}
+	
+	@Override
+	public void update()
+	{
+		boolean markDirty = false;
+		ItemStack input = this.getStackInSlot(0);
+		
+		if(input != null)
+		{
+			input.stackSize--;
+			
+			Random random = new Random();
+			
+			HashMap<ItemElement, MinMax> elements = assignRandomElements(input.getItem()); //Get random elements based on ore
+			
+			for(ItemElement element : elements.keySet())
+			{
+				MinMax minMax = elements.get(element);
+				//Get random quantity within bounds (inclusive)
+				int quantity = random.nextInt(minMax.getMax() +1 - minMax.getMin()) + minMax.getMin();
+				
+				for(int i = 0; i < quantity; i++)
+				{
+					//1 = starting output slot TODO make constants
+					for (int j = 1; j < inventory.length; j++)
+					{
+						System.out.println(element + " " + i + " " + j);
+						
+						ItemStack stack = inventory[j];
+						if(stack == null)
+						{
+							this.setInventorySlotContents(j, new ItemStack(element));
+							break;
+						}
+						else if(stack.getItem() == element && stack.stackSize < 64)
+						{
+							stack.stackSize++;
+							break;
+						}
+					}
+				}
+			}
+			markDirty = true;
+			
+			if(input.stackSize == 0)
+			{
+				input = null;
+				this.setInventorySlotContents(0, null);
+				markDirty = true;
+			}
+		}
+		
+		/*if(this.processTimeRemaining > 0 && this.canProcess()) this.processTimeRemaining--;
+		else this.processTimeRemaining = TileOreProcessor.PROCESS_TIME;
+		
+		if(!this.worldObj.isRemote  && this.canProcess() && this.processTimeRemaining == 0)
+		{
+			this.setInventorySlotContents(2, new ItemStack(Items.IRON_AXE));
+		}*/
+		
+		if(markDirty) this.markDirty();
+	}
+	
+	/**
+	 * Assigns random elements based on the item given, assuming the item is an ore. TODO Move
+	 * The quantity of elements is based on the ore's resource map.
+	 * @param item The item to assign elements to.
+	 * @return A map of assigned elements and quantities
+	 */
+	private HashMap<ItemElement, MinMax> assignRandomElements(Item item)
+	{
+		HashMap<ItemElement, MinMax> elements = new HashMap<>();
+		
+		if(item instanceof ItemBlockOre) //Check item is ore
+		{
+			Random random = new Random();
+			BlockOre ore = ((ItemBlockOre) item).getOre();
+			
+			for(ItemElement element : ore.getResourceMap().keySet())
+			{
+				MinMax minMax = ore.getResourceMap().get(element);
+				elements.put(element, minMax);
+			}
+		}
+		
+		return elements;
+	}
+	
+	private boolean canProcess()
+	{
+		return true; //TODO Switch to use power (RF)
 	}
 	
 	public ItemStack[] getInventory()
