@@ -28,7 +28,7 @@ import java.util.Map.Entry;
  */
 public class Ores 
 {
-	private HashMap<String, HashMap<ItemElement, MinMax>> oreRegistrants = new HashMap<String, HashMap<ItemElement, MinMax>>(); //Ores to register
+	private HashMap<String, HashMap<ItemElement, MinMax>> oreRegistrants = new HashMap<>(); //Ores to register
 	private HashMap<String, ModelResourceLocation> models = new HashMap<>(); //Ores and models
 	
 	private List<BlockOre> oreList = new ArrayList<>(); //List of all ores (for public access)
@@ -65,7 +65,7 @@ public class Ores
 				this.models.put(name, new ModelResourceLocation(model));
 				
 				JsonObject processObj = oreData.get("processMap").getAsJsonObject();
-				HashMap<ItemElement, MinMax> processMap = new HashMap<ItemElement, MinMax>();
+				HashMap<ItemElement, MinMax> processMap = new HashMap<>();
 				
 				for(Entry<String, JsonElement> processData : processObj.entrySet())
 				{
