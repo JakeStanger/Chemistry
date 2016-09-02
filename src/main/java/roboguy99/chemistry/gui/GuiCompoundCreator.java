@@ -12,7 +12,7 @@ import roboguy99.chemistry.gui.container.ContainerCompoundCreator;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 
-public class GuiBlockCompoundCreator extends GuiContainer
+public class GuiCompoundCreator extends GuiContainer
 {
 	private GuiButton btnCreate;
 	
@@ -26,7 +26,7 @@ public class GuiBlockCompoundCreator extends GuiContainer
 	
 	private static final ResourceLocation texture = new ResourceLocation("chemistry", "textures/gui/compoundCreator.png");
 	
-	public GuiBlockCompoundCreator(Container container, TileCompoundCreator compoundCreator)
+	public GuiCompoundCreator(Container container, TileCompoundCreator compoundCreator)
 	{
 		super(container);
 		this.xSize = 176;

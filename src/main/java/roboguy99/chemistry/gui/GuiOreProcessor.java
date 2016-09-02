@@ -9,15 +9,19 @@ import roboguy99.chemistry.tile.TileOreProcessor;
 /**
  * Created by jake on 30/08/16.
  */
-public class GuiBlockOreProcessor extends GuiContainer
+public class GuiOreProcessor extends GuiContainer
 {
 	private static final ResourceLocation texture = new ResourceLocation("chemistry", "textures/gui/oreProcessor.png");
 	
-	public GuiBlockOreProcessor(Container container, TileOreProcessor oreProcessor)
+	private TileOreProcessor oreProcessor;
+	
+	public GuiOreProcessor(Container container, TileOreProcessor oreProcessor)
 	{
 		super(container);
 		this.xSize = 176;
 		this.ySize = 156;
+		
+		this.oreProcessor = oreProcessor;
 	}
 	
 	@Override
@@ -28,5 +32,11 @@ public class GuiBlockOreProcessor extends GuiContainer
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+		
+		int progress = this.oreProcessor.getProgressScaled(24);
+		//System.out.println(progress);
+		this.drawTexturedModalRect(k + 29, l + 28,
+				176, 0,
+				progress, 17);
 	}
 }

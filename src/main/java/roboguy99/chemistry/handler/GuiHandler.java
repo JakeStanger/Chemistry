@@ -5,8 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import roboguy99.chemistry.gui.GuiBlockCompoundCreator;
-import roboguy99.chemistry.gui.GuiBlockOreProcessor;
+import roboguy99.chemistry.gui.GuiCompoundCreator;
+import roboguy99.chemistry.gui.GuiOreProcessor;
 import roboguy99.chemistry.gui.container.ContainerCompoundCreator;
 import roboguy99.chemistry.gui.container.ContainerOreProcessor;
 import roboguy99.chemistry.tile.TileCompoundCreator;
@@ -40,9 +40,9 @@ public class GuiHandler implements IGuiHandler
 		switch(ID)
 		{
 			case GUI_BLOCK_COMPOUND_CREATOR:
-				return new GuiBlockCompoundCreator(new ContainerCompoundCreator(player.inventory, (TileCompoundCreator) tile), (TileCompoundCreator) tile);
+				return new GuiCompoundCreator(new ContainerCompoundCreator(player.inventory, (TileCompoundCreator) tile), (TileCompoundCreator) tile);
 			case GUI_BLOCK_ORE_PROCESSOR:
-				return new GuiBlockOreProcessor(new ContainerOreProcessor(player.inventory, (TileOreProcessor) tile), (TileOreProcessor) tile);
+				return new GuiOreProcessor(new ContainerOreProcessor(player.inventory, (TileOreProcessor) tile), (TileOreProcessor) tile);
 			default:
 				return null;
 		}
