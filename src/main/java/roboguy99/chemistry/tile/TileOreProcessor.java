@@ -1,5 +1,8 @@
 package roboguy99.chemistry.tile;
 
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -8,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -21,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Random;
 
-public class TileOreProcessor extends TileEntity implements IInventory, ITickable //TODO Split into abstract classes
+public class TileOreProcessor extends TileEntity implements IInventory, ITickable, IEnergyHandler, IEnergyReceiver //TODO Split into abstract classes
 {
 	private static final int SIZE = 19;
 	private static final String NAME = "tileCompoundCreator.inventory";
@@ -32,15 +36,22 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	private ItemStack[] inventory;
 	private String customName;
 	
-	private static final int PROCESS_TIME = 10; //TODO Set process time
+	private static final int PROCESS_TIME = 100; //TODO Set process time
 	private int processTimeRemaining = PROCESS_TIME;
 	
 	private HashMap<ItemElement, MinMax> elements;
 	private int currentElementQuantity;
 	
+	protected EnergyStorage energyStorage = new EnergyStorage(0);
+	
 	public TileOreProcessor()
 	{
 		this.inventory = new ItemStack[this.getSizeInventory()];
+		
+		this.energyStorage.setCapacity(10000);
+		this.energyStorage.setEnergyStored(0);
+		this.energyStorage.setMaxExtract(0);
+		this.energyStorage.setMaxReceive(500);
 	}
 	
 	/**
@@ -103,12 +114,17 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 					{
 						this.setInventorySlotContents(TileOreProcessor.INPUT_SLOT, null);
 						this.elements = null; //Reset element map when input empty.
+						this.processTimeRemaining = TileOreProcessor.PROCESS_TIME;
 					}
 					this.markDirty();
 				}
 			}
+			else this.processTimeRemaining = TileOreProcessor.PROCESS_TIME;
 		}
-		else this.elements = null;
+		else
+		{
+			this.elements = null;
+		}
 	}
 	
 	/**
@@ -118,8 +134,9 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	 */
 	public int getProgressScaled(int scale)
 	{
-		int progress = TileOreProcessor.PROCESS_TIME - this.processTimeRemaining;
-		return (progress / TileOreProcessor.PROCESS_TIME) * scale;
+		float progress = TileOreProcessor.PROCESS_TIME - this.processTimeRemaining;
+		float scaled = (progress / TileOreProcessor.PROCESS_TIME) * scale;
+		return (int) scaled;
 	}
 	
 	/**
@@ -414,15 +431,28 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		return(index == 0 && (block instanceof BlockOre || block instanceof net.minecraft.block.BlockOre));
 	}
 	
-	@Override
 	public int getField(int id)
 	{
+		switch (id)
+		{
+			case 0:
+				return this.processTimeRemaining;
+			case 1:
+				return TileOreProcessor.PROCESS_TIME;
+		}
+		
 		return 0;
 	}
 	
-	@Override
 	public void setField(int id, int value)
-	{}
+	{
+		switch (id)
+		{
+			case 0:
+				this.processTimeRemaining = value;
+				break;
+		}
+	}
 	
 	@Override
 	public int getFieldCount()
@@ -507,5 +537,35 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	public ITextComponent getDisplayName()
 	{
 		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
+	}
+	
+	@Override
+	public boolean canConnectEnergy(EnumFacing from)
+	{
+		return true;
+	}
+	
+	@Override
+	public int receiveEnergy(EnumFacing from, int maxReceive, boolean simulate)
+	{
+		return this.energyStorage.receiveEnergy(maxReceive, simulate);
+	}
+	
+	@Override
+	public int extractEnergy(EnumFacing from, int maxExtract, boolean simulate)
+	{
+		return this.energyStorage.extractEnergy(maxExtract, simulate);
+	}
+	
+	@Override
+	public int getEnergyStored(EnumFacing from)
+	{
+		return this.energyStorage.getEnergyStored();
+	}
+	
+	@Override
+	public int getMaxEnergyStored(EnumFacing from)
+	{
+		return this.energyStorage.getMaxEnergyStored();
 	}
 }
