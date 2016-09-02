@@ -2,7 +2,7 @@ package cofh.api.energy;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.EnumFacing;
+import net.minecraft.util.EnumFacing;
 
 /**
  * Reference implementation of {@link IEnergyHandler}. Use/extend this or implement your own.
@@ -22,10 +22,12 @@ public class TileEnergyHandler extends TileEntity implements IEnergyHandler {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 
 		super.writeToNBT(nbt);
 		storage.writeToNBT(nbt);
+		
+		return nbt;
 	}
 
 	/* IEnergyConnection */
