@@ -6,6 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -47,7 +48,7 @@ abstract class BlockTile extends BlockContainer
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState blockstate) 
 	{
-	    TileCompoundCreator te = (TileCompoundCreator) world.getTileEntity(pos);
+	    IInventory te = (IInventory) world.getTileEntity(pos);
 	    InventoryHelper.dropInventoryItems(world, pos, te);
 	    super.breakBlock(world, pos, blockstate);
 	}
