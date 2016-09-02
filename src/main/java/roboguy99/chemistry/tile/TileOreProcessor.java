@@ -43,6 +43,10 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		this.inventory = new ItemStack[this.getSizeInventory()];
 	}
 	
+	/**
+	 * Runs every tick.
+	 * Handles processing of input items into output items.
+	 */
 	@Override
 	public void update()
 	{
@@ -103,6 +107,11 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		else this.elements = null;
 	}
 	
+	/**
+	 * Gets the machine processing progress scaled.
+	 * @param scale The scale.
+	 * @return The progress scaled.
+	 */
 	public int getProgressScaled(int scale)
 	{
 		int progress = TileOreProcessor.PROCESS_TIME - this.processTimeRemaining;
@@ -110,10 +119,10 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	}
 	
 	/**
-	 * Assigns random elements based on the item given, assuming the item is an ore. TODO Move
+	 * Assigns random elements based on the item given, assuming the item is an ore.
 	 * The quantity of elements is based on the ore's resource map.
 	 * @param item The item to assign elements to.
-	 * @return A map of assigned elements and quantities
+	 * @return A map of assigned elements and quantities.
 	 */
 	private HashMap<ItemElement, MinMax> assignRandomElements(Item item)
 	{
@@ -133,6 +142,11 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		return elements;
 	}
 	
+	/**
+	 * Checks if the machine has enough output capacity
+	 * and power to process its input.
+	 * @return True if the machine can process.
+	 */
 	private boolean canProcess()
 	{
 		if(this.getNumOfEmptySlots() >= this.elements.keySet().size()) return true;
@@ -148,16 +162,29 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		//TODO check power too (RF)
 	}
 	
+	/**
+	 * Gets the inventory ItemStack array.
+	 * @return The inventory ItemStack array.
+	 */
 	public ItemStack[] getInventory()
 	{
 		return this.inventory;
 	}
 	
+	/**
+	 * Gets the first output slot with a null contents.
+	 * @return The ID of the slot or -1 if one could not be found.
+	 */
 	private int getFirstEmptySlot()
 	{
 		return this.getFirstEmptySlot(TileOreProcessor.OUTPUT_SLOTS_BEGIN);
 	}
 	
+	/**
+	 * Gets the first slot with a null contents.
+	 * @param beginSlot The slot ID to begin looking at.
+	 * @return The ID of the slot or -1 if one could not be found.
+	 */
 	private int getFirstEmptySlot(int beginSlot)
 	{
 		for (int i = beginSlot; i < this.inventory.length; i++)
@@ -168,16 +195,37 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		return -1;
 	}
 	
+	/**
+	 * Gets the first output slot with a contents but with room for more
+	 * of the given item.
+	 * @param item The item to find a slot for.
+	 * @return The ID of the slot or -1 if one could not be found.
+	 */
 	private int getFirstSlotWithRoom(Item item)
 	{
 		return this.getFirstSlotWithRoom(item, TileOreProcessor.OUTPUT_SLOTS_BEGIN);
 	}
 	
+	/**
+	 * Gets the first slot with a contents but with room for more
+	 * of the given item.
+	 * @param item The item to find a slot for.
+	 * @param slotBegin The slot ID to begin looking at.
+	 * @return The ID of the slot or -1 if one could not be found.
+	 */
 	private int getFirstSlotWithRoom(Item item, int slotBegin)
 	{
 		return this.getFirstSlotWithRoom(item, slotBegin, 1);
 	}
 	
+	/**
+	 * Gets the first slot with a contents but with room for more
+	 * of the given item.
+	 * @param item The item to find a slot for.
+	 * @param slotBegin The slot ID to begin looking at.
+	 * @param roomRequired The amount of room required in the slot.
+	 * @return The ID of the slot or -1 if one could not be found.
+	 */
 	private int getFirstSlotWithRoom(Item item, int slotBegin, int roomRequired)
 	{
 		for(int i = slotBegin; i < this.inventory.length; i++)
@@ -190,6 +238,10 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		return -1;
 	}
 	
+	/**
+	 * Gets the number of slots with a null contents.
+	 * @return The number of slots with a null contents.
+	 */
 	private int getNumOfEmptySlots()
 	{
 		int num = 0;
@@ -201,6 +253,11 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		return num;
 	}
 	
+	/**
+	 * Gets the number of non-null non-full slots containing the given item.
+	 * @param item The item to find a slot containing.
+	 * @return The number of non-null non-full slots containing the given item.
+	 */
 	private int getNumOfSlotsWithRoom(Item item)
 	{
 		int num = 0;
@@ -212,11 +269,25 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		return num;
 	}
 	
+	/**
+	 * Gets the amount of room in the given slot.
+	 * @param slot The ID of the slot.
+	 * @return The amount of room in the slot.
+	 */
 	private int getRoomInSlot(int slot)
 	{
 		return this.getInventoryStackLimit() - this.inventory[slot].stackSize;
 	}
 	
+	/**
+	 * Adds the given ItemStack to the stack already in the slot.
+	 * Will only work if there is already a stack in the slot.
+	 * Does not check item types.
+	 * @param stack The stack to add to the slot.
+	 * @param slot The slot to add the stack to.
+	 * @return The input stack, with its size adjusted according to how much was placed
+	 *          (if the full stack could not be placed, the left-over is returned)
+	 */
 	private ItemStack addStackToSlot(ItemStack stack, int slot)
 	{
 		int room = this.getRoomInSlot(slot);
