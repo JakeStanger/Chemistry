@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Random;
 
-public class TileOreProcessor extends TileEntity implements IInventory, ITickable
+public class TileOreProcessor extends TileEntity implements IInventory, ITickable //TODO Split into abstract classes
 {
 	private static final int SIZE = 19;
 	private static final String NAME = "tileCompoundCreator.inventory";
@@ -56,6 +56,8 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		{
 			if(this.elements == null) this.elements = this.assignRandomElements(stackIn.getItem());
 			
+			//Check there is room to place stack first. Not definite based on random generation system.
+			//Other checks are in place.
 			if(this.canProcess())
 			{
 				if(this.processTimeRemaining > 0) this.processTimeRemaining--;
@@ -70,19 +72,21 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 					{
 						Random random = new Random();
 						
+						//Create ItemStack to place.
 						MinMax minMax = this.elements.get(element);
 						this.currentElementQuantity = random.nextInt(minMax.getMax() +1 - minMax.getMin()) + minMax.getMin();
 						ItemStack elementStack = new ItemStack(element, this.currentElementQuantity);
 						
-						while(elementStack.stackSize > 0)
+						while(elementStack.stackSize > 0) //Repeat until whole stack is placed.
 						{
+							//Attempt to place in non-null slot first
 							int slot = this.getFirstSlotWithRoom(element);
 							
 							if (slot != -1)
 							{
 								elementStack = this.addStackToSlot(elementStack, slot);
 							}
-							else
+							else //If all non-null slots are full
 							{
 								slot = this.getFirstEmptySlot();
 								if(slot != -1)
@@ -93,12 +97,12 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 							}
 						}
 					}
-					
+					//Once all elements are placed, reduce input
 					stackIn.stackSize--;
 					if(stackIn.stackSize == 0)
 					{
 						this.setInventorySlotContents(TileOreProcessor.INPUT_SLOT, null);
-						this.elements = null;
+						this.elements = null; //Reset element map when input empty.
 					}
 					this.markDirty();
 				}
@@ -145,6 +149,7 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	/**
 	 * Checks if the machine has enough output capacity
 	 * and power to process its input.
+	 * This method is not definite due to the random generation system.
 	 * @return True if the machine can process.
 	 */
 	private boolean canProcess()
