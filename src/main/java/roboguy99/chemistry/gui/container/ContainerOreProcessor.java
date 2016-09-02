@@ -15,11 +15,11 @@ import roboguy99.chemistry.tile.TileOreProcessor;
  * @author Jake stanger
  * TODO Write JavaDoc
  */
-public class ContainerBlockOreProcessor extends Container
+public class ContainerOreProcessor extends Container
 {
 	private TileOreProcessor oreProcessor;
 	
-	public ContainerBlockOreProcessor(InventoryPlayer inventoryPlayer, TileOreProcessor oreProcessor)
+	public ContainerOreProcessor(InventoryPlayer inventoryPlayer, TileOreProcessor oreProcessor)
 	{
 		this.oreProcessor = oreProcessor;
 		

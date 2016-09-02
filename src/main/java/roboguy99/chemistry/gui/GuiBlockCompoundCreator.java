@@ -8,7 +8,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.gui.container.ContainerBlockCompoundCreator;
+import roboguy99.chemistry.gui.container.ContainerCompoundCreator;
 import roboguy99.chemistry.network.packet.CompoundCreate;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 
@@ -49,7 +49,7 @@ public class GuiBlockCompoundCreator extends GuiContainer
 	@Override
 	protected void actionPerformed(GuiButton btn)
 	{
-		if(btn == this.btnCreate) Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new CompoundCreate(((ContainerBlockCompoundCreator) Minecraft.getMinecraft().thePlayer.openContainer).getTilePos()));
+		if(btn == this.btnCreate) Chemistry.INSTANCE.getNetworkWrapper().sendToServer(new CompoundCreate(((ContainerCompoundCreator) Minecraft.getMinecraft().thePlayer.openContainer).getTilePos()));
 	}
 	
 	/**

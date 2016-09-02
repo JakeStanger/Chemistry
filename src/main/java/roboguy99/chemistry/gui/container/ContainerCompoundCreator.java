@@ -9,11 +9,11 @@ import net.minecraft.util.math.BlockPos;
 import roboguy99.chemistry.gui.container.slot.SlotElement;
 import roboguy99.chemistry.tile.TileCompoundCreator;
 
-public class ContainerBlockCompoundCreator extends Container
+public class ContainerCompoundCreator extends Container
 {
 	private TileCompoundCreator compoundCreator;
 	
-	public ContainerBlockCompoundCreator(InventoryPlayer inventoryPlayer, TileCompoundCreator compoundCreator)
+	public ContainerCompoundCreator(InventoryPlayer inventoryPlayer, TileCompoundCreator compoundCreator)
 	{
 		this.compoundCreator = compoundCreator;
 		
