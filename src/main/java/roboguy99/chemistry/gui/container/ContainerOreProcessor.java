@@ -20,8 +20,12 @@ import roboguy99.chemistry.tile.TileOreProcessor;
 public class ContainerOreProcessor extends Container
 {
 	private TileOreProcessor oreProcessor;
+	
 	private int progress;
 	private int totalProgress;
+	
+	private int energy;
+	private int maxEnergy;
 	
 	public ContainerOreProcessor(InventoryPlayer inventoryPlayer, TileOreProcessor oreProcessor)
 	{
@@ -63,7 +67,7 @@ public class ContainerOreProcessor extends Container
 		
 		for (int i = 0; i < this.listeners.size(); ++i)
 		{
-			IContainerListener icontainerlistener = (IContainerListener)this.listeners.get(i);
+			IContainerListener icontainerlistener = this.listeners.get(i);
 			
 			if (this.progress != this.oreProcessor.getField(0))
 			{
@@ -74,10 +78,21 @@ public class ContainerOreProcessor extends Container
 			{
 				icontainerlistener.sendProgressBarUpdate(this, 1, this.oreProcessor.getField(1));
 			}
+			if(this.energy != this.oreProcessor.getField(2))
+			{
+				icontainerlistener.sendProgressBarUpdate(this, 2, this.oreProcessor.getField(2));
+			}
+			if(this.maxEnergy != this.oreProcessor.getField(3))
+			{
+				icontainerlistener.sendProgressBarUpdate(this, 3, this.oreProcessor.getField(3));
+			}
 		}
 		
 		this.progress = this.oreProcessor.getField(0);
 		this.totalProgress = this.oreProcessor.getField(1);
+		
+		this.energy = this.oreProcessor.getField(2);
+		this.maxEnergy = this.oreProcessor.getField(3);
 	}
 	
 	@SideOnly(Side.CLIENT)

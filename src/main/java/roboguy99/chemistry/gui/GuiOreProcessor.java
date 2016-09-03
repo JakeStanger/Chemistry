@@ -1,9 +1,9 @@
 package roboguy99.chemistry.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import roboguy99.chemistry.gui.container.ContainerOreProcessor;
 import roboguy99.chemistry.tile.TileOreProcessor;
 
 /**
@@ -15,13 +15,12 @@ public class GuiOreProcessor extends GuiContainer
 	
 	private TileOreProcessor oreProcessor;
 	
-	public GuiOreProcessor(Container container, TileOreProcessor oreProcessor)
+	public GuiOreProcessor(ContainerOreProcessor container, TileOreProcessor oreProcessor)
 	{
 		super(container);
+		this.oreProcessor = oreProcessor;
 		this.xSize = 176;
 		this.ySize = 156;
-		
-		this.oreProcessor = oreProcessor;
 	}
 	
 	@Override
@@ -34,9 +33,13 @@ public class GuiOreProcessor extends GuiContainer
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		
 		int progress = this.oreProcessor.getProgressScaled(24);
-		//System.out.println(progress);
 		this.drawTexturedModalRect(k + 29, l + 28,
 				176, 0,
 				progress, 17);
+		
+		int energy = this.oreProcessor.getEnergyScaled(160);
+		this.drawTexturedModalRect(k + 8, l + 65,
+				0, 156,
+				energy, 5);
 	}
 }

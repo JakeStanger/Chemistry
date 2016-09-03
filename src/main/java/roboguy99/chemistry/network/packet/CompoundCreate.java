@@ -45,14 +45,7 @@ public class CompoundCreate implements IMessage
         public IMessage onMessage(final CompoundCreate message, final MessageContext ctx) 
 		{
             IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.worldObj;
-            mainThread.addScheduledTask(new Runnable() 
-            {
-                @Override
-                public void run() 
-                {  
-                	CompoundCreationHandler.createCompound(ctx.getServerHandler().playerEntity, message.pos);
-                }
-            });
+            mainThread.addScheduledTask(() -> CompoundCreationHandler.createCompound(ctx.getServerHandler().playerEntity, message.pos));
             return null;
         }
 	}

@@ -1,7 +1,6 @@
 package roboguy99.chemistry.tile;
 
 import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -25,7 +26,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Random;
 
-public class TileOreProcessor extends TileEntity implements IInventory, ITickable, IEnergyHandler, IEnergyReceiver //TODO Split into abstract classes
+public class TileOreProcessor extends TileEntity implements IInventory, ITickable, IEnergyReceiver //TODO Split into abstract classes
 {
 	private static final int SIZE = 19;
 	private static final String NAME = "tileCompoundCreator.inventory";
@@ -39,19 +40,19 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	private static final int PROCESS_TIME = 100; //TODO Set process time
 	private int processTimeRemaining = PROCESS_TIME;
 	
+	private static final int ENERGY_PER_OPERATION = 1000;
+	private static final int MAX_ENERGY = 10000;
+	
 	private HashMap<ItemElement, MinMax> elements;
 	private int currentElementQuantity;
 	
-	protected EnergyStorage energyStorage = new EnergyStorage(0);
+	private EnergyStorage energyStorage;
 	
 	public TileOreProcessor()
 	{
 		this.inventory = new ItemStack[this.getSizeInventory()];
 		
-		this.energyStorage.setCapacity(10000);
-		this.energyStorage.setEnergyStored(0);
-		this.energyStorage.setMaxExtract(0);
-		this.energyStorage.setMaxReceive(500);
+		this.energyStorage = new EnergyStorage(TileOreProcessor.MAX_ENERGY, 500);
 	}
 	
 	/**
@@ -108,9 +109,11 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 							}
 						}
 					}
-					//Once all elements are placed, reduce input
+					//Once all elements are placed, reduce input & energy
+					this.energyStorage.modifyEnergyStored(-TileOreProcessor.ENERGY_PER_OPERATION);
+					
 					stackIn.stackSize--;
-					if(stackIn.stackSize == 0)
+					if(stackIn.stackSize == 0) //Delete stack & reset info if input empty
 					{
 						this.setInventorySlotContents(TileOreProcessor.INPUT_SLOT, null);
 						this.elements = null; //Reset element map when input empty.
@@ -136,6 +139,18 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	{
 		float progress = TileOreProcessor.PROCESS_TIME - this.processTimeRemaining;
 		float scaled = (progress / TileOreProcessor.PROCESS_TIME) * scale;
+		return (int) scaled;
+	}
+	
+	/**
+	 * Gets the machine energy scaled.
+	 * @param scale The scale.
+	 * @return The energy scaled.
+	 */
+	public int getEnergyScaled(int scale)
+	{
+		float energy = this.getEnergyStored(EnumFacing.NORTH);
+		float scaled = (energy / this.getMaxEnergyStored(EnumFacing.NORTH)) * scale;
 		return (int) scaled;
 	}
 	
@@ -171,6 +186,8 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	 */
 	private boolean canProcess()
 	{
+		if(energyStorage.getEnergyStored() < TileOreProcessor.ENERGY_PER_OPERATION) return false;
+		
 		if(this.getNumOfEmptySlots() >= this.elements.keySet().size()) return true;
 		
 		boolean enoughRoom = true;
@@ -439,6 +456,10 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 				return this.processTimeRemaining;
 			case 1:
 				return TileOreProcessor.PROCESS_TIME;
+			case 2:
+				return this.energyStorage.getEnergyStored();
+			case 3:
+				return this.energyStorage.getMaxEnergyStored();
 		}
 		
 		return 0;
@@ -451,13 +472,15 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 			case 0:
 				this.processTimeRemaining = value;
 				break;
+			case 3:
+				this.energyStorage.setEnergyStored(value);
 		}
 	}
 	
 	@Override
 	public int getFieldCount()
 	{
-		return 0;
+		return 4;
 	}
 	
 	@Override
@@ -488,6 +511,10 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		
 		if (this.hasCustomName()) nbt.setString("customName", this.getCustomName());
 		
+		nbt.setInteger("progress", this.processTimeRemaining);
+		
+		this.energyStorage.writeToNBT(nbt);
+		
 		return nbt;
 	}
 	
@@ -507,6 +534,40 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 		if (nbt.hasKey("customName", 8)) {
 			this.setCustomName(nbt.getString("customName"));
 		}
+		
+		if(nbt.hasKey("progress")) this.processTimeRemaining = nbt.getInteger("progress");
+		
+		this.energyStorage.readFromNBT(nbt);
+	}
+	
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		nbtTag.setInteger("Energy", this.energyStorage.getEnergyStored());
+		this.energyStorage.setEnergyStored(nbtTag.getInteger("Energy"));
+		writeEnergy(nbtTag);
+		writeToNBT(nbtTag);
+		return new SPacketUpdateTileEntity(this.pos, 0, nbtTag);
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
+	{
+		readEnergy(packet.getNbtCompound());
+		readFromNBT(packet.getNbtCompound());
+	}
+	
+	public void readEnergy(NBTTagCompound nbt)
+	{
+		if (nbt.hasKey("storage")) this.energyStorage.readFromNBT(nbt.getCompoundTag("storage"));
+	}
+	
+	public void writeEnergy(NBTTagCompound nbt)
+	{
+		NBTTagCompound energyTag = new NBTTagCompound();
+		this.energyStorage.writeToNBT(energyTag);
+		nbt.setTag("storage", energyTag);
 	}
 	
 	private String getCustomName()
@@ -552,14 +613,9 @@ public class TileOreProcessor extends TileEntity implements IInventory, ITickabl
 	}
 	
 	@Override
-	public int extractEnergy(EnumFacing from, int maxExtract, boolean simulate)
-	{
-		return this.energyStorage.extractEnergy(maxExtract, simulate);
-	}
-	
-	@Override
 	public int getEnergyStored(EnumFacing from)
 	{
+		System.out.println(this.energyStorage.getEnergyStored());
 		return this.energyStorage.getEnergyStored();
 	}
 	
