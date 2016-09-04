@@ -8,7 +8,7 @@ import roboguy99.chemistry.block.ore.BlockOre;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * Slot which only accepts ores.
  */
 public class SlotOre extends Slot
 {

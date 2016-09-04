@@ -2,7 +2,7 @@ package roboguy99.chemistry.api;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * IDs for TileEntity getField() methods.
  */
 public enum FieldID
 {

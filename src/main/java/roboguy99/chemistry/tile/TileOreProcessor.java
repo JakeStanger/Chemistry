@@ -12,7 +12,7 @@ import roboguy99.chemistry.wrapper.MinMax;
 import java.util.HashMap;
 import java.util.Random;
 
-public class TileOreProcessor extends TileMachine //TODO Split into abstract classes
+public class TileOreProcessor extends TileMachine
 {
 	private static final int SIZE = 19;
 	private static final String NAME = "tileCompoundCreator.inventory";
@@ -35,7 +35,7 @@ public class TileOreProcessor extends TileMachine //TODO Split into abstract cla
 	@Override
 	protected int giveEnergyPerTick()
 	{
-		return TileOreProcessor.ENERGY_PER_TICK; //TODO Reduce per tick
+		return TileOreProcessor.ENERGY_PER_TICK;
 	}
 	
 	@Override
@@ -203,8 +203,6 @@ public class TileOreProcessor extends TileMachine //TODO Split into abstract cla
 		}
 		
 		return enoughRoom;
-		
-		//TODO check power too (RF)
 	}
 	
 	

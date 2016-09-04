@@ -9,13 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.gui.container.slot.SlotOre;
-import roboguy99.chemistry.gui.container.slot.SlotOreOutput;
+import roboguy99.chemistry.gui.container.slot.SlotOutput;
 import roboguy99.chemistry.tile.TileOreProcessor;
 
 
 /**
  * @author Jake stanger
- * TODO Write JavaDoc
+ * Container class for OreProcessor machine.
  */
 public class ContainerOreProcessor extends Container
 {
@@ -37,7 +37,7 @@ public class ContainerOreProcessor extends Container
 		//Output slots
 		for(int y = 0; y < 3; y++)
 		{
-			for(int x = 0; x < 6; x++) this.addSlotToContainer(new SlotOreOutput(oreProcessor, x + y * 6 + 1, 62 + x * 18, 9 + y * 18));
+			for(int x = 0; x < 6; x++) this.addSlotToContainer(new SlotOutput(oreProcessor, x + y * 6 + 1, 62 + x * 18, 9 + y * 18));
 		}
 		
 		//Player inventory

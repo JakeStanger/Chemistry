@@ -6,11 +6,11 @@ import net.minecraft.item.ItemStack;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * Slot which items cannot be placed into.
  */
-public class SlotOreOutput extends Slot
+public class SlotOutput extends Slot
 {
-	public SlotOreOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
+	public SlotOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
 	{
 		super(inventoryIn, index, xPosition, yPosition);
 	}
