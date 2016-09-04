@@ -31,7 +31,7 @@ public class TimeFormatter {
 		int time = (int) (seconds / unitBelow.getKey());
 		String formatted = time + unitBelow.getValue();
 		
-		if(time == 1 && unitBelow.getKey() < 1000000L) formatted = formatted.substring(0, formatted.length()-1); //Remove plural
+		if(time == 1 && unitBelow.getKey() < TimeUnit.DAYS.toSeconds(365 * 1000000L)) formatted = formatted.substring(0, formatted.length()-1); //Remove plural
 		
 		return formatted;
 	}
