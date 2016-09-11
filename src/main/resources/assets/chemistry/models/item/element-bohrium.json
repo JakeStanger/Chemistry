@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:item/element_bohrium"
+		"layer0": "chemistry:items/element_bohrium"
 	},
 	"display": {
 		"thirdperson": {

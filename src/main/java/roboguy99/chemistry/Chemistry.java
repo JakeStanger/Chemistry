@@ -23,8 +23,11 @@ import roboguy99.chemistry.api.Elements.Element;
 import roboguy99.chemistry.api.Group;
 import roboguy99.chemistry.api.Ores;
 import roboguy99.chemistry.block.BlockCompoundCreator;
+import roboguy99.chemistry.block.BlockOre;
 import roboguy99.chemistry.block.BlockOreProcessor;
-import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.block.BlockRefinery;
+import roboguy99.chemistry.fluid.Fluids;
+import roboguy99.chemistry.gui.GuiDrawHelper;
 import roboguy99.chemistry.handler.GuiHandler;
 import roboguy99.chemistry.item.compound.Compound;
 import roboguy99.chemistry.item.element.ItemElement;
@@ -67,12 +70,14 @@ public class Chemistry
 
 	public static Chemistry INSTANCE;
 	
-	private static BlockCompoundCreator blockCompoundCreator; //TODO Give this a proper home
+	private static BlockCompoundCreator blockCompoundCreator; //TODO Give these a proper home
 	private static BlockOreProcessor blockOreProcessor;
+	private static BlockRefinery blockRefinery;
 	
 	private static Compound compound;
 	
 	private static Ores ores;
+	private static Fluids fluids;
 	
 	@EventHandler
 	private void preInit(FMLPreInitializationEvent event) // Pre-initialisation loading
@@ -85,15 +90,17 @@ public class Chemistry
 		new Elements();
 		
 		Chemistry.ores = new Ores(event);
+		Chemistry.fluids = new Fluids(event);
 		
 		Chemistry.compound = new Compound();
 		
 		Chemistry.blockCompoundCreator = new BlockCompoundCreator();
 		Chemistry.blockOreProcessor = new BlockOreProcessor();
+		Chemistry.blockRefinery = new BlockRefinery();
 		
 		proxy.registerProxies();
 		
-		Chemistry.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("chemisty");
+		Chemistry.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("chemistry");
 		this.getNetworkWrapper().registerMessage(CompoundCreateHandle.class, CompoundCreate.class, 0, Side.SERVER);
 		this.getNetworkWrapper().registerMessage(ItemDeleteHandle.class, ItemDelete.class, 1, Side.SERVER);
 		
@@ -104,8 +111,10 @@ public class Chemistry
 		{
 			//Textures
 			ModelLoader.setCustomModelResourceLocation(Chemistry.compound, 0, new ModelResourceLocation("chemistry:compound", "inventory"));
+			
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockCompoundCreator), 0, new ModelResourceLocation("chemistry:blockCompoundCreator", "inventory"));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockOreProcessor), 0, new ModelResourceLocation("chemistry:blockOreProcessor", "inventory"));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(Chemistry.blockRefinery), 0, new ModelResourceLocation("chemistry:blockRefinery", "inventory"));
 		}
 	}
 
@@ -122,6 +131,7 @@ public class Chemistry
 	private void postInit(FMLPostInitializationEvent event) 
 	{
 		//this.generateTexturesForElements();
+		new GuiDrawHelper();
 	}
 	
 	private void generateTexturesForElements()

@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.block.BlockOre;
 
 import javax.annotation.Nullable;
 

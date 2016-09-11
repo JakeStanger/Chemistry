@@ -1,7 +1,7 @@
 {
 "__comment": "Designed by Grandadsadbags with BDcraft Cubik PRO 0.95 Beta - http://bdcraft.net",
 "textures": {
-    "texture": "chemistry:block/blockCompoundCreator"
+    "texture": "chemistry:blocks/blockCompoundCreator"
 },
 "elements": [ 
 {

@@ -22,7 +22,7 @@ public class BlockOreProcessor extends BlockTile
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
-		if(!world.isRemote) player.openGui(Chemistry.INSTANCE, GuiHandler.GUI_BLOCK_ORE_PROCESSOR, world, pos.getX(), pos.getY(), pos.getZ());
+		if(!world.isRemote) player.openGui(Chemistry.INSTANCE, GuiHandler.GUI_ORE_PROCESSOR, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 	

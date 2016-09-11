@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.io.FileUtils;
 import roboguy99.chemistry.Chemistry;
-import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.block.BlockOre;
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.wrapper.MinMax;
 

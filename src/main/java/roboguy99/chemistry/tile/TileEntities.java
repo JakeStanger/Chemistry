@@ -8,5 +8,6 @@ public class TileEntities
 	{
 		GameRegistry.registerTileEntity(TileCompoundCreator.class, "tileCompoundCreator");
 		GameRegistry.registerTileEntity(TileOreProcessor.class, "tileOreProcessor");
+		GameRegistry.registerTileEntity(TileRefinery.class, "tileRefinery");
 	}
 }

@@ -7,7 +7,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import roboguy99.chemistry.api.FieldID;
+import roboguy99.chemistry.api.Constants;
 
 /**
  * @author Jake stanger
@@ -35,10 +35,53 @@ public abstract class TileMachine extends TileInventory implements ITickable, IE
 		this.energyStorage = new EnergyStorage(this.maxEnergy, this.maxEnergyIn);
 	}
 	
+	/**
+	 * The number of ticks to wait before processing
+	 * @return
+	 */
 	protected abstract int giveTickRate();
+	
+	/**
+	 * The amount of energy to use when a process tick occurs
+	 * @return
+	 */
 	protected abstract int giveEnergyPerTick();
+	
+	/**
+	 * The size of the energy buffer
+	 * @return
+	 */
 	protected abstract int giveMaxEnergy();
+	
+	/**
+	 * The maximum RF/tick in
+	 * @return
+	 */
 	protected abstract int giveMaxEnergyIn();
+	
+	/**
+	 * Gets the machine processing progress scaled.
+	 * @param scale The scale.
+	 * @return The progress scaled.
+	 */
+	public int getProgressScaled(int scale)
+	{
+		float progress = this.getTickRate() - this.processTimeRemaining;
+		float scaled = (progress / this.getTickRate()) * scale;
+		return (int) scaled;
+	}
+	
+	/**
+	 * Gets the machine energy scaled.
+	 * @param scale The scale.
+	 * @return The energy scaled.
+	 */
+	public int getEnergyScaled(int scale)
+	{
+		float energy = this.getEnergyStored(EnumFacing.NORTH);
+		float scaled = (energy / this.getMaxEnergyStored(EnumFacing.NORTH)) * scale;
+		return (int) scaled;
+	}
 	
 	@Override
 	public boolean canConnectEnergy(EnumFacing from)
@@ -138,18 +181,18 @@ public abstract class TileMachine extends TileInventory implements ITickable, IE
 	@Override
 	public int getField(int id)
 	{
-		if(id == FieldID.PROCESS_TIME_REMAINING.fieldID) return this.processTimeRemaining;
-		else if(id == FieldID.TICK_RATE.fieldID) return this.tickRate;
-		else if (id == FieldID.ENERGY_STORED.fieldID) return this.energyStorage.getEnergyStored();
-		else if (id == FieldID.TOTAL_ENERGY.fieldID) return this.energyStorage.getMaxEnergyStored();
+		if(id == Constants.FieldID.PROCESS_TIME_REMAINING) return this.processTimeRemaining;
+		else if(id == Constants.FieldID.TICK_RATE) return this.tickRate;
+		else if (id == Constants.FieldID.ENERGY_STORED) return this.energyStorage.getEnergyStored();
+		else if (id == Constants.FieldID.TOTAL_ENERGY) return this.energyStorage.getMaxEnergyStored();
 		else return 0;
 	}
 	
 	@Override
 	public void setField(int id, int value)
 	{
-		if (id == FieldID.PROCESS_TIME_REMAINING.fieldID) this.processTimeRemaining = value;
-		if (id == FieldID.ENERGY_STORED.fieldID) this.getEnergyStorage().setEnergyStored(value);
+		if (id == Constants.FieldID.PROCESS_TIME_REMAINING) this.processTimeRemaining = value;
+		if (id == Constants.FieldID.ENERGY_STORED) this.getEnergyStorage().setEnergyStored(value);
 	}
 	
 	@Override

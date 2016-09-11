@@ -32,14 +32,12 @@ public class GuiOreProcessor extends GuiContainer
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		
-		int progress = this.oreProcessor.getProgressScaled(24);
-		this.drawTexturedModalRect(k + 29, l + 28,
-				176, 0,
-				progress, 17);
+		GuiDrawHelper guiDrawHelper = GuiDrawHelper.getInstance();
 		
-		int energy = this.oreProcessor.getEnergyScaled(160);
-		this.drawTexturedModalRect(k + 8, l + 65,
-				0, 156,
-				energy, 5);
+		int progress = this.oreProcessor.getProgressScaled(GuiDrawHelper.ARROW_WIDTH+4);
+		guiDrawHelper.drawArrow(k + 29, l + 28, progress, this);
+		
+		int energy = this.oreProcessor.getEnergyScaled(GuiDrawHelper.ENERGY_WIDTH);
+		guiDrawHelper.drawEnergyBar(k + 7, l + 64, energy, this);
 	}
 }

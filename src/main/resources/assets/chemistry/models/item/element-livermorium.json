@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:item/element_livermorium"
+		"layer0": "chemistry:items/element_livermorium"
 	},
 	"display": {
 		"thirdperson": {

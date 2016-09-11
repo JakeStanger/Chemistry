@@ -9,7 +9,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import roboguy99.chemistry.api.Ores;
-import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.block.BlockOre;
 
 class OreGenerator implements IWorldGenerator
 {

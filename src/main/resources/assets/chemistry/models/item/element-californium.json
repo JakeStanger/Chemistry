@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:item/element_californium"
+		"layer0": "chemistry:items/element_californium"
 	},
 	"display": {
 		"thirdperson": {

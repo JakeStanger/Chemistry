@@ -3,8 +3,7 @@ package roboguy99.chemistry.tile;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.block.BlockOre;
 import roboguy99.chemistry.item.block.ItemBlockOre;
 import roboguy99.chemistry.item.element.ItemElement;
 import roboguy99.chemistry.wrapper.MinMax;
@@ -80,7 +79,7 @@ public class TileOreProcessor extends TileMachine
 			if(this.canProcess())
 			{
 				if(this.processTimeRemaining > 0) this.processTimeRemaining--;
-				this.getEnergyStorage().modifyEnergyStored(-this.ENERGY_PER_TICK);
+				this.getEnergyStorage().modifyEnergyStored(-this.getEnergyPerTick());
 				
 				if(this.processTimeRemaining == 0)
 				{
@@ -134,30 +133,6 @@ public class TileOreProcessor extends TileMachine
 		{
 			this.elements = null;
 		}
-	}
-	
-	/**
-	 * Gets the machine processing progress scaled.
-	 * @param scale The scale.
-	 * @return The progress scaled.
-	 */
-	public int getProgressScaled(int scale)
-	{
-		float progress = TileOreProcessor.TICK_RATE - this.processTimeRemaining;
-		float scaled = (progress / TileOreProcessor.TICK_RATE) * scale;
-		return (int) scaled;
-	}
-	
-	/**
-	 * Gets the machine energy scaled.
-	 * @param scale The scale.
-	 * @return The energy scaled.
-	 */
-	public int getEnergyScaled(int scale)
-	{
-		float energy = this.getEnergyStored(EnumFacing.NORTH);
-		float scaled = (energy / this.getMaxEnergyStored(EnumFacing.NORTH)) * scale;
-		return (int) scaled;
 	}
 	
 	/**

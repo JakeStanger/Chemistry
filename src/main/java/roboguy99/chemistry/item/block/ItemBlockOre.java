@@ -1,7 +1,7 @@
 package roboguy99.chemistry.item.block;
 
 import net.minecraft.item.ItemBlock;
-import roboguy99.chemistry.block.ore.BlockOre;
+import roboguy99.chemistry.block.BlockOre;
 
 /**
  * A custom ItemBlock for ores, making it possible to get the ore block from Item/ItemStack instances

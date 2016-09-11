@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "chemistry:item/element_copernicium"
+		"layer0": "chemistry:items/element_copernicium"
 	},
 	"display": {
 		"thirdperson": {
