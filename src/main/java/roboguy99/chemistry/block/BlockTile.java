@@ -28,11 +28,21 @@ abstract class BlockTile extends BlockContainer
 {
 	private Class tile;
 	
+	private TileEntity tileEntity;
+	
 	BlockTile(Material materialIn, String name, CreativeTabs creativeTab, Class<? extends TileEntity> tile)
 	{
 		super(materialIn);
 		
 		this.tile = tile;
+		try
+		{
+			this.tileEntity = tile.newInstance();
+		}
+		catch (InstantiationException | IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
 		
 		this.setCreativeTab(creativeTab);
 		this.setUnlocalizedName(name);
@@ -66,20 +76,12 @@ abstract class BlockTile extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World world, int var2) 
 	{
-		try 
-		{
-			return (TileEntity) this.tile.newInstance();
-		} 
-		catch (InstantiationException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (IllegalAccessException e) 
-		{
-			e.printStackTrace();
-		}
-		
-		return null;
+		return this.tileEntity;
+	}
+	
+	public TileEntity getTileEntity()
+	{
+		return tileEntity;
 	}
 	
 	public EnumBlockRenderType getRenderType(IBlockState state)

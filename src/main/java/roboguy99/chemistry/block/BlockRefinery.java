@@ -14,7 +14,7 @@ import roboguy99.chemistry.tile.TileRefinery;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * The block for the refinery
  */
 public class BlockRefinery extends BlockTile
 {

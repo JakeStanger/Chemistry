@@ -1,4 +1,4 @@
-package roboguy99.chemistry.fluid;
+package roboguy99.chemistry.api;
 
 import com.google.common.collect.HashBiMap;
 import net.minecraft.block.state.IBlockState;
@@ -10,13 +10,15 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import roboguy99.chemistry.block.BlockFluid;
+import roboguy99.chemistry.fluid.FluidBasic;
+import roboguy99.chemistry.fluid.FluidFuel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * Fluid registration
  */
 public class Fluids
 {
@@ -26,10 +28,23 @@ public class Fluids
 	public Fluids(FMLPreInitializationEvent event)
 	{
 		FluidBasic fluidOil = new FluidBasic("oil", 1200, 2000);
-		FluidBasic fluidFuel = new FluidBasic("fuel");
+		
+		FluidFuel fluidPetrol = new FluidFuel("petrol");
+		FluidFuel fluidNaphtha = new FluidFuel("naphtha");
+		FluidFuel fluidKerosene = new FluidFuel("kerosene");
+		FluidFuel fluidDiesel = new FluidFuel("diesel");
+		FluidFuel fluidLubricant = new FluidFuel("lubricant");
+		FluidFuel fluidBitumen = new FluidFuel("bitumen");
 		
 		map.put(fluidOil, new BlockFluid("blockOil", fluidOil));
-		map.put(fluidFuel, new BlockFluid("blockFuel", fluidFuel));
+		
+		//TODO Add/init inside loop
+		map.put(fluidPetrol, new BlockFluid("blockPetrol", fluidPetrol));
+		map.put(fluidNaphtha, new BlockFluid("blockNaphtha", fluidNaphtha));
+		map.put(fluidKerosene, new BlockFluid("blockKerosene", fluidKerosene));
+		map.put(fluidDiesel, new BlockFluid("blockDiesel", fluidDiesel));
+		map.put(fluidLubricant, new BlockFluid("blockLubricant", fluidLubricant));
+		map.put(fluidBitumen, new BlockFluid("blockBitumen", fluidBitumen));
 		
 		for(FluidBasic fluid : map.keySet())
 		{

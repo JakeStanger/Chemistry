@@ -53,9 +53,6 @@ public class BlockOre extends Block
 		
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, model);
 		ModelLoader.setCustomModelResourceLocation(itemBlock, 0, model);
-		//ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-		//mesher.register(Item.getItemFromBlock(this), 0, model);
-		//mesher.register(itemBlock, 0, model);
 	}
 	
 	@Override

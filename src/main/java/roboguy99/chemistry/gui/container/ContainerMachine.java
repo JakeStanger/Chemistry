@@ -5,13 +5,14 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import roboguy99.chemistry.tile.TileMachine;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * A container for a TileEntity with an inventory and energy buffer.
  */
 public class ContainerMachine extends Container
 {
@@ -22,7 +23,12 @@ public class ContainerMachine extends Container
 	{
 		this.tileMachine = tileMachine;
 		this.progressBarValues = new int[tileMachine.getFieldCount()];
-		
+		this.addSlots(inventoryPlayer);
+		System.out.println(FMLCommonHandler.instance().getEffectiveSide());
+	}
+	
+	protected void addSlots(InventoryPlayer inventoryPlayer)
+	{
 		//Player inventory
 		for(int y = 0; y < 3; y++)
 		{

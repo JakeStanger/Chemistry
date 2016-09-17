@@ -8,7 +8,8 @@ import javax.annotation.Nullable;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * A FluidTank for which a fluid can be specified.
+ * The specified fluid is the only fluid which is allowed into the tank.
  */
 public class FilteredFluidTank extends FluidTank
 {

@@ -12,7 +12,7 @@ import roboguy99.chemistry.Chemistry;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * A standard fluid block
  */
 public class BlockFluid extends BlockFluidClassic
 {

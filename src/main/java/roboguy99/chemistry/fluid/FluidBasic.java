@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * A basic fluid, with a bucket.
  */
 public class FluidBasic extends Fluid
 {

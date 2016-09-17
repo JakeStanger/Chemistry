@@ -26,7 +26,7 @@ import roboguy99.chemistry.block.BlockCompoundCreator;
 import roboguy99.chemistry.block.BlockOre;
 import roboguy99.chemistry.block.BlockOreProcessor;
 import roboguy99.chemistry.block.BlockRefinery;
-import roboguy99.chemistry.fluid.Fluids;
+import roboguy99.chemistry.api.Fluids;
 import roboguy99.chemistry.gui.GuiDrawHelper;
 import roboguy99.chemistry.handler.GuiHandler;
 import roboguy99.chemistry.item.compound.Compound;

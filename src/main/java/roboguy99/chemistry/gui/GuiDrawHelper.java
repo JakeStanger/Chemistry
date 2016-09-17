@@ -10,10 +10,11 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import org.lwjgl.opengl.GL11;
+import roboguy99.chemistry.wrapper.FluidTooltipWrapper;
 
 /**
  * @author Jake stanger
- *         TODO Write JavaDoc
+ * Helper methods for drawing GUI components
  */
 public class GuiDrawHelper
 {
@@ -45,31 +46,43 @@ public class GuiDrawHelper
 		GuiDrawHelper.instance = this;
 	}
 	
-	void drawEnergyBar(int x, int y, int energy, GuiContainer gui)
+	void drawEnergyBar(int x, int y, int energyScaled, GuiContainer gui)
 	{
 		bindTexture();
 		gui.drawTexturedModalRect(x, y, ENERGY_BACK_START_X, ENERGY_BACK_START_Y, ENERGY_WIDTH, ENERGY_HEIGHT);
-		gui.drawTexturedModalRect(x, y, ENERGY_FRONT_START_X, ENERGY_FRONT_START_Y, energy, ENERGY_HEIGHT);
+		gui.drawTexturedModalRect(x, y, ENERGY_FRONT_START_X, ENERGY_FRONT_START_Y, energyScaled, ENERGY_HEIGHT);
 	}
 	
-	void drawArrow(int x, int y, int progress, GuiContainer gui)
+	void drawArrow(int x, int y, int progressScaled, GuiContainer gui)
 	{
 		bindTexture();
 		gui.drawTexturedModalRect(x, y, ARROW_BACK_START_X, ARROW_BACK_START_Y, ARROW_WIDTH, ARROW_HEIGHT);
-		gui.drawTexturedModalRect(x, y, ARROW_FRONT_START_X, ARROW_FRONT_START_Y, progress, ARROW_HEIGHT+1);
+		gui.drawTexturedModalRect(x, y, ARROW_FRONT_START_X, ARROW_FRONT_START_Y, progressScaled, ARROW_HEIGHT+1);
 	}
 	
-	void drawFluidTank(int x, int y, Fluid fluid, int fluidAmount, GuiContainer gui)
+	void drawFluidTank(int x, int y, Fluid fluid, int fluidAmount, int fluidCapacity, GuiRefinery gui) //TODO make base fluid tile
 	{
+		float fluidAmountScaled = ((float) fluidAmount / fluidCapacity) * (FLUID_HEIGHT-2);
+		
 		//Draw tank
 		bindTexture();
 		gui.drawTexturedModalRect(x, y, FLUID_START_X, FLUID_START_Y, FLUID_WIDTH, FLUID_HEIGHT);
 		
-		drawRepeatedFluidSprite(fluid, x+1, y+1+(FLUID_HEIGHT-2-fluidAmount), FLUID_WIDTH-2, FLUID_HEIGHT-2-(FLUID_HEIGHT-2-fluidAmount)); //Draw fluid
+		drawRepeatedFluidSprite(fluid, x+1, y+1+(FLUID_HEIGHT-2-fluidAmountScaled), FLUID_WIDTH-2, FLUID_HEIGHT-2-(FLUID_HEIGHT-2-fluidAmountScaled)); //Draw fluid
 		
 		//Draw gauge
 		bindTexture();
-		gui.drawTexturedModalRect(x+1, y+1, FLUID_GAUGE_START_X, FLUID_GAUGE_START_Y, FLUID_GAUGE_WIDTH, FLUID_GAUGE_HEIGHT);
+		gui.drawTexturedModalRect(x+1, y+2, FLUID_GAUGE_START_X, FLUID_GAUGE_START_Y, FLUID_GAUGE_WIDTH, FLUID_GAUGE_HEIGHT);
+		
+		//Tooltip
+		gui.tooltips.put(fluid, new FluidTooltipWrapper(x, y, FLUID_WIDTH, FLUID_HEIGHT, fluidAmount, fluidCapacity));
+	}
+	
+	boolean isPointInRegion(int rectX, int rectY, int rectWidth, int rectHeight, int pointX, int pointY) //TODO make base GUI
+	{
+		boolean isHorizontallyInLine = pointX > rectX && pointX < (rectX + rectWidth);
+		boolean isVerticallyInLine = pointY > rectY && pointY < (rectY + rectHeight);
+		return isHorizontallyInLine && isVerticallyInLine;
 	}
 	
 	private static void bindTexture()
